@@ -1,29 +1,45 @@
 [gd_scene format=3 uid="uid://1bw5t1wg7j0p"]
 
-[ext_resource type="PackedScene" uid="uid://cxv3i3lqywdpf" path="res://worms/worm.tscn" id="1_3t5os"]
+[ext_resource type="Texture2D" uid="uid://buthj8l4iou4n" path="res://icon.svg" id="2_usmjt"]
+[ext_resource type="Script" uid="uid://cy28cw74rxu70" path="res://commons/money_screen.gd" id="3_5i6my"]
+[ext_resource type="Script" uid="uid://pap1ix58kquy" path="res://main_screen/combat_spawner.gd" id="4_combat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw8l4"]
 size = Vector2(54, 627)
 
+[sub_resource type="LabelSettings" id="LabelSettings_5i6my"]
+font_size = 54
+outline_size = 8
+shadow_color = Color(0, 0, 0, 0.34509805)
+shadow_offset = Vector2(5.645, -5.085)
+
 [node name="combat" type="Node2D" unique_id=582485804]
 y_sort_enabled = true
-
-[node name="worm" parent="." unique_id=255688625 instance=ExtResource("1_3t5os")]
-position = Vector2(139, 184)
-
-[node name="worm2" parent="." unique_id=1649690726 instance=ExtResource("1_3t5os")]
-position = Vector2(251, 177)
-
-[node name="worm3" parent="." unique_id=715735920 instance=ExtResource("1_3t5os")]
-position = Vector2(191, 306)
-
-[node name="worm4" parent="." unique_id=1643780805 instance=ExtResource("1_3t5os")]
-position = Vector2(298, 260)
-
-[node name="worm5" parent="." unique_id=1601395936 instance=ExtResource("1_3t5os")]
-position = Vector2(365, 184)
+script = ExtResource("4_combat")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1632273780]
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D" unique_id=985864970]
+position = Vector2(40.92, 314.99997)
+scale = Vector2(0.43625, 4.9218745)
+texture = ExtResource("2_usmjt")
+
+[node name="Icon2" type="Sprite2D" parent="StaticBody2D" unique_id=1421875270]
+position = Vector2(682.00006, 322)
+scale = Vector2(0.43625, 4.9218745)
+texture = ExtResource("2_usmjt")
+
+[node name="Icon3" type="Sprite2D" parent="StaticBody2D" unique_id=981624787]
+position = Vector2(352.00003, 602.99994)
+rotation = 1.5707964
+scale = Vector2(0.43625, 4.9218745)
+texture = ExtResource("2_usmjt")
+
+[node name="Icon4" type="Sprite2D" parent="StaticBody2D" unique_id=965668826]
+position = Vector2(364.99997, 29.999876)
+rotation = 1.5707964
+scale = Vector2(0.43625, 4.9218745)
+texture = ExtResource("2_usmjt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1129512349]
 position = Vector2(40, 314)
@@ -42,3 +58,29 @@ shape = SubResource("RectangleShape2D_yw8l4")
 position = Vector2(361, 31)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="money_screen" type="Label" parent="." unique_id=1565653997]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 101.0
+offset_bottom = 82.0
+text = "200"
+label_settings = SubResource("LabelSettings_5i6my")
+script = ExtResource("3_5i6my")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1586780899]
+
+[node name="SpawnButton" type="Button" parent="UI" unique_id=530695295]
+offset_left = 8.0
+offset_top = 90.0
+offset_right = 200.0
+offset_bottom = 140.0
+text = "Spawn Worm"
+
+[node name="SpawnMin" type="Marker2D" parent="." unique_id=364509012]
+position = Vector2(85, 80)
+
+[node name="SpawnMax" type="Marker2D" parent="." unique_id=436850966]
+position = Vector2(634, 561)
+
+[connection signal="pressed" from="UI/SpawnButton" to="." method="spawn_worm"]

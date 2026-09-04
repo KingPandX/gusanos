@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cxv3i3lqywdpf"]
 
-[ext_resource type="Texture2D" uid="uid://bfq8qwd3it15a" path="res://assets/gusano_prueba.png" id="1_3owwe"]
 [ext_resource type="Script" uid="uid://htl12lnwkaa" path="res://worms/worm.gd" id="1_f6c8x"]
 [ext_resource type="Script" uid="uid://c7lpnmjb6xidc" path="res://commons/worm_data.gd" id="2_adq0j"]
 [ext_resource type="Script" uid="uid://doejhfgthu4ky" path="res://addons/finite_state_machine/finite_state_machine.gd" id="3_78xqu"]
+[ext_resource type="SpriteFrames" uid="uid://dow304vn5s2kj" path="res://assets/worms_frames/glasses_worm.tres" id="3_6802t"]
 [ext_resource type="Script" uid="uid://xr87otbia20" path="res://worms/animation_manager.gd" id="4_6802t"]
 [ext_resource type="Script" uid="uid://ck6yc0d8n6tw1" path="res://worms/States/patrol.gd" id="4_adq0j"]
 [ext_resource type="Script" uid="uid://c14871phdsqjv" path="res://worms/worm_detector.gd" id="6_t21j8"]
@@ -32,9 +32,12 @@ worm_data = SubResource("Resource_78xqu")
 position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_f6c8x")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=2130513250]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1196284300]
 position = Vector2(0, -32)
-texture = ExtResource("1_3owwe")
+sprite_frames = ExtResource("3_6802t")
+animation = &"attack"
+frame = 9
+frame_progress = 1.0
 script = ExtResource("4_6802t")
 
 [node name="FiniteStateMachine" type="Node" parent="." unique_id=657736474 node_paths=PackedStringArray("initial_state")]
