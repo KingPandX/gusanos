@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://1bw5t1wg7j0p"]
+
+[ext_resource type="PackedScene" uid="uid://cxv3i3lqywdpf" path="res://worms/worm.tscn" id="1_3t5os"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yw8l4"]
+radius = 13.038404
+
+[node name="combat" type="Node2D" unique_id=582485804]
+
+[node name="worm" parent="." unique_id=255688625 instance=ExtResource("1_3t5os")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="worm" unique_id=1159137414]
+shape = SubResource("CircleShape2D_yw8l4")
