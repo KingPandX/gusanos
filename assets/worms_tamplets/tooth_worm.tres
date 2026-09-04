@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://bg6o5tbsm76fg"]
+
+[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_1ca5j"]
+[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_chynd"]
+[ext_resource type="SpriteFrames" uid="uid://bhpux5h7fk0iy" path="res://assets/worms_frames/tooth_worm.tres" id="3_1ca5j"]
+
+[sub_resource type="Resource" id="Resource_common"]
+script = ExtResource("1_1ca5j")
+size = Vector2(0.7, 0.9)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_1ca5j")
+hp = Vector2(180, 260)
+damage = Vector2(35, 55)
+cooldown_attack = Vector2(0.6, 1)
+cooldown_money = Vector2(1, 2.5)
+speed = Vector2(90, 110)
+size = Vector2(1.1, 1.4)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_1ca5j")
+hp = Vector2(260, 400)
+damage = Vector2(55, 80)
+cooldown_attack = Vector2(0.4, 0.8)
+cooldown_money = Vector2(0.8, 2)
+speed = Vector2(110, 140)
+size = Vector2(1.4, 1.8)
+
+[sub_resource type="Resource" id="Resource_rare"]
+script = ExtResource("1_1ca5j")
+hp = Vector2(120, 180)
+damage = Vector2(20, 35)
+cooldown_attack = Vector2(0.8, 1.2)
+cooldown_money = Vector2(1.5, 3)
+speed = Vector2(70, 90)
+size = Vector2(0.9, 1.1)
+
+[resource]
+script = ExtResource("2_chynd")
+worm_name = "Gusano Intelectual"
+sprite_frames = ExtResource("3_1ca5j")
+common_stats = SubResource("Resource_common")
+rare_stats = SubResource("Resource_rare")
+epic_stats = SubResource("Resource_epic")
+legendary_stats = SubResource("Resource_legendary")

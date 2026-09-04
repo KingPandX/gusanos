@@ -1,0 +1,93 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bhpux5h7fk0iy"]
+
+[ext_resource type="Texture2D" uid="uid://dfd1sekrcvgjj" path="res://assets/Dientudo-Sheet.png" id="1_rri10"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la507"]
+atlas = ExtResource("1_rri10")
+region = Rect2(450, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11mii"]
+atlas = ExtResource("1_rri10")
+region = Rect2(540, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uranc"]
+atlas = ExtResource("1_rri10")
+region = Rect2(630, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr8ft"]
+atlas = ExtResource("1_rri10")
+region = Rect2(720, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jev7h"]
+atlas = ExtResource("1_rri10")
+region = Rect2(810, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2c8jt"]
+atlas = ExtResource("1_rri10")
+region = Rect2(900, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjf7f"]
+atlas = ExtResource("1_rri10")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy6c1"]
+atlas = ExtResource("1_rri10")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw5ay"]
+atlas = ExtResource("1_rri10")
+region = Rect2(180, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83k40"]
+atlas = ExtResource("1_rri10")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwlbt"]
+atlas = ExtResource("1_rri10")
+region = Rect2(360, 0, 90, 90)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la507")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11mii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uranc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr8ft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jev7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2c8jt")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjf7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy6c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw5ay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83k40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwlbt")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
