@@ -2,12 +2,34 @@
 
 [ext_resource type="PackedScene" uid="uid://cxv3i3lqywdpf" path="res://worms/worm.tscn" id="1_3t5os"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yw8l4"]
-radius = 13.038404
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw8l4"]
+size = Vector2(54, 627)
 
 [node name="combat" type="Node2D" unique_id=582485804]
+y_sort_enabled = true
 
 [node name="worm" parent="." unique_id=255688625 instance=ExtResource("1_3t5os")]
+position = Vector2(190, 270)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="worm" unique_id=1159137414]
-shape = SubResource("CircleShape2D_yw8l4")
+[node name="worm2" parent="." unique_id=1649690726 instance=ExtResource("1_3t5os")]
+position = Vector2(573, 294)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1632273780]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1129512349]
+position = Vector2(40, 314)
+shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=472509144]
+position = Vector2(680, 317)
+shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=609986460]
+position = Vector2(354, 601)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1554969114]
+position = Vector2(361, 31)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_yw8l4")

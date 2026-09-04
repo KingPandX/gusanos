@@ -1,3 +1,16 @@
 [gd_scene format=3 uid="uid://cxv3i3lqywdpf"]
 
+[ext_resource type="Texture2D" uid="uid://bfq8qwd3it15a" path="res://assets/gusano_prueba.png" id="1_3owwe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f6c8x"]
+radius = 35.35534
+
 [node name="worm" type="CharacterBody2D" unique_id=255688625]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=492218121]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_f6c8x")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130513250]
+position = Vector2(0, -32)
+texture = ExtResource("1_3owwe")
