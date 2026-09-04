@@ -1,12 +1,18 @@
 extends State
 
 @onready var worm: Worm = $"../.."
+@onready var detector: Area2D = $"../../worm_detector"
 
 func enter():
 	worm.sprite.play("idle")
 
 func physics_update(delta: float):
-	if worm.actual_enemy != null and is_instance_valid(worm.actual_enemy):
+	if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy):
+		var enemy = detector.get_available_enemy()
+		if enemy:
+			worm.actual_enemy = enemy
+	
+	if worm.actual_enemy != null and not worm.actual_enemy.in_combat:
 		transition("Combat")
 		return
 	

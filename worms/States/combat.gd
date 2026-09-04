@@ -1,6 +1,7 @@
 extends State
 
 @onready var worm: Worm = $"../.."
+@onready var detector: Area2D = $"../../worm_detector"
 
 const ATTACK_RANGE : float = 70.0
 var attack_cooldown : float = 0.0
@@ -14,16 +15,25 @@ func enter():
 
 func exit():
 	worm.in_combat = false
+	worm.actual_enemy = null
 	worm.hp = worm.worm_data.hp_max
 
 func physics_update(delta: float):
 	if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy):
-		transition("Patrol")
-		return
+		var enemy = detector.get_available_enemy()
+		if enemy:
+			worm.actual_enemy = enemy
+		else:
+			transition("Patrol")
+			return
 	
 	if worm.actual_enemy.actual_enemy != worm:
-		transition("Patrol")
-		return
+		var enemy = detector.get_available_enemy()
+		if enemy and enemy != worm.actual_enemy:
+			worm.actual_enemy.enter_combat(worm)
+		else:
+			transition("Patrol")
+			return
 	
 	var distance = worm.global_position.distance_to(worm.actual_enemy.global_position)
 	var direction_to_enemy = (worm.actual_enemy.global_position - worm.global_position).normalized()
