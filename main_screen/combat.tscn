@@ -9,10 +9,19 @@ size = Vector2(54, 627)
 y_sort_enabled = true
 
 [node name="worm" parent="." unique_id=255688625 instance=ExtResource("1_3t5os")]
-position = Vector2(190, 270)
+position = Vector2(139, 184)
 
 [node name="worm2" parent="." unique_id=1649690726 instance=ExtResource("1_3t5os")]
-position = Vector2(573, 294)
+position = Vector2(251, 177)
+
+[node name="worm3" parent="." unique_id=715735920 instance=ExtResource("1_3t5os")]
+position = Vector2(191, 306)
+
+[node name="worm4" parent="." unique_id=1643780805 instance=ExtResource("1_3t5os")]
+position = Vector2(298, 260)
+
+[node name="worm5" parent="." unique_id=1601395936 instance=ExtResource("1_3t5os")]
+position = Vector2(365, 184)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1632273780]
 
