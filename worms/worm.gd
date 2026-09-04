@@ -39,6 +39,7 @@ func _ready() -> void:
 	scale = Vector2.ONE * worm_data.size
 	if worm_data.template and worm_data.template.sprite_frames:
 		sprite.sprite_frames = worm_data.template.sprite_frames
+		sprite.offset = Vector2(worm_data.template.sprite_offset.x, worm_data.template.sprite_offset.y)
 	new_random_velocity()
 	change_direction.timeout.connect(change_patrol_dir)
 	money.timeout.connect(add_money)
@@ -76,7 +77,15 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
+	set_physics_process(false)
+	set_process(false)
+	change_direction.stop()
+	money.stop()
+	target_velocity = Vector2.ZERO
+	current_velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 	queue_free()
+
 
 func enter_combat(enemy: Worm) -> void:
 	if in_combat:

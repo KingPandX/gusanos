@@ -1,0 +1,72 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cd5pnste8coet"]
+
+[ext_resource type="Texture2D" uid="uid://io2gis6a8a4c" path="res://assets/Marine-Sheet.png" id="1_vqeyd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydoru"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(444, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2p0r"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(592, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egkj2"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(740, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7mwf"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(888, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmtfx"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(1036, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jisv"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(0, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_267jr"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(148, 0, 148, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4b8e"]
+atlas = ExtResource("1_vqeyd")
+region = Rect2(296, 0, 148, 83)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydoru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2p0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egkj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7mwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmtfx")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jisv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_267jr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4b8e")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]

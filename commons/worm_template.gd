@@ -3,6 +3,7 @@ class_name WormTemplate
 
 @export var worm_name : String = ""
 @export var sprite_frames : SpriteFrames
+@export var sprite_offset : Vector2 = Vector2.ZERO
 
 @export var common_stats : StatRange
 @export var rare_stats : StatRange
