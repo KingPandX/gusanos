@@ -2,6 +2,9 @@ extends State
 
 @onready var worm: Worm = $"../.."
 
+func enter():
+	worm.sprite.play("idle")
+
 func physics_update(delta: float):
 	if worm.actual_enemy != null and is_instance_valid(worm.actual_enemy):
 		transition("Combat")

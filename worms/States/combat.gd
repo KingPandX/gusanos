@@ -8,14 +8,20 @@ var attack_cooldown : float = 0.0
 func enter():
 	attack_cooldown = 0.0
 	worm.in_combat = true
+	worm.sprite.play("idle")
 	if worm.actual_enemy != null and is_instance_valid(worm.actual_enemy):
 		worm.actual_enemy.enter_combat(worm)
 
 func exit():
 	worm.in_combat = false
+	worm.hp = worm.worm_data.hp_max
 
 func physics_update(delta: float):
 	if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy):
+		transition("Patrol")
+		return
+	
+	if worm.actual_enemy.actual_enemy != worm:
 		transition("Patrol")
 		return
 	
@@ -28,6 +34,7 @@ func physics_update(delta: float):
 		worm.target_velocity = Vector2.ZERO
 		attack_cooldown -= delta
 		if attack_cooldown <= 0.0:
+			worm.sprite.play("attack")
 			worm.actual_enemy.take_damage(worm.worm_data.damage)
 			attack_cooldown = worm.worm_data.cooldown_attack
 	
