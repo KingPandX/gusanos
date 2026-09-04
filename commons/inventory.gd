@@ -12,29 +12,19 @@ func _ready() -> void:
 	_load_templates()
 
 func _load_templates() -> void:
-	var template_paths = [
-		"res://assets/worms_tamplets/test.tres",
-	]
-	for path in template_paths:
-		var resource = load(path)
-		if resource is WormTemplate:
-			templates.append(resource)
-	
-	if templates.is_empty():
-		var dirs = ["res://assets/worms_tamplets/", "res://resources/templates/"]
-		for path in dirs:
-			var dir = DirAccess.open(path)
-			if dir == null:
-				continue
-			dir.list_dir_begin()
-			var file_name = dir.get_next()
-			while file_name != "":
-				if file_name.ends_with(".tres"):
-					var resource = load(path + file_name)
-					if resource is WormTemplate:
-						templates.append(resource)
-				file_name = dir.get_next()
-	
+	var dirs = ["res://assets/worms_tamplets/", "res://resources/templates/"]
+	for path in dirs:
+		var dir = DirAccess.open(path)
+		if dir == null:
+			continue
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name.ends_with(".tres"):
+				var resource = load(path + file_name)
+				if resource is WormTemplate:
+					templates.append(resource)
+			file_name = dir.get_next()
 	print("Templates loaded: %d" % templates.size())
 
 func add_worm(worm: Worm_Data) -> bool:

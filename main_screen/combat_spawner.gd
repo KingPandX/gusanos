@@ -1,5 +1,7 @@
 extends Node2D
 
+signal toggle_position_requested()
+
 @onready var spawn_min : Marker2D = $SpawnMin
 @onready var spawn_max : Marker2D = $SpawnMax
 
@@ -7,6 +9,9 @@ var worm_scene : PackedScene
 
 func _ready() -> void:
 	worm_scene = load("res://worms/worm.tscn")
+
+func _on_toggle_position_pressed() -> void:
+	toggle_position_requested.emit()
 
 func spawn_worm() -> void:
 	if Inventory.templates.is_empty():
