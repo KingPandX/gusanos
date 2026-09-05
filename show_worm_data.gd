@@ -1,0 +1,40 @@
+extends Control
+class_name Show_Data
+
+var worm_data: Worm_Data = null
+var hp = Label.new()
+var damage = Label.new()
+var rarity = Label.new()
+var sizeW = Label.new()
+var speed = Label.new()
+var attackSPD = Label.new()
+var moneySPD = Label.new()
+
+func _ready() -> void:
+	$VBoxContainer.add_child(hp)
+	$VBoxContainer.add_child(damage)
+	$VBoxContainer.add_child(rarity)
+	$VBoxContainer.add_child(sizeW)
+	$VBoxContainer.add_child(speed)
+	$VBoxContainer.add_child(attackSPD)
+	$VBoxContainer.add_child(moneySPD)
+
+func show_data(_worm_data : Worm_Data):
+	worm_data = _worm_data
+	show()
+	show_worm_data()
+
+func hide_data():
+	hide()
+
+func show_worm_data() -> void:
+	if worm_data == null:
+		return
+		
+	hp.text = "Vida maxima: " + str(snappedf(worm_data.hp_max,0.01))
+	damage.text = "Daño: " + str(snappedf(worm_data.damage,0.01))
+	rarity.text = "Rareza: " + str(worm_data.rarity)
+	sizeW.text = "Tamaño: " + str(snappedf(worm_data.size,0.01))
+	speed.text = "Velocidad: " + str(snappedf(worm_data.speed,0.01))
+	attackSPD.text = "Velocidad ataque: " + str(snappedf(worm_data.cooldown_attack,0.01))
+	moneySPD.text = "Velocidad dinero: " + str(snappedf(worm_data.cooldown_money,0.01))

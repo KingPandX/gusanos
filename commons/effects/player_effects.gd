@@ -7,6 +7,7 @@ static var rarity_boost: float = 0.0
 static var rarity_boost_timer: float = 0.0
 
 static var auto_collect_level: int = 0
+static var drop_frequency_level: int = 0
 
 static func add_money_multiplier(value: float, duration: float):
 	money_multiplier = value

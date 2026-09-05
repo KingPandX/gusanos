@@ -10,3 +10,5 @@ class_name Worm_Data
 @export var cooldown_money : float
 @export var size : float = 1
 @export var speed : float = 60
+
+var worm: Worm

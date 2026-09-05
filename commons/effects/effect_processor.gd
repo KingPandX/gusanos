@@ -52,3 +52,5 @@ static func _apply_to_mechanic(effect: EffectData):
 	match effect.effect_type:
 		EffectData.Type.AUTO_COLLECT:
 			PlayerEffects.auto_collect_level += 1
+		EffectData.Type.DROP_FREQUENCY:
+			PlayerEffects.drop_frequency_level += 1
