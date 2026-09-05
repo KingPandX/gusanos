@@ -32,6 +32,8 @@ var sprite: AnimatedSprite2D:
 var hp : float
 var actual_enemy : Worm
 var in_combat : bool = false
+var in_combat_zone : bool = false
+var team_id : int = -1
 
 # Efectos activos
 var active_effects: Array[Dictionary] = []
@@ -98,6 +100,8 @@ func get_effect_value(effect_type: String) -> float:
 var coin_scene: PackedScene = preload("res://commons/coins/coin.tscn")
 
 func add_money():
+	if in_combat_zone:
+		return
 	var coin_value = round(GlobalManager.BASE_MONEY * worm_data.size)
 	var coin = coin_scene.instantiate()
 	coin.value = coin_value
@@ -149,3 +153,8 @@ func enter_combat(enemy: Worm) -> void:
 		return
 	actual_enemy = enemy
 	$FiniteStateMachine.transition("Combat")
+
+func exit_combat() -> void:
+	if not in_combat:
+		return
+	$FiniteStateMachine.transition("Patrol")
