@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Worm
 
+signal on_take_damage(new_value : float)
+
 @export var worm_data : Worm_Data
 
 # Parametros de fisica
@@ -47,9 +49,6 @@ var area: String = "social"
 var is_being_dragged: bool = false
 var drag_preview: Control = null
 
-# Hover
-@onready var show_worm_data: Show_Data = $ShowWormData
-
 # Efectos activos
 var active_effects: Array[Dictionary] = []
 
@@ -67,8 +66,6 @@ func _ready() -> void:
 	money.timeout.connect(add_money)
 	money.wait_time = worm_data.cooldown_money
 	worm_data.worm = self
-	mouse_entered.connect(show_worm_data.show_data.bind(worm_data))
-	mouse_exited.connect(show_worm_data.hide_data)
 	if move_sfx:
 		_move_id = AudioManager.create_sfx_looped(move_sfx, move_sfx_volume)
 
@@ -218,6 +215,7 @@ func take_damage(amount: float, attacker: Worm = null) -> void:
 			amount -= shield_value
 			remove_effect("shield")
 	hp -= amount
+	on_take_damage.emit(hp)
 	_notify_take_damage(attacker, amount)
 	if hp <= 0.0:
 		die()
