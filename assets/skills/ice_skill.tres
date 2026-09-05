@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2]
+
+[ext_resource type="Script" path="res://commons/skills/ice_skill.gd" id="1_ice"]
+
+[resource]
+script = ExtResource("1_ice")
+skill_name = "Hielo"
+description = "Reduce 20% daño recibido y ralentiza 30% ataques enemigos"

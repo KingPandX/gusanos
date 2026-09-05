@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2]
+
+[ext_resource type="Script" path="res://commons/skills/metal_worm_skill.gd" id="1_metal"]
+
+[resource]
+script = ExtResource("1_metal")
+skill_name = "Metalico"
+description = "40% probabilidad de multiplicar stats x1.5 al ganar batalla"

@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://dn21de4vq0jqk"]
+[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://dosrq2ucjs6e4"]
 
-[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_f653x"]
-[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="1_tevdl"]
-[ext_resource type="SpriteFrames" uid="uid://dow304vn5s2kj" path="res://assets/worms_frames/glasses_worm.tres" id="2_frames"]
-[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_ef3w4"]
-[ext_resource type="Resource" uid="uid://bl5s8g2xqz3w" path="res://assets/skills/ice_skill.tres" id="4_ice"]
+[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_nxk4p"]
+[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_ys713"]
+[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_32kuk"]
+[ext_resource type="SpriteFrames" uid="uid://bhpux5h7fk0iy" path="res://assets/worms_frames/tooth_worm.tres" id="4_isqwp"]
 
 [sub_resource type="Resource" id="Resource_common"]
-script = ExtResource("1_f653x")
+script = ExtResource("1_nxk4p")
 size = Vector2(0.7, 0.9)
 
 [sub_resource type="Resource" id="Resource_epic"]
-script = ExtResource("1_f653x")
+script = ExtResource("1_nxk4p")
 hp = Vector2(180, 260)
 damage = Vector2(35, 55)
 cooldown_attack = Vector2(0.6, 1)
@@ -20,7 +19,7 @@ speed = Vector2(90, 110)
 size = Vector2(1.1, 1.4)
 
 [sub_resource type="Resource" id="Resource_legendary"]
-script = ExtResource("1_f653x")
+script = ExtResource("1_nxk4p")
 hp = Vector2(260, 400)
 damage = Vector2(55, 80)
 cooldown_attack = Vector2(0.4, 0.8)
@@ -29,7 +28,7 @@ speed = Vector2(110, 140)
 size = Vector2(1.4, 1.8)
 
 [sub_resource type="Resource" id="Resource_rare"]
-script = ExtResource("1_f653x")
+script = ExtResource("1_nxk4p")
 hp = Vector2(120, 180)
 damage = Vector2(20, 35)
 cooldown_attack = Vector2(0.8, 1.2)
@@ -38,14 +37,10 @@ speed = Vector2(70, 90)
 size = Vector2(0.9, 1.1)
 
 [resource]
-script = ExtResource("1_tevdl")
+script = ExtResource("2_ys713")
 worm_name = "Gusano Intelectual"
-sprite_frames = ExtResource("2_frames")
+sprite_frames = ExtResource("4_isqwp")
 common_stats = SubResource("Resource_common")
 rare_stats = SubResource("Resource_rare")
 epic_stats = SubResource("Resource_epic")
 legendary_stats = SubResource("Resource_legendary")
-skills = [{
-"spawn_chance": 0.4,
-"skill": ExtResource("4_ice")
-}]

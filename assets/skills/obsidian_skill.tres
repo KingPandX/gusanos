@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2]
+
+[ext_resource type="Script" path="res://commons/skills/obsidian_skill.gd" id="1_obsidian"]
+
+[resource]
+script = ExtResource("1_obsidian")
+skill_name = "Obsidiana"
+description = "25% probabilidad de ignorar daño recibido, cura 10% HP al recibir golpe"
