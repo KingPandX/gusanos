@@ -25,3 +25,9 @@ func on_combat_tick(_worm: Worm) -> void:
 
 func get_damage_multiplier(_worm: Worm) -> float:
 	return 0.0
+
+func get_incoming_damage_reduction(_worm: Worm, _attacker: Worm, _amount: float) -> float:
+	return 0.0
+
+func get_attack_cooldown_slow(_worm: Worm) -> float:
+	return 0.0

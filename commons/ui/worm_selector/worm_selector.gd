@@ -45,7 +45,7 @@ func _create_worm_button(worm: Worm) -> Button:
 	var btn = Button.new()
 	var rarity_name = Rarity.get_rarity_name(worm.worm_data.rarity)
 	var worm_name = worm.worm_data.template.worm_name if worm.worm_data.template else "Gusano"
-	btn.text = "%s [%s] - HP: %.0f" % [worm_name, rarity_name, worm.hp]
+	btn.text = "%s [%s] - HP: %.0f / Daño: %.0f" % [worm_name, rarity_name, worm.hp, worm.worm_data.get_computed_damage()]
 	btn.custom_minimum_size = Vector2(280, 40)
 	
 	var rarity_color = Rarity.get_rarity_color(worm.worm_data.rarity)

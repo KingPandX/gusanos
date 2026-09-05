@@ -33,17 +33,20 @@ func show_worm_data() -> void:
 	if worm_data == null:
 		return
 		
-	hp.text = "Vida maxima: " + str(snappedf(worm_data.hp_max,0.01))
-	damage.text = "Daño: " + str(snappedf(worm_data.damage,0.01))
+	hp.text = "Vida maxima: " + str(snappedf(worm_data.get_computed_hp_max(), 0.01))
+	damage.text = "Daño: " + str(snappedf(worm_data.get_computed_damage(), 0.01))
 	rarity.text = "Rareza: " + str(worm_data.rarity)
-	sizeW.text = "Tamaño: " + str(snappedf(worm_data.size,0.01))
-	speed.text = "Velocidad: " + str(snappedf(worm_data.speed,0.01))
-	attackSPD.text = "Velocidad ataque: " + str(snappedf(worm_data.cooldown_attack,0.01))
-	moneySPD.text = "Velocidad dinero: " + str(snappedf(worm_data.cooldown_money,0.01))
+	sizeW.text = "Tamaño: " + str(snappedf(worm_data.get_computed_size(), 0.01))
+	speed.text = "Velocidad: " + str(snappedf(worm_data.get_computed_speed(), 0.01))
+	attackSPD.text = "Velocidad ataque: " + str(snappedf(worm_data.get_computed_cooldown_attack(), 0.01))
+	moneySPD.text = "Velocidad dinero: " + str(snappedf(worm_data.cooldown_money, 0.01))
 	if worm_data.skills.is_empty():
 		skills_label.text = "Habilidades: Ninguna"
 	else:
 		var skill_names: Array[String] = []
 		for skill in worm_data.skills:
 			skill_names.append(skill.skill_name)
-		skills_label.text = "Habilidades: " + ", ".join(skill_names)
+		var text = "Habilidades: " + ", ".join(skill_names)
+		if worm_data.stat_multiplier > 1.0:
+			text += " | Multiplicador: x%.2f" % worm_data.stat_multiplier
+		skills_label.text = text

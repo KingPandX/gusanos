@@ -13,5 +13,21 @@ class_name Worm_Data
 
 @export var skills: Array[SkillData] = []
 var combat_stacks: int = 0
+var stat_multiplier: float = 1.0
+
+func get_computed_damage() -> float:
+	return damage * stat_multiplier
+
+func get_computed_hp_max() -> float:
+	return hp_max * stat_multiplier
+
+func get_computed_speed() -> float:
+	return speed * stat_multiplier
+
+func get_computed_size() -> float:
+	return size * stat_multiplier
+
+func get_computed_cooldown_attack() -> float:
+	return cooldown_attack / stat_multiplier
 
 var worm: Worm
