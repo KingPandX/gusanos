@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_script"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("1_script")
+effect_name = "Escudo"
+description = "Escudo temporal que absorbe daño"
+effect_type = 3
+target = 1
+value = 50.0
+duration = 20.0
+
+[node name="ShieldScroll" type="Resource"]
+script = ExtResource("1_script")
+item_name = "Pergamino de Escudo"
+description = "+50 HP escudo temporal (20s)"
+target = 1
+cost = 150
+quantity = 1

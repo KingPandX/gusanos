@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_script"]
+
+[sub_resource type="Resource" id="Resource_effect"]
+script = ExtResource("1_script")
+effect_name = "Curación"
+description = "Cura el 100% de HP"
+effect_type = 6
+target = 1
+value = 1.0
+
+[node name="HealPotion" type="Resource"]
+script = ExtResource("1_script")
+item_name = "Poción de Curación"
+description = "Cura 100% HP instantáneo"
+target = 1
+cost = 80
+quantity = 1

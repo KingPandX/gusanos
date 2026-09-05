@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/ui/test_panel.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://commons/ui/worm_selector/worm_selector.tscn" id="2_selector"]
+
+[node name="TestPanel" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="MoneyLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Dinero: $0"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SpawnButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spawn Worm"
+
+[node name="GiveMoneyButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+$500"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="WormSelector" parent="." instance=ExtResource("2_selector")]
+visible = false

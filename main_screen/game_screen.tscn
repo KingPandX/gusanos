@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bdwlcgsm615gm" path="res://main_screen/game_screen.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://1bw5t1wg7j0p" path="res://main_screen/combat.tscn" id="2_combat"]
+[ext_resource type="PackedScene" path="res://commons/ui/test_panel.tscn" id="3_test_panel"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
 bg_color = Color(1, 1, 1, 0)
@@ -31,7 +32,6 @@ custom_minimum_size = Vector2(720, 627)
 layout_mode = 0
 offset_right = 720.0
 offset_bottom = 627.0
-pivot_offset_ratio = Vector2(0.0, 0.0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_box")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CombatBox" unique_id=891103340]
@@ -45,3 +45,13 @@ size = Vector2i(714, 621)
 render_target_update_mode = 4
 
 [node name="Combat" parent="CombatBox/SubViewportContainer/SubViewport" unique_id=89827814 instance=ExtResource("2_combat")]
+
+[node name="TestPanel" parent="." instance=ExtResource("3_test_panel")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 400.0
+grow_horizontal = 0
