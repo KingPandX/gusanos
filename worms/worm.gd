@@ -95,7 +95,7 @@ func _start_drag() -> void:
 	if DragManager.is_dragging:
 		return
 	is_being_dragged = true
-	DragManager.start_drag(worm_data, DragManager.DragSource.SOCIAL)
+	DragManager.start_drag(worm_data, "social")
 	_create_drag_preview()
 	visible = false
 	set_physics_process(false)
