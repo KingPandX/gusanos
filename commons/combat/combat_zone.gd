@@ -32,7 +32,6 @@ func _check_dead_worms() -> void:
 			changed = true
 	
 	if changed:
-		_start_all_combats()
 		_check_combat_end()
 
 func _on_body_entered(body: Node2D) -> void:
@@ -66,7 +65,6 @@ func activate_combat() -> void:
 	if combat_active:
 		return
 	combat_active = true
-	_start_all_combats()
 	combat_activated.emit()
 
 func deactivate_combat() -> void:
