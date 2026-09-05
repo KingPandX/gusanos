@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://cq7pdqdfmgae5"]
+
+[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_0yvim"]
+[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_drrip"]
+[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_xc2us"]
+[ext_resource type="Texture2D" uid="uid://bfq8qwd3it15a" path="res://assets/gusano_prueba.png" id="4_xc2us"]
+[ext_resource type="Script" uid="uid://dsif35vmh5508" path="res://commons/skills/money_on_hit.gd" id="5_0027o"]
+[ext_resource type="SpriteFrames" uid="uid://f8v64l5grqmm" path="res://assets/worms_frames/golden_worm.tres" id="6_uasjn"]
+
+[sub_resource type="Resource" id="Resource_common"]
+script = ExtResource("1_0yvim")
+size = Vector2(0.7, 0.9)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_0yvim")
+hp = Vector2(180, 260)
+damage = Vector2(35, 55)
+cooldown_attack = Vector2(0.6, 1)
+cooldown_money = Vector2(1, 2.5)
+speed = Vector2(90, 110)
+size = Vector2(1.1, 1.4)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_0yvim")
+hp = Vector2(260, 400)
+damage = Vector2(35.305, 50.775)
+cooldown_attack = Vector2(0.4, 0.8)
+cooldown_money = Vector2(0.8, 2)
+speed = Vector2(110, 140)
+size = Vector2(1.4, 1.8)
+
+[sub_resource type="Resource" id="Resource_rare"]
+script = ExtResource("1_0yvim")
+hp = Vector2(120, 180)
+damage = Vector2(20, 35)
+cooldown_attack = Vector2(0.8, 1.2)
+cooldown_money = Vector2(1.5, 3)
+speed = Vector2(70, 90)
+size = Vector2(0.9, 1.1)
+
+[sub_resource type="Resource" id="Resource_hsdc2"]
+script = ExtResource("5_0027o")
+trigger_chance = 1.0
+skill_name = "Fiebre del oro"
+description = "Al recibir daño este gusano da dinero"
+icon = ExtResource("4_xc2us")
+
+[sub_resource type="Resource" id="Resource_xdenj"]
+script = ExtResource("3_xc2us")
+skill = SubResource("Resource_hsdc2")
+spawn_chance = 1.0
+
+[resource]
+script = ExtResource("2_drrip")
+worm_name = "Gusano Intelectual"
+sprite_frames = ExtResource("6_uasjn")
+common_stats = SubResource("Resource_common")
+rare_stats = SubResource("Resource_rare")
+epic_stats = SubResource("Resource_epic")
+legendary_stats = SubResource("Resource_legendary")
+skills = Array[ExtResource("3_xc2us")]([SubResource("Resource_xdenj")])

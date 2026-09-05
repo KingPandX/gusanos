@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=4]
+
+[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1_upgrade"]
+[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+
+[sub_resource type="Resource" id="effect_extra_slots"]
+script = ExtResource("2_effect")
+effect_name = "Slots Extra"
+description = "Desbloquea 1 slot extra de inventario por nivel"
+effect_type = 8
+target = 3
+value = 1.0
+duration = 0.0
+is_upgrade = true
+
+[resource]
+script = ExtResource("1_upgrade")
+upgrade_name = "Slots Extra"
+description = "Desbloquea 1 slot extra de inventario por nivel"
+icon = ExtResource("3_icon")
+effect = SubResource("effect_extra_slots")
+cost = 400
+cost_multiplier = 2.0
+max_level = 3

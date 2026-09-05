@@ -1,0 +1,25 @@
+[gd_resource type="Resource" load_steps=4]
+
+[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1_upgrade"]
+[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+
+[sub_resource type="Resource" id="effect_rarity_spawn"]
+script = ExtResource("2_effect")
+effect_name = "Suerte de Aparición"
+description = "Aumenta la probabilidad de encontrar gusanos raros en un 5% por nivel"
+effect_type = 12
+target = 3
+value = 0.05
+duration = 0.0
+is_upgrade = true
+
+[resource]
+script = ExtResource("1_upgrade")
+upgrade_name = "Suerte de Aparición"
+description = "Aumenta la probabilidad de encontrar gusanos raros en un 5% por nivel"
+icon = ExtResource("3_icon")
+effect = SubResource("effect_rarity_spawn")
+cost = 250
+cost_multiplier = 1.8
+max_level = 5

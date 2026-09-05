@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://dj24ub8i4ikm3"]
+
+[ext_resource type="Script" uid="uid://drhrvvufu8pgs" path="res://commons/ui/shop_menu.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="panel_style"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.1, 0.12, 0.16, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.35, 0.45, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ShopMenu" type="Control" unique_id=1808397345]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="BG" type="ColorRect" parent="." unique_id=2090954274]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=876089678]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -300.0
+offset_right = 250.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("panel_style")
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=444489926]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBox" unique_id=1689500418]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Panel/VBox/Header" unique_id=149442667]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Tienda"
+
+[node name="CloseBtn" type="Button" parent="Panel/VBox/Header" unique_id=486433696]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "X"
+
+[node name="TopBar" type="HBoxContainer" parent="Panel/VBox" unique_id=696901300]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="Panel/VBox/TopBar" unique_id=73370171]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Renovación: 5:00"
+vertical_alignment = 1
+
+[node name="RenewBtn" type="Button" parent="Panel/VBox/TopBar" unique_id=1275823745]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Renovar [50¢]"
+
+[node name="Tabs" type="HBoxContainer" parent="Panel/VBox" unique_id=38255150]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ItemsTab" type="Button" parent="Panel/VBox/Tabs" unique_id=6997856]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "Items"
+
+[node name="UpgradesTab" type="Button" parent="Panel/VBox/Tabs" unique_id=1298070408]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mejoras"
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/VBox" unique_id=464543198]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentList" type="VBoxContainer" parent="Panel/VBox/Scroll" unique_id=308385916]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Footer" type="HBoxContainer" parent="Panel/VBox" unique_id=2083737815]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="Panel/VBox/Footer" unique_id=55639997]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Dinero: 0¢"
