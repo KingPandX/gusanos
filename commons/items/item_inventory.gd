@@ -67,3 +67,7 @@ func use_item_on_player(item_name: String) -> bool:
 	inventory_changed.emit()
 	item_used.emit(item, null)
 	return true
+
+func unlock_extra_slots(amount: int):
+	Inventory.unlocked_slots += amount
+	Inventory.inventory_changed.emit()
