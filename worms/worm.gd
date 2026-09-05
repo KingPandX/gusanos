@@ -33,7 +33,11 @@ var hp : float
 var actual_enemy : Worm
 var in_combat : bool = false
 
+# Efectos activos
+var active_effects: Array[Dictionary] = []
+
 func _ready() -> void:
+	add_to_group("worms")
 	hp = worm_data.hp_max
 	max_speed = worm_data.speed
 	scale = Vector2.ONE * worm_data.size
@@ -46,6 +50,7 @@ func _ready() -> void:
 	money.wait_time = worm_data.cooldown_money
 
 func _process(delta: float) -> void:
+	_update_effects(delta)
 	var speed = current_velocity.length()
 	if speed > 5.0:
 		bop_timer += delta * bop_speed * (speed / max_speed)
@@ -54,6 +59,41 @@ func _process(delta: float) -> void:
 	else:
 		sprite.scale = sprite.scale.lerp(Vector2.ONE, delta * 8.0)
 		bop_timer = 0.0
+
+func _update_effects(delta: float):
+	var i = active_effects.size() - 1
+	while i >= 0:
+		var effect = active_effects[i]
+		effect.timer -= delta
+		if effect.timer <= 0:
+			active_effects.remove_at(i)
+		i -= 1
+
+func add_effect(effect_type: String, value: float, duration: float):
+	for effect in active_effects:
+		if effect.type == effect_type:
+			effect.value = max(effect.value, value)
+			effect.timer = max(effect.timer, duration)
+			return
+	active_effects.append({"type": effect_type, "value": value, "timer": duration})
+
+func remove_effect(effect_type: String):
+	for i in range(active_effects.size()):
+		if active_effects[i].type == effect_type:
+			active_effects.remove_at(i)
+			return
+
+func has_effect(effect_type: String) -> bool:
+	for effect in active_effects:
+		if effect.type == effect_type:
+			return true
+	return false
+
+func get_effect_value(effect_type: String) -> float:
+	for effect in active_effects:
+		if effect.type == effect_type:
+			return effect.value
+	return 0.0
 
 func add_money():
 	var money_to_add : int= round(GlobalManager.BASE_MONEY * worm_data.size)
@@ -72,6 +112,18 @@ func new_random_velocity() -> void:
 	target_velocity = new_dir * new_speed
 
 func take_damage(amount: float) -> void:
+	if has_effect("shield"):
+		var shield_value = get_effect_value("shield")
+		if shield_value >= amount:
+			for effect in active_effects:
+				if effect.type == "shield":
+					effect.value -= amount
+					if effect.value <= 0:
+						remove_effect("shield")
+					return
+		else:
+			amount -= shield_value
+			remove_effect("shield")
 	hp -= amount
 	if hp <= 0.0:
 		die()
