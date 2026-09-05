@@ -3,16 +3,18 @@
 [ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_nxk4p"]
 [ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_ys713"]
 [ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_32kuk"]
-[ext_resource type="SpriteFrames" uid="uid://bhpux5h7fk0iy" path="res://assets/worms_frames/tooth_worm.tres" id="4_isqwp"]
+[ext_resource type="Script" uid="uid://d3usylenyaym" path="res://commons/skills/reflect_damage.gd" id="4_ys713"]
+[ext_resource type="SpriteFrames" uid="uid://depjsxlsex0yy" path="res://assets/worms_frames/tifany_worm.tres" id="5_32kuk"]
 
 [sub_resource type="Resource" id="Resource_common"]
 script = ExtResource("1_nxk4p")
+damage = Vector2(0, 0)
 size = Vector2(0.7, 0.9)
 
 [sub_resource type="Resource" id="Resource_epic"]
 script = ExtResource("1_nxk4p")
 hp = Vector2(180, 260)
-damage = Vector2(35, 55)
+damage = Vector2(0, 0)
 cooldown_attack = Vector2(0.6, 1)
 cooldown_money = Vector2(1, 2.5)
 speed = Vector2(90, 110)
@@ -21,7 +23,7 @@ size = Vector2(1.1, 1.4)
 [sub_resource type="Resource" id="Resource_legendary"]
 script = ExtResource("1_nxk4p")
 hp = Vector2(260, 400)
-damage = Vector2(55, 80)
+damage = Vector2(0, 0)
 cooldown_attack = Vector2(0.4, 0.8)
 cooldown_money = Vector2(0.8, 2)
 speed = Vector2(110, 140)
@@ -29,18 +31,31 @@ size = Vector2(1.4, 1.8)
 
 [sub_resource type="Resource" id="Resource_rare"]
 script = ExtResource("1_nxk4p")
-hp = Vector2(120, 180)
-damage = Vector2(20, 35)
+hp = Vector2(129.505, 175.17)
+damage = Vector2(0, 0)
 cooldown_attack = Vector2(0.8, 1.2)
 cooldown_money = Vector2(1.5, 3)
 speed = Vector2(70, 90)
 size = Vector2(0.9, 1.1)
 
+[sub_resource type="Resource" id="Resource_h5oit"]
+script = ExtResource("4_ys713")
+reflect_percent = 1.0
+trigger_chance = 1.0
+metadata/_custom_type_script = "uid://d3usylenyaym"
+
+[sub_resource type="Resource" id="Resource_dq7rc"]
+script = ExtResource("3_32kuk")
+skill = SubResource("Resource_h5oit")
+spawn_chance = 1.0
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
 [resource]
 script = ExtResource("2_ys713")
 worm_name = "Gusano Intelectual"
-sprite_frames = ExtResource("4_isqwp")
+sprite_frames = ExtResource("5_32kuk")
 common_stats = SubResource("Resource_common")
 rare_stats = SubResource("Resource_rare")
 epic_stats = SubResource("Resource_epic")
 legendary_stats = SubResource("Resource_legendary")
+skills = Array[ExtResource("3_32kuk")]([SubResource("Resource_dq7rc")])

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_chynd"]
 [ext_resource type="SpriteFrames" uid="uid://bhpux5h7fk0iy" path="res://assets/worms_frames/tooth_worm.tres" id="3_1ca5j"]
 [ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_chynd"]
-[ext_resource type="Resource" uid="uid://d7j6k8m5x9w0" path="res://assets/skills/metal_worm_skill.tres" id="4_metal"]
 
 [sub_resource type="Resource" id="Resource_common"]
 script = ExtResource("1_1ca5j")
@@ -45,7 +44,3 @@ common_stats = SubResource("Resource_common")
 rare_stats = SubResource("Resource_rare")
 epic_stats = SubResource("Resource_epic")
 legendary_stats = SubResource("Resource_legendary")
-skills = [{
-"spawn_chance": 0.4,
-"skill": ExtResource("4_metal")
-}]
