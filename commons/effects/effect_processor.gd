@@ -2,6 +2,7 @@ extends Node
 class_name EffectProcessor
 
 static func apply(effect: EffectData, target = null):
+	print("[EffectProcessor] apply: effect=%s, target=%s, effect_type=%s" % [effect.effect_name if effect else "null", effect.target if effect else -1, effect.effect_type if effect else -1])
 	match effect.target:
 		EffectData.Target.PLAYER:
 			_apply_to_player(effect)
@@ -49,8 +50,16 @@ static func _apply_to_all_worms(effect: EffectData):
 			_apply_to_worm(effect, worm)
 
 static func _apply_to_mechanic(effect: EffectData):
+	print("[EffectProcessor] _apply_to_mechanic: type=%s" % effect.effect_type)
 	match effect.effect_type:
 		EffectData.Type.AUTO_COLLECT:
 			PlayerEffects.auto_collect_level += 1
+			print("[EffectProcessor] AUTO_COLLECT -> auto_collect_level = %d" % PlayerEffects.auto_collect_level)
 		EffectData.Type.DROP_FREQUENCY:
 			PlayerEffects.drop_frequency_level += 1
+		EffectData.Type.RARITY_SPAWN_BOOST:
+			PlayerEffects.rarity_spawn_boost += effect.value
+		EffectData.Type.SHOP_DISCOUNT:
+			PlayerEffects.shop_discount_level += 1
+		EffectData.Type.EXTRA_SLOTS:
+			Inventory.unlock_extra_slots(int(effect.value))

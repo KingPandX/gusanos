@@ -28,6 +28,7 @@ Shop="*res://commons/shop.gd"
 DragManager="*res://commons/social/drag_manager.gd"
 UpgradeManager="*res://commons/upgrades/upgrade_manager.gd"
 AudioManager="*res://commons/audio/audio_manager.gd"
+PlayerEffects="*res://commons/effects/player_effects.gd"
 
 [display]
 
