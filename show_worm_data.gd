@@ -1,5 +1,5 @@
 extends Control
-
+class_name Show_Data
 
 var worm_data: Worm_Data = null
 var hp = Label.new()
@@ -18,6 +18,14 @@ func _ready() -> void:
 	$VBoxContainer.add_child(speed)
 	$VBoxContainer.add_child(attackSPD)
 	$VBoxContainer.add_child(moneySPD)
+
+func show_data(_worm_data : Worm_Data):
+	worm_data = _worm_data
+	show()
+	show_worm_data()
+
+func hide_data():
+	hide()
 
 func show_worm_data() -> void:
 	if worm_data == null:

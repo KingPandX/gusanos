@@ -40,10 +40,14 @@ var area: String = "social"
 var is_being_dragged: bool = false
 var drag_preview: Control = null
 
+# Hover
+@onready var show_worm_data: Show_Data = $ShowWormData
+
 # Efectos activos
 var active_effects: Array[Dictionary] = []
 
 func _ready() -> void:
+	input_pickable = true
 	add_to_group("worms")
 	hp = worm_data.hp_max
 	max_speed = worm_data.speed
@@ -55,10 +59,11 @@ func _ready() -> void:
 	change_direction.timeout.connect(change_patrol_dir)
 	money.timeout.connect(add_money)
 	money.wait_time = worm_data.cooldown_money
-	worm_data.worm = self 
+	worm_data.worm = self
+	mouse_entered.connect(show_worm_data.show_data.bind(worm_data))
+	mouse_exited.connect(show_worm_data.hide_data)
 
 func _process(delta: float) -> void:
-	show_Data()
 	if is_being_dragged:
 		return
 	_update_effects(delta)
@@ -70,15 +75,6 @@ func _process(delta: float) -> void:
 	else:
 		sprite.scale = sprite.scale.lerp(Vector2.ONE, delta * 8.0)
 		bop_timer = 0.0
-		
-func show_Data() -> void:
-	if !is_being_dragged:
-		print("entrando")
-		$ShowWormData.worm_data = worm_data
-		$ShowWormData.show_worm_data()
-		$ShowWormData.visible = true
-	else:
-		$ShowWormData.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
