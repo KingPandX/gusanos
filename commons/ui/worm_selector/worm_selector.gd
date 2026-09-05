@@ -25,10 +25,9 @@ func _refresh_worm_list() -> void:
 		child.queue_free()
 	
 	available_worms.clear()
-	var worms = get_tree().get_nodes_in_group("worms")
-	for worm in worms:
-		if worm is Worm and is_instance_valid(worm):
-			available_worms.append(worm)
+	for worm_data in Inventory.worms:
+		if worm_data and is_instance_valid(worm_data.worm):
+			available_worms.append(worm_data.worm)
 	
 	if available_worms.is_empty():
 		var label = Label.new()
