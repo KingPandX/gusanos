@@ -74,7 +74,9 @@ func physics_update(delta: float):
 			
 			for skill in worm.worm_data.skills:
 				skill.on_deal_damage(worm, final_damage)
-			AudioManager.play_sfx(HIT, randf_range(0.4,0.8))
+			
+			if final_damage > 0:
+				AudioManager.play_sfx(HIT, randf_range(0.4,0.8))
 	
 	worm.current_velocity = worm.current_velocity.lerp(
 		worm.target_velocity,
