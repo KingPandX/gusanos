@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_6hll4"]
 [ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_oejlb"]
 [ext_resource type="SpriteFrames" uid="uid://cd5pnste8coet" path="res://assets/worms_frames/marine_worm.tres" id="3_6hll4"]
+[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_oejlb"]
 
 [sub_resource type="Resource" id="Resource_common"]
 script = ExtResource("1_6hll4")
