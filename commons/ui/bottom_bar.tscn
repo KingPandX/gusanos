@@ -112,6 +112,15 @@ custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "Inventario"
 
+[node name="WormsBtn" type="Button" parent="MainVBox/BarContainer"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "Gusanos"
+
+[node name="Sep6" type="VSeparator" parent="MainVBox/BarContainer"]
+custom_minimum_size = Vector2(2, 50)
+layout_mode = 2
+
 [node name="InventoryPanel" type="PanelContainer" parent="MainVBox"]
 visible = false
 custom_minimum_size = Vector2(0, 200)

@@ -7,6 +7,7 @@ signal bar_height_changed(new_height: float)
 
 const SHOP_MENU_SCENE = preload("res://commons/ui/shop_menu.tscn")
 const WORM_SELECTOR_SCENE = preload("res://commons/ui/worm_selector/worm_selector.tscn")
+const WORM_DETAILS_SCENE = preload("res://commons/ui/worm_details_panel.tscn")
 
 @onready var bg: ColorRect = $BG
 @onready var main_vbox: VBoxContainer = $MainVBox
@@ -19,6 +20,7 @@ const WORM_SELECTOR_SCENE = preload("res://commons/ui/worm_selector/worm_selecto
 @onready var slot_btn: Button = $MainVBox/BarContainer/SlotBtn
 @onready var give_money_btn: Button = $MainVBox/BarContainer/GiveMoneyBtn
 @onready var inventory_btn: Button = $MainVBox/BarContainer/InventoryBtn
+@onready var worms_btn: Button = $MainVBox/BarContainer/WormsBtn
 @onready var expand_btn: Button = $ExpandBtn
 @onready var inventory_panel: PanelContainer = $MainVBox/InventoryPanel
 @onready var inventory_scroll: ScrollContainer = $MainVBox/InventoryPanel/VBox/Scroll
@@ -32,6 +34,7 @@ var animation_speed: float = 10.0
 var displayed_money: int = 0
 var shop_menu_instance: Control = null
 var worm_selector_instance: WormSelector = null
+var worm_details_instance: WormDetailsPanel = null
 var pending_item: ItemData = null
 
 func _ready() -> void:
@@ -41,6 +44,7 @@ func _ready() -> void:
 	shop_btn.pressed.connect(_on_shop_pressed)
 	slot_btn.pressed.connect(_on_slot_machine_pressed)
 	inventory_btn.pressed.connect(_on_inventory_pressed)
+	worms_btn.pressed.connect(_on_worms_pressed)
 	inventory_close_btn.pressed.connect(_on_inventory_close)
 	give_money_btn.pressed.connect(func(): GlobalManager.add_money(500))
 	GlobalManager.money_changed.connect(_on_money_changed)
@@ -143,6 +147,16 @@ func _on_inventory_close() -> void:
 	is_inventory_open = false
 	inventory_panel.visible = false
 	_update_positions()
+
+func _on_worms_pressed() -> void:
+	if worm_details_instance == null or not is_instance_valid(worm_details_instance):
+		worm_details_instance = WORM_DETAILS_SCENE.instantiate()
+		worm_details_instance.panel_closed.connect(_on_worm_details_closed)
+		get_parent().add_child(worm_details_instance)
+	worm_details_instance.open()
+
+func _on_worm_details_closed() -> void:
+	pass
 
 func _refresh_inventory_panel() -> void:
 	for child in inventory_list.get_children():
