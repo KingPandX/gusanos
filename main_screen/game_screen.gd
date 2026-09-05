@@ -1,6 +1,6 @@
 extends Control
 
-@onready var combat_box: PanelContainer = $CombatBox
+@onready var combat_box: PanelContainer = $UILayer/CombatBox
 @onready var social_area: Control = $SocialArea
 @onready var ui_layer: CanvasLayer = $UILayer
 

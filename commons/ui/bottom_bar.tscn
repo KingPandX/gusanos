@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cyffvcbyce32o"]
+
+[ext_resource type="Script" uid="uid://bbuheleilf5ml" path="res://commons/ui/bottom_bar.gd" id="1_script"]
+
+[node name="BottomBar" type="Control" unique_id=370507628]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1979785549]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.1, 0.12, 0.16, 0.9)
+
+[node name="BarContainer" type="HBoxContainer" parent="." unique_id=1760971879]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+theme_override_constants/separation = 12
+
+[node name="CollapseBtn" type="Button" parent="BarContainer" unique_id=898296007]
+custom_minimum_size = Vector2(30, 50)
+layout_mode = 2
+text = "▼"
+
+[node name="Sep1" type="VSeparator" parent="BarContainer" unique_id=1079360127]
+custom_minimum_size = Vector2(2, 50)
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="BarContainer" unique_id=236519340]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+text = "0¢"
+vertical_alignment = 1
+
+[node name="Sep2" type="VSeparator" parent="BarContainer" unique_id=603024330]
+custom_minimum_size = Vector2(2, 50)
+layout_mode = 2
+
+[node name="ContentContainer" type="HBoxContainer" parent="BarContainer" unique_id=1123426833]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Sep3" type="VSeparator" parent="BarContainer" unique_id=1362241615]
+custom_minimum_size = Vector2(2, 50)
+layout_mode = 2
+
+[node name="ShopBtn" type="Button" parent="BarContainer" unique_id=1128948267]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "Tienda"
+
+[node name="SlotBtn" type="Button" parent="BarContainer" unique_id=115199671]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+text = "Tragamonedas"
+
+[node name="Sep4" type="VSeparator" parent="BarContainer" unique_id=1847743546]
+custom_minimum_size = Vector2(2, 50)
+layout_mode = 2
+
+[node name="GiveMoneyBtn" type="Button" parent="BarContainer" unique_id=1008638401]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "+500¢"
+
+[node name="ExpandBtn" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -25.0
+offset_right = -10.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "▲"
