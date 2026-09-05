@@ -9,6 +9,7 @@ var sizeW = Label.new()
 var speed = Label.new()
 var attackSPD = Label.new()
 var moneySPD = Label.new()
+var skills_label = Label.new()
 
 func _ready() -> void:
 	$VBoxContainer.add_child(hp)
@@ -18,6 +19,7 @@ func _ready() -> void:
 	$VBoxContainer.add_child(speed)
 	$VBoxContainer.add_child(attackSPD)
 	$VBoxContainer.add_child(moneySPD)
+	$VBoxContainer.add_child(skills_label)
 
 func show_data(_worm_data : Worm_Data):
 	worm_data = _worm_data
@@ -38,3 +40,10 @@ func show_worm_data() -> void:
 	speed.text = "Velocidad: " + str(snappedf(worm_data.speed,0.01))
 	attackSPD.text = "Velocidad ataque: " + str(snappedf(worm_data.cooldown_attack,0.01))
 	moneySPD.text = "Velocidad dinero: " + str(snappedf(worm_data.cooldown_money,0.01))
+	if worm_data.skills.is_empty():
+		skills_label.text = "Habilidades: Ninguna"
+	else:
+		var skill_names: Array[String] = []
+		for skill in worm_data.skills:
+			skill_names.append(skill.skill_name)
+		skills_label.text = "Habilidades: " + ", ".join(skill_names)
