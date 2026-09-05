@@ -1,5 +1,4 @@
 extends Node
-class_name Shop
 
 static var discount: float = 0.0
 static var discount_timer: float = 0.0
