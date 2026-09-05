@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://doejhfgthu4ky" path="res://addons/finite_state_machine/finite_state_machine.gd" id="3_78xqu"]
 [ext_resource type="SpriteFrames" uid="uid://dow304vn5s2kj" path="res://assets/worms_frames/glasses_worm.tres" id="3_6802t"]
 [ext_resource type="Resource" uid="uid://di5n43o30vano" path="res://assets/audio/SFX/move.tres" id="3_hblao"]
+[ext_resource type="Script" uid="uid://ivhey8ejtf5f" path="res://commons/skills/skill_data.gd" id="3_i1qlk"]
 [ext_resource type="Script" uid="uid://xr87otbia20" path="res://worms/animation_manager.gd" id="4_6802t"]
 [ext_resource type="Script" uid="uid://ck6yc0d8n6tw1" path="res://worms/States/patrol.gd" id="4_adq0j"]
 [ext_resource type="Script" uid="uid://c14871phdsqjv" path="res://worms/worm_detector.gd" id="6_t21j8"]
