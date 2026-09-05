@@ -102,7 +102,7 @@ func add_money():
 	var coin = coin_scene.instantiate()
 	coin.value = coin_value
 	coin.global_position = global_position + Vector2(randf_range(-20, 20), randf_range(-20, 20))
-	get_tree().current_scene.add_child(coin)
+	get_parent().add_child(coin)
 
 func change_patrol_dir():
 	if randf() < 0.3:
