@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1"]
+
+[sub_resource type="Resource" id="Resource_auto_collect"]
+script = ExtResource("1")
+effect_name = "Recogedor Automático"
+description = "Recoge monedas automáticamente con un 20% de probabilidad por nivel"
+value = 1.0
+duration = 0.0
+cost = 200
+
+[node name="AutoCollector" type="Resource"]
+script = ExtResource("1")
+upgrade_name = "Recogedor Automático"
+description = "Recoge monedas automáticamente con un 20% de probabilidad por nivel"
+cost = 200
+cost_multiplier = 1.8
+max_level = 5
