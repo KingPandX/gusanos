@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://commons/ui/worm_selector/worm_selector.gd" id="1_script"]
 
 [node name="WormSelector" type="Control"]
+z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
