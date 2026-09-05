@@ -10,3 +10,6 @@ func on_take_damage(worm: Worm, attacker: Worm, amount: float) -> void:
 	if randf() > trigger_chance:
 		return
 	attacker.take_damage(amount * reflect_percent, null)
+
+func get_display_chance() -> String:
+	return " (%d%%)" % int(trigger_chance * 100)

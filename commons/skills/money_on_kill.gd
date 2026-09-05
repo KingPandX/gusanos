@@ -8,3 +8,6 @@ func on_kill(_killer: Worm, _victim: Worm) -> void:
 	if randf() > trigger_chance:
 		return
 	GlobalManager.add_money(money_amount)
+
+func get_display_chance() -> String:
+	return ""

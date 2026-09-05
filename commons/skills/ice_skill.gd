@@ -12,3 +12,6 @@ func get_incoming_damage_reduction(_worm: Worm, _attacker: Worm, _amount: float)
 
 func get_attack_cooldown_slow(_worm: Worm) -> float:
 	return cooldown_slow
+
+func get_display_chance() -> String:
+	return ""

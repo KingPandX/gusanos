@@ -10,3 +10,6 @@ func on_take_damage(worm: Worm, _attacker: Worm, amount: float) -> void:
 		return
 	var heal = worm.worm_data.get_computed_hp_max() * heal_percent
 	worm.hp = min(worm.hp + heal, worm.worm_data.get_computed_hp_max())
+
+func get_display_chance() -> String:
+	return " (%d%%)" % int(ignore_damage_chance * 100)

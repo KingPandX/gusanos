@@ -16,3 +16,6 @@ func on_combat_tick(worm: Worm) -> void:
 
 func get_damage_multiplier(worm: Worm) -> float:
 	return damage_per_stack * worm.worm_data.combat_stacks
+
+func get_display_chance() -> String:
+	return " (max %d stacks)" % max_stacks
