@@ -11,6 +11,7 @@ var target_position: Vector2
 var target_scale: float
 var mini_position: Vector2
 var combat_sub_viewport: SubViewport = null
+var bar_height: float = 50.0
 
 const EXPANDED_SIZE = Vector2(720, 627)
 
@@ -25,6 +26,15 @@ func _ready() -> void:
 	gui_input.connect(_on_gui_input)
 	combat_sub_viewport = _find_sub_viewport()
 	get_viewport().size_changed.connect(_setup_positions)
+	var bottom_bar = get_tree().get_first_node_in_group("bottom_bar")
+	if bottom_bar and bottom_bar.has_signal("bar_height_changed"):
+		bottom_bar.bar_height_changed.connect(_on_bar_height_changed)
+
+func _on_bar_height_changed(new_height: float) -> void:
+	bar_height = new_height
+	_setup_positions()
+	if not is_expanded:
+		target_position = mini_position
 
 func _find_sub_viewport() -> SubViewport:
 	var container = get_node_or_null("SubViewportContainer")
@@ -37,7 +47,7 @@ func _setup_positions() -> void:
 	var scaled_mini = EXPANDED_SIZE * mini_scale
 	mini_position = Vector2(
 		viewport_size.x - scaled_mini.x - 10,
-		viewport_size.y - scaled_mini.y - 10
+		viewport_size.y - scaled_mini.y - bar_height - 10
 	)
 	var expanded_position = (viewport_size - EXPANDED_SIZE) / 2
 	target_position = expanded_position if is_expanded else mini_position
@@ -123,7 +133,7 @@ func _update_target() -> void:
 		var scaled_mini = EXPANDED_SIZE * mini_scale
 		mini_position = Vector2(
 			viewport_size.x - scaled_mini.x - 10,
-			viewport_size.y - scaled_mini.y - 10
+			viewport_size.y - scaled_mini.y - bar_height - 10
 		)
 		target_position = mini_position
 		target_scale = mini_scale
