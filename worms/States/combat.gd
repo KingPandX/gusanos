@@ -1,6 +1,8 @@
 extends State
 
 @onready var worm: Worm = $"../.."
+const HIT = preload("uid://ckxcjiic847q1")
+
 
 const ATTACK_RANGE : float = 70.0
 var attack_cooldown : float = 0.0
@@ -38,6 +40,7 @@ func physics_update(delta: float):
 		if attack_cooldown <= 0.0:
 			worm.sprite.play("attack")
 			worm.actual_enemy.take_damage(worm.worm_data.damage)
+			AudioManager.play_sfx(HIT, randf_range(0.4,0.8))
 			attack_cooldown = worm.worm_data.cooldown_attack
 	
 	worm.current_velocity = worm.current_velocity.lerp(

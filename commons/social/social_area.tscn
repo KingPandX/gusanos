@@ -26,6 +26,7 @@ mouse_filter = 2
 color = Color(0.15, 0.18, 0.22, 1)
 
 [node name="WormsContainer" type="Node2D" parent="." unique_id=512385745]
+y_sort_enabled = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WormsContainer" unique_id=617344733]
 

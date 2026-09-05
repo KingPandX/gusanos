@@ -3,8 +3,10 @@ extends Control
 @onready var combat_box: PanelContainer = $UILayer/CombatBox
 @onready var social_area: Control = $SocialArea
 @onready var ui_layer: CanvasLayer = $UILayer
+const ETERNO__PERO_NO_PARA_SIEMPRE = preload("uid://bj5wdvs13ijiq")
 
 func _ready() -> void:
+	AudioManager.change_music(ETERNO__PERO_NO_PARA_SIEMPRE)
 	DragManager.worm_dropped.connect(_on_worm_dropped)
 
 func _on_worm_dropped(worm_data: Worm_Data, source: String, target_area: String, drop_position: Vector2) -> void:
