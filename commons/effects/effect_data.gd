@@ -20,6 +20,7 @@ enum Type {
 	EXTRA_SLOTS,
 	SHOP_DISCOUNT,
 	SHOP_EXTRA_ITEMS,
+	DROP_FREQUENCY,
 }
 
 @export var effect_name: String

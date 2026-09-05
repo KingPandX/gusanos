@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1"]
+[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2"]
+
+[sub_resource type="Resource" id="Resource_drop_freq"]
+script = ExtResource("2")
+effect_name = "Frecuencia de Drops"
+description = "Reduce el tiempo entre drops en 2 segundos por nivel"
+effect_type = 11
+target = 3
+value = 1.0
+duration = 0.0
+is_upgrade = true
+
+[node name="DropFrequency" type="Resource"]
+script = ExtResource("1")
+upgrade_name = "Frecuencia de Drops"
+description = "Reduce el tiempo entre drops en 2 segundos por nivel"
+effect = SubResource("Resource_drop_freq")
+cost = 300
+cost_multiplier = 1.8
+max_level = 5

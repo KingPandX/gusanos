@@ -52,16 +52,8 @@ func _process(delta: float) -> void:
 
 func _on_drop() -> void:
 	var mouse_pos = get_global_mouse_position()
-	var game_scene = get_tree().current_scene
-	if not game_scene:
-		DragManager.end_drag()
-		return
-
-	var combat_box = game_scene.get_node_or_null("CombatBox")
-	if combat_box and combat_box.is_point_inside(mouse_pos):
-		DragManager.drop_in_target(DragManager.DropTarget.COMBAT, mouse_pos)
-	else:
-		DragManager.drop_in_target(DragManager.DropTarget.SOCIAL, mouse_pos)
+	var zone = DragManager.get_zone_at_point(mouse_pos)
+	DragManager.drop_in_target(zone, mouse_pos)
 	queue_free()
 
 func _exit_tree() -> void:

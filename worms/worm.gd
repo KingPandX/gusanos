@@ -40,10 +40,14 @@ var area: String = "social"
 var is_being_dragged: bool = false
 var drag_preview: Control = null
 
+# Hover
+@onready var show_worm_data: Show_Data = $ShowWormData
+
 # Efectos activos
 var active_effects: Array[Dictionary] = []
 
 func _ready() -> void:
+	input_pickable = true
 	add_to_group("worms")
 	hp = worm_data.hp_max
 	max_speed = worm_data.speed
@@ -55,6 +59,9 @@ func _ready() -> void:
 	change_direction.timeout.connect(change_patrol_dir)
 	money.timeout.connect(add_money)
 	money.wait_time = worm_data.cooldown_money
+	worm_data.worm = self
+	mouse_entered.connect(show_worm_data.show_data.bind(worm_data))
+	mouse_exited.connect(show_worm_data.hide_data)
 
 func _process(delta: float) -> void:
 	if is_being_dragged:
@@ -88,12 +95,14 @@ func _start_drag() -> void:
 	if DragManager.is_dragging:
 		return
 	is_being_dragged = true
-	DragManager.start_drag(worm_data, DragManager.DragSource.SOCIAL)
+	DragManager.start_drag(worm_data, "social")
 	_create_drag_preview()
 	visible = false
 	set_physics_process(false)
 	set_process(false)
 	change_direction.stop()
+	
+
 
 func _create_drag_preview() -> void:
 	var preview_scene = preload("res://commons/ui/drag_preview.gd")

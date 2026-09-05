@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bdwlcgsm615gm" path="res://main_screen/game_screen.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://1bw5t1wg7j0p" path="res://main_screen/combat.tscn" id="2_combat"]
-[ext_resource type="PackedScene" uid="uid://dflhcw3jk2uqh" path="res://commons/ui/test_panel.tscn" id="3_test_panel"]
 [ext_resource type="PackedScene" uid="uid://dec8obrakusw1" path="res://commons/social/social_area.tscn" id="4_social_area"]
-[ext_resource type="Script" uid="uid://droyo0iq2bquv" path="res://commons/ui/combat_toggle.gd" id="5_combat_toggle"]
+[ext_resource type="Script" uid="uid://h5d5t5c7mgse" path="res://commons/ui/combat_toggle.gd" id="5_combat_toggle"]
+[ext_resource type="PackedScene" uid="uid://cyffvcbyce32o" path="res://commons/ui/bottom_bar.tscn" id="6_bottom_bar"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
 bg_color = Color(1, 1, 1, 0)
@@ -33,35 +33,25 @@ script = ExtResource("1_script")
 [node name="SocialArea" parent="." unique_id=152448106 instance=ExtResource("4_social_area")]
 layout_mode = 1
 
-[node name="CombatBox" type="PanelContainer" parent="." unique_id=1413578617]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=546894987]
+
+[node name="BottomBar" parent="UILayer" unique_id=1123046036 instance=ExtResource("6_bottom_bar")]
+
+[node name="CombatBox" type="PanelContainer" parent="UILayer" unique_id=1413578617]
 custom_minimum_size = Vector2(720, 627)
-layout_mode = 0
 offset_right = 720.0
 offset_bottom = 627.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_box")
 script = ExtResource("5_combat_toggle")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="CombatBox" unique_id=1136049486]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UILayer/CombatBox" unique_id=1136049486]
 layout_mode = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CombatBox/SubViewportContainer" unique_id=1175672748]
+[node name="SubViewport" type="SubViewport" parent="UILayer/CombatBox/SubViewportContainer" unique_id=1175672748]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(714, 621)
 render_target_update_mode = 4
 
-[node name="Combat" parent="CombatBox/SubViewportContainer/SubViewport" unique_id=209056222 instance=ExtResource("2_combat")]
-
-[node name="UILayer" type="CanvasLayer" parent="." unique_id=546894987]
-
-[node name="TestPanel" parent="UILayer" unique_id=1696511552 instance=ExtResource("3_test_panel")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = -416.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 406.0
-grow_horizontal = 0
-grow_vertical = 1
+[node name="Combat" parent="UILayer/CombatBox/SubViewportContainer/SubViewport" unique_id=209056222 instance=ExtResource("2_combat")]

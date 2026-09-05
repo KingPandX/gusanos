@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ck6yc0d8n6tw1" path="res://worms/States/patrol.gd" id="4_adq0j"]
 [ext_resource type="Script" uid="uid://c14871phdsqjv" path="res://worms/worm_detector.gd" id="6_t21j8"]
 [ext_resource type="Script" uid="uid://wq0hquu5gtcy" path="res://worms/States/combat.gd" id="7_combat"]
+[ext_resource type="PackedScene" uid="uid://2747vtt4virg" path="res://commons/social/show_worm_data.tscn" id="9_ubkfk"]
 
 [sub_resource type="Shader" id="Shader_6802t"]
 code = "shader_type canvas_item;
@@ -123,6 +124,8 @@ script = ExtResource("6_t21j8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="worm_detector" unique_id=1975784535]
 position = Vector2(0, -32)
 shape = SubResource("CircleShape2D_yw8l4")
+
+[node name="ShowWormData" parent="." unique_id=133896879 instance=ExtResource("9_ubkfk")]
 
 [connection signal="body_entered" from="worm_detector" to="worm_detector" method="_on_body_entered"]
 [connection signal="body_exited" from="worm_detector" to="worm_detector" method="_on_body_exited"]

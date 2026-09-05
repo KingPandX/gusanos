@@ -1,4 +1,4 @@
-extends PanelContainer
+extends DropZone
 
 signal toggle_changed(is_expanded: bool)
 
@@ -15,6 +15,8 @@ var combat_sub_viewport: SubViewport = null
 const EXPANDED_SIZE = Vector2(720, 627)
 
 func _ready() -> void:
+	zone_name = "combat"
+	super()
 	scale = Vector2.ONE * mini_scale
 	_setup_positions()
 	target_position = mini_position
@@ -52,16 +54,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			collapse()
 
 func _on_gui_input(event: InputEvent) -> void:
-	if DragManager.is_dragging:
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			DragManager.drop_in_target(DragManager.DropTarget.COMBAT, get_global_mouse_position())
-		return
-
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_expanded:
 			_try_extract_worm()
 		else:
 			toggle()
+
+func on_worm_dropped(worm_data: Worm_Data, source: String, drop_position: Vector2) -> void:
+	var spawner = get_tree().get_first_node_in_group("combat_spawner")
+	if spawner:
+		var local_pos = drop_position - global_position
+		var scaled_pos = local_pos / scale.x
+		spawner.spawn_specific_worm(worm_data, scaled_pos)
+		Inventory.move_worm(worm_data, "combat")
+		var game_scene = get_tree().current_scene
+		if game_scene and game_scene.has_method("_remove_from_social_area"):
+			game_scene._remove_from_social_area(worm_data)
 
 func _try_extract_worm() -> void:
 	if not combat_sub_viewport:
@@ -81,7 +89,7 @@ func _try_extract_worm() -> void:
 		_start_combat_extract(closest_worm)
 
 func _start_combat_extract(worm: Worm) -> void:
-	DragManager.start_drag(worm.worm_data, DragManager.DragSource.COMBAT)
+	DragManager.start_drag(worm.worm_data, "combat")
 	var preview_scene = preload("res://commons/ui/drag_preview.gd")
 	var preview = Control.new()
 	preview.set_script(preview_scene)
