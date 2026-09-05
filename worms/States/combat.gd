@@ -11,7 +11,7 @@ func enter():
 	worm.in_combat = true
 	worm.sprite.play("idle")
 	if worm.actual_enemy != null and is_instance_valid(worm.actual_enemy):
-		if worm.actual_enemy.team_id != worm.team_id:
+		if worm.actual_enemy.hp > 0:
 			worm.actual_enemy.enter_combat(worm)
 
 func exit():
@@ -24,21 +24,17 @@ func physics_update(delta: float):
 	if worm.in_combat_zone:
 		_check_combat_zone_status()
 	
-	if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy):
+	if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy) or worm.actual_enemy.hp <= 0:
 		var enemy = detector.get_available_enemy()
-		if enemy and enemy.team_id != worm.team_id:
+		if enemy:
 			worm.actual_enemy = enemy
 		else:
 			transition("Patrol")
 			return
 	
-	if worm.actual_enemy.team_id == worm.team_id:
-		transition("Patrol")
-		return
-	
 	if worm.actual_enemy.actual_enemy != worm and worm.actual_enemy.actual_enemy != null:
 		var enemy = detector.get_available_enemy()
-		if enemy and enemy != worm.actual_enemy and enemy.team_id != worm.team_id:
+		if enemy and enemy != worm.actual_enemy:
 			worm.actual_enemy.enter_combat(worm)
 		else:
 			transition("Patrol")
