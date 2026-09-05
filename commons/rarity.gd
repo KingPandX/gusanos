@@ -23,13 +23,18 @@ static func get_rarity_color(rarity: Level) -> Color:
 	return Color.WHITE
 
 static func roll_rarity() -> Level:
+	var weights = RARITY_WEIGHTS.duplicate()
+	var rarity_boost = PlayerEffects.get_rarity_boost()
+	if rarity_boost > 0:
+		weights[Level.LEGENDARY] = round(weights[Level.LEGENDARY] * (1.0 + rarity_boost))
+		weights[Level.EPIC] = round(weights[Level.EPIC] * (1.0 + rarity_boost * 0.5))
 	var total = 0
-	for w in RARITY_WEIGHTS:
+	for w in weights:
 		total += w
 	var roll = randi() % total
 	var cumulative = 0
-	for i in range(RARITY_WEIGHTS.size()):
-		cumulative += RARITY_WEIGHTS[i]
+	for i in range(weights.size()):
+		cumulative += weights[i]
 		if roll < cumulative:
 			return i as Level
 	return Level.COMMON
