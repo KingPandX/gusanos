@@ -40,7 +40,10 @@ static func _apply_to_worm(effect: EffectData, worm: Worm):
 			pass
 
 static func _apply_to_all_worms(effect: EffectData):
-	var worms = get_tree().get_nodes_in_group("worms")
+	var tree = Engine.get_main_loop() as SceneTree
+	if tree == null:
+		return
+	var worms = tree.get_nodes_in_group("worms")
 	for worm in worms:
 		if worm is Worm:
 			_apply_to_worm(effect, worm)
