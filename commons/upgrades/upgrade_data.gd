@@ -23,7 +23,10 @@ func can_upgrade() -> bool:
 	return true
 
 func apply() -> void:
+	print("[UpgradeData] apply: %s, current_level=%d, effect=%s" % [upgrade_name, current_level, effect.effect_name if effect else "NULL"])
 	if not can_upgrade():
+		print("[UpgradeData] can_upgrade() = false, aborting")
 		return
 	current_level += 1
+	print("[UpgradeData] level -> %d, calling EffectProcessor.apply(effect)" % current_level)
 	EffectProcessor.apply(effect)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_resource type="Resource" load_steps=4]
 
-[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2"]
+[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1_upgrade"]
+[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
 
-[sub_resource type="Resource" id="Resource_drop_freq"]
-script = ExtResource("2")
+[sub_resource type="Resource" id="effect_drop_freq"]
+script = ExtResource("2_effect")
 effect_name = "Frecuencia de Drops"
 description = "Reduce el tiempo entre drops en 2 segundos por nivel"
 effect_type = 11
@@ -13,11 +14,12 @@ value = 1.0
 duration = 0.0
 is_upgrade = true
 
-[node name="DropFrequency" type="Resource"]
-script = ExtResource("1")
+[resource]
+script = ExtResource("1_upgrade")
 upgrade_name = "Frecuencia de Drops"
 description = "Reduce el tiempo entre drops en 2 segundos por nivel"
-effect = SubResource("Resource_drop_freq")
+icon = ExtResource("3_icon")
+effect = SubResource("effect_drop_freq")
 cost = 300
 cost_multiplier = 1.8
 max_level = 5

@@ -9,6 +9,9 @@ func _ready() -> void:
 	AudioManager.change_music(ETERNO__PERO_NO_PARA_SIEMPRE)
 	DragManager.worm_dropped.connect(_on_worm_dropped)
 
+func _process(delta: float) -> void:
+	Shop.update(delta)
+
 func _on_worm_dropped(worm_data: Worm_Data, source: String, target_area: String, drop_position: Vector2) -> void:
 	if source == target_area:
 		_restore_worm(worm_data, source, drop_position)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
 [ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
@@ -18,5 +19,6 @@ item_name = "Pergamino de Escudo"
 description = "+50 HP escudo temporal (20s)"
 effect = SubResource("effect")
 target = 1
+icon = ExtResource("3_icon")
 cost = 150
 quantity = 1
