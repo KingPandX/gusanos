@@ -10,6 +10,8 @@ class_name WormTemplate
 @export var epic_stats : StatRange
 @export var legendary_stats : StatRange
 
+@export var skills: Array[SkillEntry] = []
+
 func get_stats_for_rarity(rarity: Rarity.Level) -> StatRange:
 	match rarity:
 		Rarity.Level.COMMON: return common_stats

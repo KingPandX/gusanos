@@ -19,6 +19,10 @@ static func generate_worm(rarity: Rarity.Level, templates: Array[WormTemplate]) 
 	worm_data.speed = stats.speed
 	worm_data.size = stats.size
 	
+	for entry in template.skills:
+		if randf() < entry.spawn_chance:
+			worm_data.skills.append(entry.skill)
+	
 	return worm_data
 
 static func generate_random_worm(templates: Array[WormTemplate]) -> Worm_Data:

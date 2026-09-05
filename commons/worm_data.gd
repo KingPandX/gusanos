@@ -11,4 +11,7 @@ class_name Worm_Data
 @export var size : float = 1
 @export var speed : float = 60
 
+@export var skills: Array[SkillData] = []
+var combat_stacks: int = 0
+
 var worm: Worm
