@@ -95,9 +95,14 @@ func get_effect_value(effect_type: String) -> float:
 			return effect.value
 	return 0.0
 
+var coin_scene: PackedScene = preload("res://commons/coins/coin.tscn")
+
 func add_money():
-	var money_to_add : int= round(GlobalManager.BASE_MONEY * worm_data.size)
-	GlobalManager.add_money(money_to_add)
+	var coin_value = round(GlobalManager.BASE_MONEY * worm_data.size)
+	var coin = coin_scene.instantiate()
+	coin.value = coin_value
+	coin.global_position = global_position + Vector2(randf_range(-20, 20), randf_range(-20, 20))
+	get_tree().current_scene.add_child(coin)
 
 func change_patrol_dir():
 	if randf() < 0.3:
