@@ -11,19 +11,18 @@ const CORNER_MARGIN = 10.0
 
 func _ready() -> void:
 	combat_box.pivot_offset = Vector2.ZERO
-	_update_positions()
+	_update_center_pos()
+	combat_box.position = center_pos
+	combat_box.scale = Vector2.ONE
 	get_viewport().size_changed.connect(_on_resize)
-	$CombatBox/SubViewportContainer/SubViewport/Combat.toggle_position_requested.connect(_on_toggle_position)
 
 func _on_resize() -> void:
-	_update_positions()
-
-func _update_positions() -> void:
-	center_pos = (get_viewport_rect().size - FULL_SIZE) / 2
-	if not is_centered:
-		combat_box.position = _get_corner_pos()
-	else:
+	_update_center_pos()
+	if is_centered:
 		combat_box.position = center_pos
+
+func _update_center_pos() -> void:
+	center_pos = (get_viewport_rect().size - FULL_SIZE) / 2
 
 func _get_corner_pos() -> Vector2:
 	var viewport_size = get_viewport_rect().size
@@ -33,13 +32,10 @@ func _get_corner_pos() -> Vector2:
 		viewport_size.y - scaled_size.y - CORNER_MARGIN
 	)
 
-func _on_toggle_position() -> void:
-	set_centered(!is_centered)
-
 func set_centered(centered: bool) -> void:
 	is_centered = centered
 	var target_pos = center_pos if is_centered else _get_corner_pos()
-	var target_scale = Vector2(1.0, 1.0) if is_centered else Vector2(SCALE_DOWN, SCALE_DOWN)
+	var target_scale = Vector2.ONE if is_centered else Vector2(SCALE_DOWN, SCALE_DOWN)
 
 	var tween = create_tween().set_parallel(true)
 	tween.tween_property(combat_box, "position", target_pos, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
