@@ -6,15 +6,22 @@ const HIT = preload("uid://ckxcjiic847q1")
 
 const ATTACK_RANGE : float = 70.0
 var attack_cooldown : float = 0.0
+var ramp_timer : float = 0.0
+const RAMP_INTERVAL : float = 1.0
 
 func enter():
 	attack_cooldown = 0.0
+	ramp_timer = 0.0
 	worm.in_combat = true
+	for skill in worm.worm_data.skills:
+		skill.on_combat_start(worm)
 	worm.sprite.play("idle")
 
 func exit():
 	worm.in_combat = false
 	worm.actual_enemy = null
+	for skill in worm.worm_data.skills:
+		skill.on_combat_end(worm)
 	if not worm.in_combat_zone:
 		worm.hp = worm.worm_data.hp_max
 
@@ -29,6 +36,12 @@ func physics_update(delta: float):
 		transition("Patrol")
 		return
 	
+	ramp_timer += delta
+	if ramp_timer >= RAMP_INTERVAL:
+		ramp_timer -= RAMP_INTERVAL
+		for skill in worm.worm_data.skills:
+			skill.on_combat_tick(worm)
+	
 	var distance = worm.global_position.distance_to(worm.actual_enemy.global_position)
 	var direction_to_enemy = (worm.actual_enemy.global_position - worm.global_position).normalized()
 	
@@ -39,7 +52,14 @@ func physics_update(delta: float):
 		attack_cooldown -= delta
 		if attack_cooldown <= 0.0:
 			worm.sprite.play("attack")
-			worm.actual_enemy.take_damage(worm.worm_data.damage)
+			var base_damage = worm.worm_data.damage
+			var bonus := 0.0
+			for skill in worm.worm_data.skills:
+				bonus += skill.get_damage_multiplier(worm)
+			var final_damage = base_damage * (1.0 + bonus)
+			worm.actual_enemy.take_damage(final_damage, worm)
+			for skill in worm.worm_data.skills:
+				skill.on_deal_damage(worm, final_damage)
 			AudioManager.play_sfx(HIT, randf_range(0.4,0.8))
 			attack_cooldown = worm.worm_data.cooldown_attack
 	

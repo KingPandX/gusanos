@@ -173,6 +173,7 @@ func get_effect_value(effect_type: String) -> float:
 			return effect.value
 	return 0.0
 
+var last_attacker: Worm = null
 var coin_scene: PackedScene = preload("res://commons/coins/coin.tscn")
 
 func add_money():
@@ -196,7 +197,13 @@ func new_random_velocity() -> void:
 	var new_dir = Vector2.from_angle(deg_to_rad(randf_range(0, 360)))
 	target_velocity = new_dir * new_speed
 
-func take_damage(amount: float) -> void:
+func _notify_take_damage(attacker: Worm, amount: float) -> void:
+	for skill in worm_data.skills:
+		skill.on_take_damage(self, attacker, amount)
+
+func take_damage(amount: float, attacker: Worm = null) -> void:
+	if attacker != null:
+		last_attacker = attacker
 	if has_effect("shield"):
 		var shield_value = get_effect_value("shield")
 		if shield_value >= amount:
@@ -205,15 +212,19 @@ func take_damage(amount: float) -> void:
 					effect.value -= amount
 					if effect.value <= 0:
 						remove_effect("shield")
+					_notify_take_damage(attacker, amount)
 					return
 		else:
 			amount -= shield_value
 			remove_effect("shield")
 	hp -= amount
+	_notify_take_damage(attacker, amount)
 	if hp <= 0.0:
 		die()
 
 func die() -> void:
+	for skill in worm_data.skills:
+		skill.on_kill(last_attacker, self)
 	if _move_id >= 0:
 		AudioManager.free_sfx_looped(_move_id)
 		_move_id = -1
