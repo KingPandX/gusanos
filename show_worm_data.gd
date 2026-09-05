@@ -23,10 +23,10 @@ func show_worm_data() -> void:
 	if worm_data == null:
 		return
 		
-	hp.text = "Vida maxima: " + str(worm_data.hp_max)
-	damage.text = "Daño: " + str(worm_data.damage)
+	hp.text = "Vida maxima: " + str(snappedf(worm_data.hp_max,0.01))
+	damage.text = "Daño: " + str(snappedf(worm_data.damage,0.01))
 	rarity.text = "Rareza: " + str(worm_data.rarity)
-	sizeW.text = "Tamaño: " + str(worm_data.size)
-	speed.text = "Velocidad: " + str(worm_data.speed)
-	attackSPD.text = "Velocidad ataque: " + str(worm_data.cooldown_attack)
-	moneySPD.text = "Velocidad dinero: " + str(worm_data.cooldown_money)
+	sizeW.text = "Tamaño: " + str(snappedf(worm_data.size,0.01))
+	speed.text = "Velocidad: " + str(snappedf(worm_data.speed,0.01))
+	attackSPD.text = "Velocidad ataque: " + str(snappedf(worm_data.cooldown_attack,0.01))
+	moneySPD.text = "Velocidad dinero: " + str(snappedf(worm_data.cooldown_money,0.01))
