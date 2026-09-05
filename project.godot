@@ -21,6 +21,7 @@ GlobalManager="*uid://b3vvixi15d8h8"
 Inventory="*res://commons/inventory.gd"
 ItemInventory="*res://commons/items/item_inventory.gd"
 Shop="*res://commons/shop.gd"
+DragManager="*res://commons/social/drag_manager.gd"
 
 [display]
 

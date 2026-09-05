@@ -4,6 +4,7 @@ class_name CombatZone
 signal worm_entered_zone(worm: Worm)
 signal worm_exited_zone(worm: Worm)
 signal worm_died(worm: Worm)
+signal worm_removed_from_combat(worm: Worm)
 signal combat_activated
 signal combat_deactivated
 
@@ -86,6 +87,17 @@ func _stop_all_combats() -> void:
 	for worm in worms_in_zone:
 		if is_instance_valid(worm):
 			worm.exit_combat()
+
+func remove_worm(worm: Worm) -> void:
+	if worm in worms_in_zone:
+		worms_in_zone.erase(worm)
+		worm.in_combat_zone = false
+		worm.exit_combat()
+		worm_removed_from_combat.emit(worm)
+		_check_combat_end()
+
+func remove_worm_from_combat(worm: Worm) -> void:
+	remove_worm(worm)
 
 func _find_enemy(worm: Worm) -> Worm:
 	var enemies: Array[Worm] = []

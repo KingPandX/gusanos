@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dec8obrakusw1"]
+
+[ext_resource type="Script" uid="uid://5cc75k3nxiua" path="res://commons/social/social_area.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw8l4"]
+size = Vector2(1155, 20)
+
+[node name="SocialArea" type="Control" unique_id=2019032827]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=631550621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.15, 0.18, 0.22, 1)
+
+[node name="WormsContainer" type="Node2D" parent="." unique_id=512385745]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WormsContainer" unique_id=617344733]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WormsContainer/StaticBody2D" unique_id=1513553428]
+position = Vector2(577.5, -10)
+shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WormsContainer/StaticBody2D" unique_id=1114000347]
+position = Vector2(575, 659)
+shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WormsContainer/StaticBody2D" unique_id=2080096602]
+position = Vector2(-13, 300)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_yw8l4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WormsContainer/StaticBody2D" unique_id=886229033]
+position = Vector2(1163, 364)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_yw8l4")

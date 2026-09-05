@@ -2,8 +2,10 @@ extends Node
 
 signal inventory_changed
 signal slot_unlocked(new_max: int)
+signal worm_area_changed(worm_data: Worm_Data, new_area: String)
 
 var worms : Array[Worm_Data] = []
+var worm_areas: Dictionary = {}
 var max_slots : int = 3
 var unlocked_slots : int = 3
 var templates : Array[WormTemplate] = []
@@ -27,10 +29,11 @@ func _load_templates() -> void:
 			file_name = dir.get_next()
 	print("Templates loaded: %d" % templates.size())
 
-func add_worm(worm: Worm_Data) -> bool:
+func add_worm(worm: Worm_Data, area: String = "social") -> bool:
 	if worms.size() >= unlocked_slots:
 		return false
 	worms.append(worm)
+	worm_areas[worm] = area
 	inventory_changed.emit()
 	return true
 
@@ -39,8 +42,30 @@ func remove_worm(index: int) -> Worm_Data:
 		return null
 	var worm = worms[index]
 	worms.remove_at(index)
+	worm_areas.erase(worm)
 	inventory_changed.emit()
 	return worm
+
+func remove_worm_data(worm_data: Worm_Data) -> void:
+	if worm_data in worms:
+		worms.erase(worm_data)
+		worm_areas.erase(worm_data)
+		inventory_changed.emit()
+
+func move_worm(worm_data: Worm_Data, new_area: String) -> void:
+	if worm_data in worm_areas:
+		worm_areas[worm_data] = new_area
+		worm_area_changed.emit(worm_data, new_area)
+
+func get_worm_area(worm_data: Worm_Data) -> String:
+	return worm_areas.get(worm_data, "social")
+
+func get_worms_in_area(area: String) -> Array[Worm_Data]:
+	var result: Array[Worm_Data] = []
+	for worm in worms:
+		if worm_areas.get(worm, "social") == area:
+			result.append(worm)
+	return result
 
 func can_add() -> bool:
 	return worms.size() < unlocked_slots

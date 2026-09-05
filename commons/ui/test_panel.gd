@@ -1,9 +1,9 @@
 extends Control
 
-@onready var money_label: Label = $VBoxContainer/MoneyLabel
 @onready var items_list: VBoxContainer = $VBoxContainer/ScrollContainer/ItemsList
 @onready var spawn_button: Button = $VBoxContainer/Buttons/SpawnButton
 @onready var give_money_button: Button = $VBoxContainer/Buttons/GiveMoneyButton
+@onready var spawn_social_button: Button = $VBoxContainer/Buttons/SpawnSocialButton
 @onready var worm_selector: Control = $WormSelector
 
 var item_buttons: Dictionary = {}
@@ -12,12 +12,10 @@ var selected_item_name: String = ""
 func _ready() -> void:
 	spawn_button.pressed.connect(_on_spawn_pressed)
 	give_money_button.pressed.connect(_on_give_money_pressed)
+	spawn_social_button.pressed.connect(_on_spawn_social_pressed)
 	worm_selector.worm_selected.connect(_on_worm_selected)
 	
-	GlobalManager.money_changed.connect(_on_money_changed)
 	ItemInventory.inventory_changed.connect(_on_inventory_changed)
-	
-	_update_money_display()
 	_refresh_items_list()
 
 func _on_spawn_pressed() -> void:
@@ -25,14 +23,18 @@ func _on_spawn_pressed() -> void:
 	if spawner:
 		spawner.spawn_worm()
 
+func _on_spawn_social_pressed() -> void:
+	var social_area = get_tree().get_first_node_in_group("social_area")
+	if social_area:
+		if Inventory.templates.is_empty():
+			print("ERROR: No templates loaded!")
+			return
+		var worm_data = WormFactory.generate_random_worm(Inventory.templates)
+		if worm_data and Inventory.add_worm(worm_data, "social"):
+			social_area.spawn_social_worm(worm_data)
+
 func _on_give_money_pressed() -> void:
 	GlobalManager.add_money(500)
-
-func _on_money_changed(_value: int) -> void:
-	_update_money_display()
-
-func _update_money_display() -> void:
-	money_label.text = "Dinero: $%d" % GlobalManager.money
 
 func _on_inventory_changed() -> void:
 	_refresh_items_list()

@@ -18,21 +18,35 @@ func spawn_worm() -> void:
 	if Inventory.templates.is_empty():
 		print("ERROR: No templates loaded!")
 		return
+	if not Inventory.can_add():
+		print("ERROR: No slots available!")
+		return
 	
 	var worm_data = WormFactory.generate_random_worm(Inventory.templates)
 	if worm_data == null:
 		print("ERROR: Failed to generate worm")
 		return
 	
-	var worm_instance = worm_scene.instantiate()
-	worm_instance.worm_data = worm_data
-	
+	Inventory.add_worm(worm_data, "combat")
 	var spawn_pos = Vector2(
 		randf_range(spawn_min.global_position.x, spawn_max.global_position.x),
 		randf_range(spawn_min.global_position.y, spawn_max.global_position.y)
 	)
-	worm_instance.position = spawn_pos
 	
+	spawn_specific_worm(worm_data, spawn_pos)
+
+func spawn_specific_worm(worm_data: Worm_Data, pos: Vector2) -> Worm:
+	var worm_instance = worm_scene.instantiate()
+	worm_instance.worm_data = worm_data
+	worm_instance.area = "combat"
+	
+	if pos == Vector2.ZERO:
+		pos = Vector2(
+			randf_range(spawn_min.global_position.x, spawn_max.global_position.x),
+			randf_range(spawn_min.global_position.y, spawn_max.global_position.y)
+		)
+	
+	worm_instance.position = pos
 	add_child(worm_instance)
 	
 	var sprite = worm_instance.get_node("Sprite")
@@ -41,4 +55,12 @@ func spawn_worm() -> void:
 		sprite.modulate = color
 	
 	var rarity_name = Rarity.get_rarity_name(worm_data.rarity)
-	print("Spawned: %s (%s) at %s" % [worm_data.template.worm_name, rarity_name, spawn_pos])
+	print("Spawned: %s (%s) at %s" % [worm_data.template.worm_name, rarity_name, pos])
+	
+	return worm_instance
+
+func remove_worm_from_combat(worm: Worm) -> void:
+	if worm and is_instance_valid(worm):
+		worm.area = "social"
+		worm.exit_combat()
+		worm.queue_free()

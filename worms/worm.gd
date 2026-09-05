@@ -34,6 +34,11 @@ var actual_enemy : Worm
 var in_combat : bool = false
 var in_combat_zone : bool = false
 var team_id : int = -1
+var area: String = "social"
+
+# Drag and drop
+var is_being_dragged: bool = false
+var drag_preview: Control = null
 
 # Efectos activos
 var active_effects: Array[Dictionary] = []
@@ -52,6 +57,8 @@ func _ready() -> void:
 	money.wait_time = worm_data.cooldown_money
 
 func _process(delta: float) -> void:
+	if is_being_dragged:
+		return
 	_update_effects(delta)
 	var speed = current_velocity.length()
 	if speed > 5.0:
@@ -61,6 +68,44 @@ func _process(delta: float) -> void:
 	else:
 		sprite.scale = sprite.scale.lerp(Vector2.ONE, delta * 8.0)
 		bop_timer = 0.0
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			_on_click_start()
+
+func _on_click_start() -> void:
+	if area != "social":
+		return
+	if DragManager.is_dragging:
+		return
+	var mouse_pos = get_global_mouse_position()
+	var distance = global_position.distance_to(mouse_pos)
+	if distance < 50.0:
+		_start_drag()
+
+func _start_drag() -> void:
+	if DragManager.is_dragging:
+		return
+	is_being_dragged = true
+	DragManager.start_drag(worm_data, DragManager.DragSource.SOCIAL)
+	_create_drag_preview()
+	visible = false
+	set_physics_process(false)
+	set_process(false)
+	change_direction.stop()
+
+func _create_drag_preview() -> void:
+	var preview_scene = preload("res://commons/ui/drag_preview.gd")
+	drag_preview = Control.new()
+	drag_preview.set_script(preview_scene)
+	drag_preview.setup(worm_data)
+	get_tree().current_scene.add_child(drag_preview)
+	DragManager.set_preview(drag_preview)
+
+func _exit_tree() -> void:
+	if drag_preview and is_instance_valid(drag_preview):
+		drag_preview.queue_free()
 
 func _update_effects(delta: float):
 	var i = active_effects.size() - 1
@@ -145,8 +190,9 @@ func die() -> void:
 	target_velocity = Vector2.ZERO
 	current_velocity = Vector2.ZERO
 	velocity = Vector2.ZERO
+	if area == "combat":
+		Inventory.remove_worm_data(worm_data)
 	queue_free()
-
 
 func enter_combat(enemy: Worm) -> void:
 	if in_combat:
