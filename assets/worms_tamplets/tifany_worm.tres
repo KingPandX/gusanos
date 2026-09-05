@@ -42,6 +42,8 @@ size = Vector2(0.9, 1.1)
 script = ExtResource("4_ys713")
 reflect_percent = 1.0
 trigger_chance = 1.0
+skill_name = "Reflección"
+description = "Permite reflejar el ataque de los enemigos"
 metadata/_custom_type_script = "uid://d3usylenyaym"
 
 [sub_resource type="Resource" id="Resource_dq7rc"]
