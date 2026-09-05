@@ -4,6 +4,16 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_irbk4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.1, 0.12, 0.16, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.35, 0.45, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+
 [node name="BottomBar" type="Control" unique_id=370507628]
 layout_mode = 3
 anchors_preset = 15
@@ -25,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.1, 0.12, 0.16, 0.9)
 
-[node name="BarContainer" type="HBoxContainer" parent="." unique_id=1760971879]
+[node name="MainVBox" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -34,55 +44,109 @@ anchor_bottom = 1.0
 offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="BarContainer" type="HBoxContainer" parent="MainVBox" unique_id=1760971879]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 12
 
-[node name="CollapseBtn" type="Button" parent="BarContainer" unique_id=898296007]
+[node name="CollapseBtn" type="Button" parent="MainVBox/BarContainer" unique_id=898296007]
 custom_minimum_size = Vector2(30, 50)
 layout_mode = 2
 text = "▼"
 
-[node name="Sep1" type="VSeparator" parent="BarContainer" unique_id=1079360127]
+[node name="Sep1" type="VSeparator" parent="MainVBox/BarContainer" unique_id=1079360127]
 custom_minimum_size = Vector2(2, 50)
 layout_mode = 2
 
-[node name="MoneyLabel" type="Label" parent="BarContainer" unique_id=236519340]
+[node name="MoneyLabel" type="Label" parent="MainVBox/BarContainer" unique_id=236519340]
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 text = "0¢"
 vertical_alignment = 1
 
-[node name="Sep2" type="VSeparator" parent="BarContainer" unique_id=603024330]
+[node name="Sep2" type="VSeparator" parent="MainVBox/BarContainer" unique_id=603024330]
 custom_minimum_size = Vector2(2, 50)
 layout_mode = 2
 
-[node name="ContentContainer" type="HBoxContainer" parent="BarContainer" unique_id=1123426833]
+[node name="ContentContainer" type="HBoxContainer" parent="MainVBox/BarContainer" unique_id=1123426833]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Sep3" type="VSeparator" parent="BarContainer" unique_id=1362241615]
+[node name="WormContainer" type="HBoxContainer" parent="MainVBox/BarContainer/ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Sep3" type="VSeparator" parent="MainVBox/BarContainer" unique_id=1362241615]
 custom_minimum_size = Vector2(2, 50)
 layout_mode = 2
 
-[node name="ShopBtn" type="Button" parent="BarContainer" unique_id=1128948267]
+[node name="ShopBtn" type="Button" parent="MainVBox/BarContainer" unique_id=1128948267]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "Tienda"
 
-[node name="SlotBtn" type="Button" parent="BarContainer" unique_id=115199671]
+[node name="SlotBtn" type="Button" parent="MainVBox/BarContainer" unique_id=115199671]
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 text = "Tragamonedas"
 
-[node name="Sep4" type="VSeparator" parent="BarContainer" unique_id=1847743546]
+[node name="Sep4" type="VSeparator" parent="MainVBox/BarContainer" unique_id=1847743546]
 custom_minimum_size = Vector2(2, 50)
 layout_mode = 2
 
-[node name="GiveMoneyBtn" type="Button" parent="BarContainer" unique_id=1008638401]
+[node name="GiveMoneyBtn" type="Button" parent="MainVBox/BarContainer" unique_id=1008638401]
 custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 text = "+500¢"
+
+[node name="Sep5" type="VSeparator" parent="MainVBox/BarContainer"]
+custom_minimum_size = Vector2(2, 50)
+layout_mode = 2
+
+[node name="InventoryBtn" type="Button" parent="MainVBox/BarContainer"]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+text = "Inventario"
+
+[node name="InventoryPanel" type="PanelContainer" parent="MainVBox"]
+visible = false
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="MainVBox/InventoryPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="HBoxContainer" parent="MainVBox/InventoryPanel/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainVBox/InventoryPanel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventario"
+vertical_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="MainVBox/InventoryPanel/VBox/Header"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "X"
+
+[node name="Scroll" type="ScrollContainer" parent="MainVBox/InventoryPanel/VBox"]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryList" type="VBoxContainer" parent="MainVBox/InventoryPanel/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
 
 [node name="ExpandBtn" type="Button" parent="." unique_id=1825690502]
 visible = false
