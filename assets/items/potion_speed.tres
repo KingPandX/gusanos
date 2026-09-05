@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=3]
+[gd_resource type="Resource" load_steps=3]
 
-[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_script"]
+[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
 
-[sub_resource type="Resource" id="Resource_effect"]
-script = ExtResource("1_script")
+[sub_resource type="Resource" id="effect"]
+script = ExtResource("2_effect")
 effect_name = "Velocidad"
 description = "Aumenta la velocidad permanentemente"
 effect_type = 0
@@ -11,10 +12,11 @@ target = 1
 stat = "speed"
 value = 0.3
 
-[node name="PotionSpeed" type="Resource"]
-script = ExtResource("1_script")
+[resource]
+script = ExtResource("1_item")
 item_name = "Poción de Velocidad"
 description = "+30% velocidad permanente"
+effect = SubResource("effect")
 target = 1
 cost = 100
 quantity = 1
