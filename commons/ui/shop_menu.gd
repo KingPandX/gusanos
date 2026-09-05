@@ -15,6 +15,7 @@ signal shop_closed
 
 var show_upgrades: bool = false
 var item_stock: Dictionary = {}
+var initialized: bool = false
 
 func _ready() -> void:
 	bg.gui_input.connect(_on_bg_input)
@@ -34,8 +35,10 @@ func _process(_delta: float) -> void:
 
 func open() -> void:
 	visible = true
-	Shop.rotate_items()
-	_init_stock()
+	if not initialized:
+		Shop.rotate_items()
+		_init_stock()
+		initialized = true
 	_refresh_content()
 	_update_money_label()
 
