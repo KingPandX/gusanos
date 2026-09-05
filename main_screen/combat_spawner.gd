@@ -8,6 +8,7 @@ signal toggle_position_requested()
 var worm_scene : PackedScene
 
 func _ready() -> void:
+	add_to_group("combat_spawner")
 	worm_scene = load("res://worms/worm.tscn")
 
 func _on_toggle_position_pressed() -> void:

@@ -70,25 +70,8 @@ script = ExtResource("3_5i6my")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1586780899]
 
-[node name="SpawnButton" type="Button" parent="UI" unique_id=530695295]
-offset_left = 8.0
-offset_top = 90.0
-offset_right = 200.0
-offset_bottom = 140.0
-text = "Spawn Worm"
-
-[node name="TogglePositionButton" type="Button" parent="UI"]
-offset_left = 8.0
-offset_top = 150.0
-offset_right = 200.0
-offset_bottom = 200.0
-text = "Toggle Position"
-
 [node name="SpawnMin" type="Marker2D" parent="." unique_id=364509012]
 position = Vector2(85, 80)
 
 [node name="SpawnMax" type="Marker2D" parent="." unique_id=436850966]
 position = Vector2(634, 562)
-
-[connection signal="pressed" from="UI/SpawnButton" to="." method="spawn_worm"]
-[connection signal="pressed" from="UI/TogglePositionButton" to="." method="_on_toggle_position_pressed"]
