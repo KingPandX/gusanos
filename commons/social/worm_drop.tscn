@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://t3a052dpl615"]
+
+[ext_resource type="Script" uid="uid://cfv4wg5nqub3u" path="res://commons/social/worm_drop.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dd8rcb08xm030" path="res://assets/worm_clod.png" id="2_lequi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drop"]
+radius = 30.0
+
+[node name="WormDrop" type="Area2D" unique_id=477548869]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2095837594]
+shape = SubResource("CircleShape2D_drop")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1996255835]
+texture = ExtResource("2_lequi")
+offset = Vector2(-1.72, -10.85)
