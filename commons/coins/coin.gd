@@ -11,6 +11,7 @@ func _ready() -> void:
 	input_pickable = true
 	monitoring = false
 	monitorable = false
+	input_event.connect(_on_input_event)
 
 func _process(_delta: float) -> void:
 	if collected:
@@ -18,12 +19,12 @@ func _process(_delta: float) -> void:
 	if PlayerEffects.has_auto_collect():
 		if randf() < PlayerEffects.get_auto_collect_chance():
 			collect()
-			return
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		var mouse_pos = get_global_mouse_position()
-		if global_position.distance_to(mouse_pos) < 20.0:
-			collect()
 
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if collected:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		collect()
 
 func collect() -> void:
 	if collected:
