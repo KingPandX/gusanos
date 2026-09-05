@@ -1,7 +1,6 @@
 extends State
 
 @onready var worm: Worm = $"../.."
-@onready var detector: Area2D = $"../../worm_detector"
 
 const ATTACK_RANGE : float = 70.0
 var attack_cooldown : float = 0.0
@@ -10,9 +9,6 @@ func enter():
 	attack_cooldown = 0.0
 	worm.in_combat = true
 	worm.sprite.play("idle")
-	if worm.actual_enemy != null and is_instance_valid(worm.actual_enemy):
-		if worm.actual_enemy.hp > 0:
-			worm.actual_enemy.enter_combat(worm)
 
 func exit():
 	worm.in_combat = false
@@ -22,23 +18,14 @@ func exit():
 
 func physics_update(delta: float):
 	if worm.in_combat_zone:
-		_check_combat_zone_status()
+		var combat_zone = _find_combat_zone()
+		if combat_zone and not combat_zone.combat_active:
+			transition("Patrol")
+			return
 	
 	if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy) or worm.actual_enemy.hp <= 0:
-		var enemy = detector.get_available_enemy()
-		if enemy:
-			worm.actual_enemy = enemy
-		else:
-			transition("Patrol")
-			return
-	
-	if worm.actual_enemy.actual_enemy != worm and worm.actual_enemy.actual_enemy != null:
-		var enemy = detector.get_available_enemy()
-		if enemy and enemy != worm.actual_enemy:
-			worm.actual_enemy.enter_combat(worm)
-		else:
-			transition("Patrol")
-			return
+		transition("Patrol")
+		return
 	
 	var distance = worm.global_position.distance_to(worm.actual_enemy.global_position)
 	var direction_to_enemy = (worm.actual_enemy.global_position - worm.global_position).normalized()
@@ -66,11 +53,6 @@ func physics_update(delta: float):
 	
 	worm.velocity = worm.current_velocity
 	worm.move_and_slide()
-
-func _check_combat_zone_status():
-	var combat_zone = _find_combat_zone()
-	if combat_zone and not combat_zone.combat_active:
-		transition("Patrol")
 
 func _find_combat_zone() -> CombatZone:
 	var zones = get_tree().get_nodes_in_group("combat_zones")

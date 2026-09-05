@@ -21,6 +21,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if combat_active:
 		_check_dead_worms()
+		_assign_targets_to_all()
 
 func _check_dead_worms() -> void:
 	var changed = false
@@ -75,12 +76,13 @@ func deactivate_combat() -> void:
 	_stop_all_combats()
 	combat_deactivated.emit()
 
-func _start_all_combats() -> void:
+func _assign_targets_to_all() -> void:
 	for worm in worms_in_zone:
-		if is_instance_valid(worm) and worm.hp > 0 and not worm.in_combat:
-			var enemy = _find_enemy(worm)
-			if enemy:
-				worm.enter_combat(enemy)
+		if is_instance_valid(worm) and worm.hp > 0:
+			if worm.actual_enemy == null or not is_instance_valid(worm.actual_enemy) or worm.actual_enemy.hp <= 0 or worm.actual_enemy == worm:
+				var enemy = _find_enemy(worm)
+				if enemy:
+					worm.enter_combat(enemy)
 
 func _stop_all_combats() -> void:
 	for worm in worms_in_zone:
