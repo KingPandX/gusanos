@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://di5n43o30vano"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_03jad"]
+[ext_resource type="AudioStream" uid="uid://nrgqnwvb6w6a" path="res://assets/audio/SFX/move.wav" id="2_g4pdj"]
+
+[resource]
+script = ExtResource("1_03jad")
+stream = ExtResource("2_g4pdj")
+max_instances = 5
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

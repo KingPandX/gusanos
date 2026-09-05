@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://ckxcjiic847q1"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_585af"]
+[ext_resource type="AudioStream" uid="uid://cmr2shmtgwrut" path="res://assets/audio/SFX/hit.wav" id="2_jpriy"]
+
+[resource]
+script = ExtResource("1_585af")
+stream = ExtResource("2_jpriy")
+max_instances = 5
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

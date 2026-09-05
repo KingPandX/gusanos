@@ -9,6 +9,13 @@ class_name Worm
 @export var friction : float = 2.0
 @export var turn_speed : float = 2.0
 
+# Sonido de movimiento
+@export var move_sfx: SFXData
+@export var move_sfx_volume: float = -6.0
+@export var move_pitch_min: float = 0.8
+@export var move_pitch_max: float = 1.5
+var _move_id: int = -1
+
 # Bop
 @export var bop_intensity : float = 0.15
 @export var bop_speed : float = 8.0
@@ -62,6 +69,8 @@ func _ready() -> void:
 	worm_data.worm = self
 	mouse_entered.connect(show_worm_data.show_data.bind(worm_data))
 	mouse_exited.connect(show_worm_data.hide_data)
+	if move_sfx:
+		_move_id = AudioManager.create_sfx_looped(move_sfx, move_sfx_volume)
 
 func _process(delta: float) -> void:
 	if is_being_dragged:
@@ -75,6 +84,14 @@ func _process(delta: float) -> void:
 	else:
 		sprite.scale = sprite.scale.lerp(Vector2.ONE, delta * 8.0)
 		bop_timer = 0.0
+	if _move_id >= 0:
+		if speed > 5:
+			if not AudioManager.is_sfx_looped_playing(_move_id):
+				AudioManager.play_sfx_looped(_move_id)
+			AudioManager.set_sfx_looped_pitch(_move_id, lerpf(move_pitch_min, move_pitch_max, speed / max_speed))
+		else:
+			if AudioManager.is_sfx_looped_playing(_move_id):
+				AudioManager.stop_sfx_looped(_move_id)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -101,6 +118,8 @@ func _start_drag() -> void:
 	set_physics_process(false)
 	set_process(false)
 	change_direction.stop()
+	if _move_id >= 0:
+		AudioManager.stop_sfx_looped(_move_id)
 	
 
 
@@ -113,6 +132,9 @@ func _create_drag_preview() -> void:
 	DragManager.set_preview(drag_preview)
 
 func _exit_tree() -> void:
+	if _move_id >= 0:
+		AudioManager.free_sfx_looped(_move_id)
+		_move_id = -1
 	if drag_preview and is_instance_valid(drag_preview):
 		drag_preview.queue_free()
 
@@ -192,6 +214,9 @@ func take_damage(amount: float) -> void:
 		die()
 
 func die() -> void:
+	if _move_id >= 0:
+		AudioManager.free_sfx_looped(_move_id)
+		_move_id = -1
 	set_physics_process(false)
 	set_process(false)
 	change_direction.stop()

@@ -15,6 +15,10 @@ run/main_scene="res://main_screen/game_screen.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://donifoacab0wt"
+
 [autoload]
 
 GlobalManager="*uid://b3vvixi15d8h8"
@@ -23,6 +27,7 @@ ItemInventory="*res://commons/items/item_inventory.gd"
 Shop="*res://commons/shop.gd"
 DragManager="*res://commons/social/drag_manager.gd"
 UpgradeManager="*res://commons/upgrades/upgrade_manager.gd"
+AudioManager="*res://commons/audio/audio_manager.gd"
 
 [display]
 

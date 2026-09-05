@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://bj5wdvs13ijiq"]
+
+[ext_resource type="Script" uid="uid://d1ksuty7pf6tt" path="res://commons/audio/music_data.gd" id="1_6cil2"]
+[ext_resource type="AudioStream" uid="uid://bgqygyd1wb373" path="res://assets/audio/music/Eterno, pero no para siempre (Tema del pantano).ogg" id="2_3yk27"]
+
+[resource]
+script = ExtResource("1_6cil2")
+stream = ExtResource("2_3yk27")
+default_fade_in = 0.0
+metadata/_custom_type_script = "uid://d1ksuty7pf6tt"
