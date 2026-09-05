@@ -49,20 +49,24 @@ func _refresh_list() -> void:
 
 func _build_worm_card(worm_data: Worm_Data) -> PanelContainer:
 	var card = PanelContainer.new()
-	card.custom_minimum_size = Vector2(0, 100)
+	card.custom_minimum_size = Vector2(0, 120)
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(0.15, 0.17, 0.22, 0.95)
 	style.set_corner_radius_all(8)
 	style.set_content_margin_all(10)
 	card.add_theme_stylebox_override("panel", style)
 
-	var hbox = HBoxContainer.new()
-	hbox.add_theme_constant_override("separation", 12)
-	card.add_child(hbox)
+	var main_vbox = VBoxContainer.new()
+	main_vbox.add_theme_constant_override("separation", 6)
+	card.add_child(main_vbox)
+
+	var top_row = HBoxContainer.new()
+	top_row.add_theme_constant_override("separation", 12)
+	main_vbox.add_child(top_row)
 
 	var sprite_container = Control.new()
 	sprite_container.custom_minimum_size = Vector2(64, 64)
-	hbox.add_child(sprite_container)
+	top_row.add_child(sprite_container)
 
 	if worm_data.template and worm_data.template.sprite_frames:
 		var sprite = AnimatedSprite2D.new()
@@ -75,7 +79,7 @@ func _build_worm_card(worm_data: Worm_Data) -> PanelContainer:
 
 	var info = VBoxContainer.new()
 	info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	hbox.add_child(info)
+	top_row.add_child(info)
 
 	var name_hbox = HBoxContainer.new()
 	info.add_child(name_hbox)
@@ -131,19 +135,47 @@ func _build_worm_card(worm_data: Worm_Data) -> PanelContainer:
 	if not worm_data.skills.is_empty():
 		var skill_sep = HSeparator.new()
 		skill_sep.add_theme_constant_override("separation", 4)
-		info.add_child(skill_sep)
+		main_vbox.add_child(skill_sep)
 
 		var skill_container = VBoxContainer.new()
-		skill_container.add_theme_constant_override("separation", 2)
-		info.add_child(skill_container)
+		skill_container.add_theme_constant_override("separation", 4)
+		main_vbox.add_child(skill_container)
 
 		for skill in worm_data.skills:
-			var skill_label = Label.new()
+			var skill_box = VBoxContainer.new()
+			skill_box.add_theme_constant_override("separation", 1)
+			skill_container.add_child(skill_box)
+
+			var skill_header = HBoxContainer.new()
+			skill_header.add_theme_constant_override("separation", 4)
+			skill_box.add_child(skill_header)
+
+			var dot = Label.new()
+			dot.text = "● "
+			dot.add_theme_font_size_override("font_size", 9)
+			dot.add_theme_color_override("font_color", Color(1.0, 0.85, 0.0))
+			skill_header.add_child(dot)
+
+			var skill_name = Label.new()
+			skill_name.text = skill.skill_name
+			skill_name.add_theme_font_size_override("font_size", 11)
+			skill_name.add_theme_color_override("font_color", Color(1.0, 0.85, 0.0))
+			skill_header.add_child(skill_name)
+
 			var chance_text = skill.get_display_chance()
-			skill_label.text = "[color=#ffd700]%s[/color]%s: %s" % [skill.skill_name, chance_text, skill.description]
-			skill_label.add_theme_font_size_override("font_size", 10)
-			skill_label.autowrap_mode = TextServer.AUTOWRAP_WORD
-			skill_label.bbcode_enabled = true
-			skill_container.add_child(skill_label)
+			if chance_text != "":
+				var chance_label = Label.new()
+				chance_label.text = chance_text
+				chance_label.add_theme_font_size_override("font_size", 9)
+				chance_label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+				skill_header.add_child(chance_label)
+
+			var desc = Label.new()
+			desc.text = skill.description
+			desc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			desc.add_theme_font_size_override("font_size", 10)
+			desc.add_theme_color_override("font_color", Color(0.75, 0.75, 0.75))
+			desc.autowrap_mode = TextServer.AUTOWRAP_WORD
+			skill_box.add_child(desc)
 
 	return card
