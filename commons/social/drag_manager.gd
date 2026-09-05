@@ -7,6 +7,8 @@ signal worm_dropped(worm_data: Worm_Data, source: int, target_area: int, positio
 enum DragSource { SOCIAL, COMBAT }
 enum DropTarget { SOCIAL, COMBAT }
 
+
+
 var is_dragging: bool = false
 var dragged_worm_data: Worm_Data = null
 var drag_source: DragSource = DragSource.SOCIAL
@@ -27,6 +29,7 @@ func end_drag() -> void:
 	dragged_worm_data = null
 	drag_source = DragSource.SOCIAL
 	drag_ended.emit()
+	
 
 func set_preview(preview: Control) -> void:
 	drag_preview = preview

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dflhcw3jk2uqh"]
 
-[ext_resource type="Script" uid="uid://cbhyahrhfwxwi" path="res://commons/ui/test_panel.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cu4r2kkw6t1bx" path="res://commons/ui/test_panel.gd" id="1_script"]
 [ext_resource type="Script" uid="uid://cy28cw74rxu70" path="res://commons/money_screen.gd" id="2_h7ef4"]
 [ext_resource type="PackedScene" path="res://commons/ui/worm_selector/worm_selector.tscn" id="2_selector"]
 
@@ -31,8 +31,6 @@ layout_mode = 2
 text = "Dinero: $0"
 horizontal_alignment = 1
 script = ExtResource("2_h7ef4")
-pretext = "Dinero:"
-symbol = "¢"
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer" unique_id=1990766162]
 layout_mode = 2
@@ -43,7 +41,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Spawn Worm"
 
-[node name="SpawnSocialButton" type="Button" parent="VBoxContainer/Buttons"]
+[node name="SpawnSocialButton" type="Button" parent="VBoxContainer/Buttons" unique_id=1334620933]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Spawn Social"

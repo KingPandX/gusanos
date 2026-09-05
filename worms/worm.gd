@@ -55,8 +55,10 @@ func _ready() -> void:
 	change_direction.timeout.connect(change_patrol_dir)
 	money.timeout.connect(add_money)
 	money.wait_time = worm_data.cooldown_money
+	worm_data.worm = self 
 
 func _process(delta: float) -> void:
+	show_Data()
 	if is_being_dragged:
 		return
 	_update_effects(delta)
@@ -68,6 +70,15 @@ func _process(delta: float) -> void:
 	else:
 		sprite.scale = sprite.scale.lerp(Vector2.ONE, delta * 8.0)
 		bop_timer = 0.0
+		
+func show_Data() -> void:
+	if !is_being_dragged:
+		print("entrando")
+		$ShowWormData.worm_data = worm_data
+		$ShowWormData.show_worm_data()
+		$ShowWormData.visible = true
+	else:
+		$ShowWormData.visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -94,6 +105,8 @@ func _start_drag() -> void:
 	set_physics_process(false)
 	set_process(false)
 	change_direction.stop()
+	
+
 
 func _create_drag_preview() -> void:
 	var preview_scene = preload("res://commons/ui/drag_preview.gd")
