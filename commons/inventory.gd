@@ -82,6 +82,11 @@ func unlock_slot() -> bool:
 	slot_unlocked.emit(unlocked_slots)
 	return true
 
+func unlock_extra_slots(amount: int = 1) -> void:
+	unlocked_slots += amount
+	slot_unlocked.emit(unlocked_slots)
+	inventory_changed.emit()
+
 func get_worm_count() -> int:
 	return worms.size()
 
