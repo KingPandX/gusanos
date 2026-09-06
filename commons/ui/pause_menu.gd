@@ -7,7 +7,11 @@ signal pause_menu_closed
 @onready var save_btn: Button = $Panel/VBox/SaveBtn
 @onready var load_btn: Button = $Panel/VBox/LoadBtn
 @onready var delete_btn: Button = $Panel/VBox/DeleteBtn
+@onready var music_slider: HSlider = $Panel/VBox/MusicSlider
+@onready var sfx_slider: HSlider = $Panel/VBox/SFXSlider
 @onready var resume_btn: Button = $Panel/VBox/ResumeBtn
+
+var _config: ConfigSave
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -17,6 +21,33 @@ func _ready() -> void:
 	load_btn.pressed.connect(_on_load_pressed)
 	delete_btn.pressed.connect(_on_delete_pressed)
 	resume_btn.pressed.connect(_on_resume_pressed)
+	music_slider.value_changed.connect(_on_music_slider_changed)
+	sfx_slider.value_changed.connect(_on_sfx_slider_changed)
+	_load_config()
+
+func _load_config() -> void:
+	_config = ConfigSave.load_config()
+	music_slider.value = _config.music_volume
+	sfx_slider.value = _config.sfx_volume
+	_apply_volumes()
+
+func _apply_volumes() -> void:
+	var music_idx = AudioServer.get_bus_index("Music")
+	if music_idx >= 0:
+		AudioServer.set_bus_volume_db(music_idx, linear_to_db(_config.music_volume))
+	var sfx_idx = AudioServer.get_bus_index("SFX")
+	if sfx_idx >= 0:
+		AudioServer.set_bus_volume_db(sfx_idx, linear_to_db(_config.sfx_volume))
+
+func _on_music_slider_changed(value: float) -> void:
+	_config.music_volume = value
+	_apply_volumes()
+	ConfigSave.save_config(_config)
+
+func _on_sfx_slider_changed(value: float) -> void:
+	_config.sfx_volume = value
+	_apply_volumes()
+	ConfigSave.save_config(_config)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):

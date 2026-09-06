@@ -21,6 +21,16 @@ func _ready() -> void:
 	_init_music_players()
 	_init_sfx_pool()
 	_ensure_buses()
+	_apply_saved_volumes()
+
+func _apply_saved_volumes() -> void:
+	var config = ConfigSave.load_config()
+	var music_idx = AudioServer.get_bus_index("Music")
+	if music_idx >= 0:
+		AudioServer.set_bus_volume_db(music_idx, linear_to_db(config.music_volume))
+	var sfx_idx = AudioServer.get_bus_index("SFX")
+	if sfx_idx >= 0:
+		AudioServer.set_bus_volume_db(sfx_idx, linear_to_db(config.sfx_volume))
 
 func _init_music_players() -> void:
 	_music_player = AudioStreamPlayer.new()
