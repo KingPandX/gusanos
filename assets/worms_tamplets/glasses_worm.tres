@@ -4,43 +4,119 @@
 [ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="1_tevdl"]
 [ext_resource type="SpriteFrames" uid="uid://dow304vn5s2kj" path="res://assets/worms_frames/glasses_worm.tres" id="2_frames"]
 [ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_ef3w4"]
+[ext_resource type="Script" path="res://commons/skills/combat_ramp.gd" id="4_cramp"]
+[ext_resource type="Script" path="res://commons/skills/money_on_hit.gd" id="5_mhit"]
+[ext_resource type="Script" path="res://commons/skills/primeros_auxilios.gd" id="6_pa"]
 
 [sub_resource type="Resource" id="Resource_common"]
 script = ExtResource("1_f653x")
-size = Vector2(0.7, 0.9)
-
-[sub_resource type="Resource" id="Resource_epic"]
-script = ExtResource("1_f653x")
-hp = Vector2(180, 260)
-damage = Vector2(35, 55)
-cooldown_attack = Vector2(0.6, 1)
-cooldown_money = Vector2(1, 2.5)
-speed = Vector2(90, 110)
-size = Vector2(1.1, 1.4)
-
-[sub_resource type="Resource" id="Resource_legendary"]
-script = ExtResource("1_f653x")
-hp = Vector2(260, 400)
-damage = Vector2(55, 80)
-cooldown_attack = Vector2(0.4, 0.8)
-cooldown_money = Vector2(0.8, 2)
-speed = Vector2(110, 140)
-size = Vector2(1.4, 1.8)
+hp = Vector2(70, 100)
+damage = Vector2(8, 15)
+cooldown_attack = Vector2(1.5, 2.5)
+cooldown_money = Vector2(8.0, 15.0)
+speed = Vector2(50, 70)
+size = Vector2(0.8, 1.0)
 
 [sub_resource type="Resource" id="Resource_rare"]
 script = ExtResource("1_f653x")
-hp = Vector2(120, 180)
-damage = Vector2(20, 35)
-cooldown_attack = Vector2(0.8, 1.2)
-cooldown_money = Vector2(1.5, 3)
-speed = Vector2(70, 90)
-size = Vector2(0.9, 1.1)
+hp = Vector2(150, 220)
+damage = Vector2(25, 40)
+cooldown_attack = Vector2(1.2, 2.0)
+cooldown_money = Vector2(4.0, 8.0)
+speed = Vector2(65, 85)
+size = Vector2(1.0, 1.2)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_f653x")
+hp = Vector2(200, 300)
+damage = Vector2(40, 60)
+cooldown_attack = Vector2(0.9, 1.5)
+cooldown_money = Vector2(2.0, 5.0)
+speed = Vector2(75, 100)
+size = Vector2(1.2, 1.5)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_f653x")
+hp = Vector2(280, 420)
+damage = Vector2(55, 75)
+cooldown_attack = Vector2(0.7, 1.2)
+cooldown_money = Vector2(1.0, 3.0)
+speed = Vector2(85, 110)
+size = Vector2(1.5, 1.9)
+
+[sub_resource type="Resource" id="Resource_s1"]
+script = ExtResource("4_cramp")
+damage_per_stack = 0.12
+max_stacks = 5
+skill_name = "Intelecto Superior"
+description = "Mientras piensa en su siguiente movimiento, su cerebro se calienta y cada segundo de combate lo hace más peligroso. Al max de stacks, es una bomba de conocimiento letal."
+
+[sub_resource type="Resource" id="Resource_e1"]
+script = ExtResource("3_ef3w4")
+skill = SubResource("Resource_s1")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s2"]
+script = ExtResource("4_cramp")
+damage_per_stack = 0.25
+max_stacks = 8
+skill_name = "Encephalitis Letal"
+description = "Su cerebro explota de inteligencia. +25% daño por stack hasta 8 stacks. La radiación letal mata a cualquiera que esté cerca, incluyéndolo a él."
+
+[sub_resource type="Resource" id="Resource_e2"]
+script = ExtResource("3_ef3w4")
+skill = SubResource("Resource_s2")
+spawn_chance = 0.1
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s3"]
+script = ExtResource("5_mhit")
+money_amount = 3
+trigger_chance = 0.25
+skill_name = "Becas Universitarias"
+description = "A veces le dan una beca por ser tan listo. No es mucho, pero es trabajo honesto... para un gusano con gafas."
+
+[sub_resource type="Resource" id="Resource_e3"]
+script = ExtResource("3_ef3w4")
+skill = SubResource("Resource_s3")
+spawn_chance = 0.6
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s4"]
+script = ExtResource("5_mhit")
+money_amount = 1
+trigger_chance = 0.08
+skill_name = "Monedita de Loza"
+description = "Una monedita de barro cada mucho tiempo. Su inteligencia no siempre se traduce en riqueza, pero al menos intenta."
+
+[sub_resource type="Resource" id="Resource_e4"]
+script = ExtResource("3_ef3w4")
+skill = SubResource("Resource_s4")
+spawn_chance = 0.8
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s5"]
+script = ExtResource("6_pa")
+hp_threshold = 0.3
+regen_boost = 3.0
+boost_duration = 5.0
+cooldown = 120.0
+skill_name = "Primeros Auxilios"
+description = "Cuando su vida cae por debajo del 30%, activa una regeneración triple por 5 segundos. Cooldown de 2 minutos."
+
+[sub_resource type="Resource" id="Resource_e5"]
+script = ExtResource("3_ef3w4")
+skill = SubResource("Resource_s5")
+spawn_chance = 0.4
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
 
 [resource]
 script = ExtResource("1_tevdl")
-worm_name = "Gusano Intelectual"
+worm_name = "El Intelectual"
 sprite_frames = ExtResource("2_frames")
 common_stats = SubResource("Resource_common")
 rare_stats = SubResource("Resource_rare")
 epic_stats = SubResource("Resource_epic")
 legendary_stats = SubResource("Resource_legendary")
+skills = Array[ExtResource("3_ef3w4")]([SubResource("Resource_e1"), SubResource("Resource_e2"), SubResource("Resource_e3"), SubResource("Resource_e4"), SubResource("Resource_e5")])

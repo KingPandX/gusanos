@@ -1,0 +1,58 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dferluchoc2us"]
+
+[ext_resource type="Texture2D" uid="uid://biwlasxypd8s1" path="res://assets/Estropieado-Sheet-Sheet.png" id="1_n5lko"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dom7p"]
+atlas = ExtResource("1_n5lko")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x75lf"]
+atlas = ExtResource("1_n5lko")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeelt"]
+atlas = ExtResource("1_n5lko")
+region = Rect2(180, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm885"]
+atlas = ExtResource("1_n5lko")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kqs8"]
+atlas = ExtResource("1_n5lko")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wep31"]
+atlas = ExtResource("1_n5lko")
+region = Rect2(180, 0, 90, 90)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dom7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x75lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeelt")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm885")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kqs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wep31")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]

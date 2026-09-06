@@ -2,8 +2,8 @@ extends Node
 
 signal money_changed(new_value: int)
 
-const BASE_MONEY : int = 1
-var money: int = 0
+const BASE_MONEY : int = 5
+var money: int = 50
 
 func add_money(amount: int) -> void:
 	if amount <= 0:

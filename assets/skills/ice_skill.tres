@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_ice")
-skill_name = "Hielo"
-description = "Reduce 20% daño recibido y ralentiza 30% ataques enemigos"
+skill_name = "Escarcha Eterna"
+description = "Una capa de hielo eterno recubre su cuerpo. Reduce 20% el daño recibido y ralentiza 30% la velocidad de ataque de cualquier enemigo que se atreva a golpearlo."

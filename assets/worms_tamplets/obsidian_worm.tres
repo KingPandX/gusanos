@@ -1,0 +1,120 @@
+[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://v5n4rx2oup5m"]
+
+[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_xxcmg"]
+[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_1xjfq"]
+[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_3oxil"]
+[ext_resource type="Script" uid="uid://du3atvw4pnvl" path="res://commons/skills/obsidian_skill.gd" id="4_7gd6i"]
+[ext_resource type="SpriteFrames" uid="uid://dxgf3jga28uhj" path="res://assets/worms_frames/obsidian_worm.tres" id="6_xxcmg"]
+[ext_resource type="Script" path="res://commons/skills/primeros_auxilios.gd" id="7_pa"]
+
+[sub_resource type="Resource" id="Resource_common"]
+script = ExtResource("1_xxcmg")
+hp = Vector2(130, 180)
+damage = Vector2(5, 10)
+cooldown_attack = Vector2(1.5, 2.5)
+cooldown_money = Vector2(8.0, 15.0)
+speed = Vector2(35, 55)
+size = Vector2(0.9, 1.2)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_xxcmg")
+hp = Vector2(350, 500)
+damage = Vector2(15, 25)
+cooldown_attack = Vector2(1, 1.8)
+cooldown_money = Vector2(2.0, 5.0)
+speed = Vector2(45, 65)
+size = Vector2(1.3, 1.7)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_xxcmg")
+hp = Vector2(500, 750)
+damage = Vector2(20, 35)
+cooldown_attack = Vector2(0.8, 1.5)
+cooldown_money = Vector2(1.0, 3.0)
+size = Vector2(1.5, 2)
+
+[sub_resource type="Resource" id="Resource_rare"]
+script = ExtResource("1_xxcmg")
+hp = Vector2(250, 350)
+damage = Vector2(10, 18)
+cooldown_attack = Vector2(1.3, 2)
+cooldown_money = Vector2(4.0, 8.0)
+speed = Vector2(40, 60)
+size = Vector2(1.1, 1.4)
+
+[sub_resource type="Resource" id="Resource_s1"]
+script = ExtResource("4_7gd6i")
+ignore_damage_chance = 0.1
+heal_percent = 0.05
+skill_name = "Corazón de Obsidiana"
+description = "Su corazón de obsidiana amortigua el daño. 10% chance de ignorar golpes, cura el 5% de su vida máxima al recibir daño."
+
+[sub_resource type="Resource" id="Resource_e1"]
+script = ExtResource("3_3oxil")
+skill = SubResource("Resource_s1")
+spawn_chance = 0.7
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s2"]
+script = ExtResource("4_7gd6i")
+ignore_damage_chance = 0.15
+heal_percent = 0.08
+skill_name = "Piel de Diamante"
+description = "Su piel es dura pero no indestructible. 15% chance de ignorar daño, cura el 8% de su vida máxima al recibir daño."
+
+[sub_resource type="Resource" id="Resource_e2"]
+script = ExtResource("3_3oxil")
+skill = SubResource("Resource_s2")
+spawn_chance = 0.3
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s3"]
+script = ExtResource("4_7gd6i")
+ignore_damage_chance = 0.05
+heal_percent = 0.03
+skill_name = "Obsidiana Agrietada"
+description = "Su armadura tiene grietas apenas visibles. Casi nunca protege y la cura es casi imperceptible. Es como tener un escudo de papel de lija."
+
+[sub_resource type="Resource" id="Resource_e3"]
+script = ExtResource("3_3oxil")
+skill = SubResource("Resource_s3")
+spawn_chance = 0.6
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s4"]
+script = ExtResource("4_7gd6i")
+ignore_damage_chance = 0.08
+heal_percent = 0.04
+skill_name = "Resiliencia Volcánica"
+description = "Una resistencia moderada. 8% chance de ignorar daño, cura el 4% de su vida máxima al recibir daño."
+
+[sub_resource type="Resource" id="Resource_e4"]
+script = ExtResource("3_3oxil")
+skill = SubResource("Resource_s4")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s5"]
+script = ExtResource("7_pa")
+hp_threshold = 0.3
+regen_boost = 3.0
+boost_duration = 5.0
+cooldown = 120.0
+skill_name = "Primeros Auxilios"
+description = "Cuando su vida cae por debajo del 30%, activa una regeneración triple por 5 segundos. Cooldown de 2 minutos."
+
+[sub_resource type="Resource" id="Resource_e5"]
+script = ExtResource("3_3oxil")
+skill = SubResource("Resource_s5")
+spawn_chance = 0.3
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[resource]
+script = ExtResource("2_1xjfq")
+worm_name = "La Obsidiana"
+sprite_frames = ExtResource("6_xxcmg")
+common_stats = SubResource("Resource_common")
+rare_stats = SubResource("Resource_rare")
+epic_stats = SubResource("Resource_epic")
+legendary_stats = SubResource("Resource_legendary")
+skills = Array[ExtResource("3_3oxil")]([SubResource("Resource_e1"), SubResource("Resource_e2"), SubResource("Resource_e3"), SubResource("Resource_e4"), SubResource("Resource_e5")])

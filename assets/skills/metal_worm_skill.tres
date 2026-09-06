@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_metal")
-skill_name = "Metalico"
-description = "40% probabilidad de multiplicar stats x1.5 al ganar batalla"
+skill_name = "Forja Metálica"
+description = "Cada victoria lo hace más fuerte. Con un 40% de probabilidad, sus stats se multiplican x1.5 permanentemente al derrotar a un enemigo. El poder se alimenta del poder."

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=3]
+
+[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+
+[sub_resource type="Resource" id="effect"]
+script = ExtResource("2_effect")
+effect_name = "Habilidad"
+description = "Otorga una habilidad aleatoria del pool del gusano"
+effect_type = 13
+target = 1
+value = 1.0
+
+[resource]
+script = ExtResource("1_item")
+item_name = "Pergamino de Habilidad"
+description = "Otorga una habilidad aleatoria que el gusano no tenga aún de su pool del template"
+effect = SubResource("effect")
+target = 1
+icon = ExtResource("3_icon")
+cost = 250
+quantity = 1

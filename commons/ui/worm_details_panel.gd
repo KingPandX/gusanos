@@ -125,6 +125,18 @@ func _build_worm_card(worm_data: Worm_Data) -> PanelContainer:
 	cd_label.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
 	stats_grid.add_child(cd_label)
 
+	var money_cd_label = Label.new()
+	money_cd_label.text = "$CD: %.1fs" % worm_data.cooldown_money
+	money_cd_label.add_theme_font_size_override("font_size", 11)
+	money_cd_label.add_theme_color_override("font_color", Color(0.9, 0.8, 0.2))
+	stats_grid.add_child(money_cd_label)
+
+	var size_label = Label.new()
+	size_label.text = "Tamaño: %.1f" % worm_data.get_computed_size()
+	size_label.add_theme_font_size_override("font_size", 11)
+	size_label.add_theme_color_override("font_color", Color(0.6, 0.9, 0.6))
+	stats_grid.add_child(size_label)
+
 	if worm_data.stat_multiplier > 1.0:
 		var mult_label = Label.new()
 		mult_label.text = "x%.1f" % worm_data.stat_multiplier

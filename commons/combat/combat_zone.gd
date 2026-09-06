@@ -13,11 +13,14 @@ signal combat_deactivated
 
 var worms_in_zone: Array[Worm] = []
 var combat_active: bool = false
+var kill_reward_handler: KillRewardHandler
 
 func _ready() -> void:
 	add_to_group("combat_zones")
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	kill_reward_handler = KillRewardHandler.new()
+	add_child(kill_reward_handler)
 
 func _process(_delta: float) -> void:
 	if combat_active:
@@ -40,11 +43,14 @@ func _on_body_entered(body: Node2D) -> void:
 		worms_in_zone.append(body)
 		body.in_combat_zone = true
 		body.team_id = -1
+		body.died.connect(kill_reward_handler.on_worm_died)
 		worm_entered_zone.emit(body)
 		_check_auto_combat()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is Worm:
+		if body.died.is_connected(kill_reward_handler.on_worm_died):
+			body.died.disconnect(kill_reward_handler.on_worm_died)
 		worms_in_zone.erase(body)
 		body.in_combat_zone = false
 		body.team_id = -1

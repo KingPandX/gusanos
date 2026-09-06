@@ -6,56 +6,118 @@
 [ext_resource type="Texture2D" uid="uid://bfq8qwd3it15a" path="res://assets/gusano_prueba.png" id="4_xc2us"]
 [ext_resource type="Script" uid="uid://dsif35vmh5508" path="res://commons/skills/money_on_hit.gd" id="5_0027o"]
 [ext_resource type="SpriteFrames" uid="uid://f8v64l5grqmm" path="res://assets/worms_frames/golden_worm.tres" id="6_uasjn"]
+[ext_resource type="Script" path="res://commons/skills/money_on_kill.gd" id="7_mkill"]
+[ext_resource type="Script" path="res://commons/skills/primeros_auxilios.gd" id="8_pa"]
 
 [sub_resource type="Resource" id="Resource_common"]
 script = ExtResource("1_0yvim")
+hp = Vector2(70, 100)
+damage = Vector2(8, 15)
+cooldown_attack = Vector2(1.2, 1.8)
+cooldown_money = Vector2(8.0, 15.0)
+speed = Vector2(55, 75)
 size = Vector2(0.7, 0.9)
-
-[sub_resource type="Resource" id="Resource_epic"]
-script = ExtResource("1_0yvim")
-hp = Vector2(180, 260)
-damage = Vector2(35, 55)
-cooldown_attack = Vector2(0.6, 1)
-cooldown_money = Vector2(1, 2.5)
-speed = Vector2(90, 110)
-size = Vector2(1.1, 1.4)
-
-[sub_resource type="Resource" id="Resource_legendary"]
-script = ExtResource("1_0yvim")
-hp = Vector2(260, 400)
-damage = Vector2(35.305, 50.775)
-cooldown_attack = Vector2(0.4, 0.8)
-cooldown_money = Vector2(0.8, 2)
-speed = Vector2(110, 140)
-size = Vector2(1.4, 1.8)
 
 [sub_resource type="Resource" id="Resource_rare"]
 script = ExtResource("1_0yvim")
 hp = Vector2(120, 180)
 damage = Vector2(20, 35)
-cooldown_attack = Vector2(0.8, 1.2)
-cooldown_money = Vector2(1.5, 3)
+cooldown_attack = Vector2(0.9, 1.4)
+cooldown_money = Vector2(4.0, 8.0)
 speed = Vector2(70, 90)
 size = Vector2(0.9, 1.1)
 
-[sub_resource type="Resource" id="Resource_hsdc2"]
-script = ExtResource("5_0027o")
-trigger_chance = 1.0
-skill_name = "Fiebre del oro"
-description = "Al recibir daño este gusano da dinero"
-icon = ExtResource("4_xc2us")
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_0yvim")
+hp = Vector2(180, 260)
+damage = Vector2(35, 55)
+cooldown_attack = Vector2(0.7, 1.1)
+cooldown_money = Vector2(2.0, 5.0)
+speed = Vector2(85, 110)
+size = Vector2(1.1, 1.4)
 
-[sub_resource type="Resource" id="Resource_xdenj"]
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_0yvim")
+hp = Vector2(250, 370)
+damage = Vector2(50, 80)
+cooldown_attack = Vector2(0.5, 0.9)
+cooldown_money = Vector2(1.0, 3.0)
+speed = Vector2(100, 130)
+size = Vector2(1.3, 1.6)
+
+[sub_resource type="Resource" id="Resource_s1"]
+script = ExtResource("5_0027o")
+money_amount = 8
+trigger_chance = 0.5
+skill_name = "Codicia Infinita"
+description = "La ambición no tiene fondo. Cada golpe que recibe es una oportunidad de oro para llenar sus bolsillos, porque el dolor se agota pero el dinero nunca."
+
+[sub_resource type="Resource" id="Resource_e1"]
 script = ExtResource("3_xc2us")
-skill = SubResource("Resource_hsdc2")
-spawn_chance = 1.0
+skill = SubResource("Resource_s1")
+spawn_chance = 0.7
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s2"]
+script = ExtResource("5_0027o")
+money_amount = 50
+trigger_chance = 1.0
+skill_name = "Midas Total"
+description = "Todo lo que toca se convierte en oro, incluso el dolor. Cada golpe le regala una fortuna, pero su cuerpo se vuelve quebradizo como el oro puro."
+
+[sub_resource type="Resource" id="Resource_e2"]
+script = ExtResource("3_xc2us")
+skill = SubResource("Resource_s2")
+spawn_chance = 0.1
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s3"]
+script = ExtResource("5_0027o")
+money_amount = 1
+trigger_chance = 0.05
+skill_name = "Moneda Oxidada"
+description = "Una monedita vieja y oxidada cae de vez en cuando. Su codicia a veces no se traduce en riqueza, pero el esfuerzo está ahí."
+
+[sub_resource type="Resource" id="Resource_e3"]
+script = ExtResource("3_xc2us")
+skill = SubResource("Resource_s3")
+spawn_chance = 0.85
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s4"]
+script = ExtResource("7_mkill")
+money_amount = 40
+trigger_chance = 1.0
+skill_name = "Botín de Guerra"
+description = "Cada enemigo derrotado le deja un botín generoso. Matar no es solo diversión, es una inversión con retorno garantizado."
+
+[sub_resource type="Resource" id="Resource_e4"]
+script = ExtResource("3_xc2us")
+skill = SubResource("Resource_s4")
+spawn_chance = 0.3
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s5"]
+script = ExtResource("8_pa")
+hp_threshold = 0.3
+regen_boost = 3.0
+boost_duration = 5.0
+cooldown = 120.0
+skill_name = "Primeros Auxilios"
+description = "Cuando su vida cae por debajo del 30%, activa una regeneración triple por 5 segundos. Cooldown de 2 minutos."
+
+[sub_resource type="Resource" id="Resource_e5"]
+script = ExtResource("3_xc2us")
+skill = SubResource("Resource_s5")
+spawn_chance = 0.4
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
 
 [resource]
 script = ExtResource("2_drrip")
-worm_name = "Gusano Intelectual"
+worm_name = "El Dorado"
 sprite_frames = ExtResource("6_uasjn")
 common_stats = SubResource("Resource_common")
 rare_stats = SubResource("Resource_rare")
 epic_stats = SubResource("Resource_epic")
 legendary_stats = SubResource("Resource_legendary")
-skills = Array[ExtResource("3_xc2us")]([SubResource("Resource_xdenj")])
+skills = Array[ExtResource("3_xc2us")]([SubResource("Resource_e1"), SubResource("Resource_e2"), SubResource("Resource_e3"), SubResource("Resource_e4"), SubResource("Resource_e5")])

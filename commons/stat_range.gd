@@ -4,7 +4,7 @@ class_name StatRange
 @export var hp : Vector2 = Vector2(80, 120)
 @export var damage : Vector2 = Vector2(10, 20)
 @export var cooldown_attack : Vector2 = Vector2(1.0, 1.5)
-@export var cooldown_money : Vector2 = Vector2(2.0, 4.0)
+@export var cooldown_money : Vector2 = Vector2(8.0, 15.0)
 @export var speed : Vector2 = Vector2(50, 70)
 @export var size : Vector2 = Vector2(0.8, 1.3)
 

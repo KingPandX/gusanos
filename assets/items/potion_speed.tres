@@ -1,14 +1,13 @@
-[gd_resource type="Resource" load_steps=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dvwpfksrim2pq"]
 
-[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" uid="uid://buthj8l4iou4n" path="res://icon.svg" id="3_icon"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
 effect_name = "Velocidad"
 description = "Aumenta la velocidad permanentemente"
-effect_type = 0
 target = 1
 stat = "speed"
 value = 0.3
@@ -17,8 +16,5 @@ value = 0.3
 script = ExtResource("1_item")
 item_name = "Poción de Velocidad"
 description = "+30% velocidad permanente"
-effect = SubResource("effect")
-target = 1
 icon = ExtResource("3_icon")
-cost = 100
-quantity = 1
+effect = SubResource("effect")

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_obsidian")
-skill_name = "Obsidiana"
-description = "25% probabilidad de ignorar daño recibido, cura 10% HP al recibir golpe"
+skill_name = "Corazón de Obsidiana"
+description = "Forjada en las entrañas de un volcán, su piel de obsidiana rechaza el daño y absorbe la vida de sus enemigos. Un tanque imparable que se fortalece con el sufrimiento."

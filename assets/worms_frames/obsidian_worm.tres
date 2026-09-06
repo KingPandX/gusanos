@@ -1,0 +1,65 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dxgf3jga28uhj"]
+
+[ext_resource type="Texture2D" uid="uid://dltjbs2taivck" path="res://assets/Obsidiana-Sheet.png" id="1_8wjkh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a8ug"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0toe"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(360, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0igu"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(450, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q136o"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(540, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w3dg"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf8db"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njg8n"]
+atlas = ExtResource("1_8wjkh")
+region = Rect2(180, 0, 90, 90)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a8ug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0toe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0igu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q136o")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1w3dg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf8db")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njg8n")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]

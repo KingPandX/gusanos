@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=4]
+[gd_resource type="Resource" script_class="UpgradeData" format=3 uid="uid://bs8in5mqmvspb"]
 
-[ext_resource type="Script" path="res://commons/upgrades/upgrade_data.gd" id="1_upgrade"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://ehmn0a2us7ej" path="res://commons/upgrades/upgrade_data.gd" id="1_upgrade"]
+[ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" uid="uid://buthj8l4iou4n" path="res://icon.svg" id="3_icon"]
 
 [sub_resource type="Resource" id="effect_auto_collect"]
 script = ExtResource("2_effect")
@@ -11,7 +11,6 @@ description = "Recoge monedas automáticamente con un 20% de probabilidad por ni
 effect_type = 7
 target = 3
 value = 1.0
-duration = 0.0
 is_upgrade = true
 
 [resource]
@@ -22,4 +21,3 @@ icon = ExtResource("3_icon")
 effect = SubResource("effect_auto_collect")
 cost = 200
 cost_multiplier = 1.8
-max_level = 5

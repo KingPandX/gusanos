@@ -8,7 +8,7 @@ var worm_scene: PackedScene = preload("res://worms/worm.tscn")
 var worm_drop_scene: PackedScene = preload("res://commons/social/worm_drop.tscn")
 var active_drops: Array = []
 
-const BASE_SPAWN_INTERVAL: float = 3.0
+const BASE_SPAWN_INTERVAL: float = 20.0
 const MIN_SPAWN_INTERVAL: float = 3.0
 const REDUCTION_PER_LEVEL: float = 2.0
 const MAX_DROPS_OFFSET: int = 2
@@ -18,6 +18,7 @@ var drop_timer: Timer
 func _ready() -> void:
 	add_to_group("social_area")
 	_setup_drop_timer()
+	spawn_worm_drop()
 
 func _setup_drop_timer() -> void:
 	drop_timer = Timer.new()

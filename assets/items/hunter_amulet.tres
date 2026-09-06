@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b85nu6bdmwb5"]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d2lx6nwy7xfmd"]
 
 [ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
 [ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
@@ -6,15 +6,16 @@
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
-effect_name = "Fuerza"
-description = "Aumenta el daño permanentemente"
-target = 1
-stat = "damage"
-value = 0.5
+effect_name = "Cazador"
+description = "Aumenta las probabilidades de mejorar al matar"
+effect_type = 14
+value = 0.1
 
 [resource]
 script = ExtResource("1_item")
-item_name = "Poción de Fuerza"
-description = "+50% daño permanente"
+item_name = "Amuleto del Cazador"
+description = "+10% probabilidad de mejora al matar enemigos. Permanentemente"
 icon = ExtResource("3_icon")
 effect = SubResource("effect")
+target = 0
+cost = 400

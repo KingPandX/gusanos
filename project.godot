@@ -33,7 +33,6 @@ PlayerEffects="*res://commons/effects/player_effects.gd"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 

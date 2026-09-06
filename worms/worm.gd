@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name Worm
 
 signal on_take_damage(new_value : float)
+signal on_hp_changed(new_value : float)
+signal died(killer: Worm, victim: Worm)
 
 @export var worm_data : Worm_Data
 
@@ -44,6 +46,15 @@ var in_combat : bool = false
 var in_combat_zone : bool = false
 var team_id : int = -1
 var area: String = "social"
+var is_dead : bool = false
+
+# Regeneración pasiva
+const REGEN_RATE : float = 0.02
+const REGEN_DELAY : float = 3.0
+var regen_timer : float = 0.0
+var can_regen : bool = false
+var regen_multiplier : float = 1.0
+var regen_boost_timer : float = 0.0
 
 # Drag and drop
 var is_being_dragged: bool = false
@@ -55,7 +66,11 @@ var active_effects: Array[Dictionary] = []
 func _ready() -> void:
 	input_pickable = true
 	add_to_group("worms")
-	hp = worm_data.hp_max
+	if worm_data.current_hp > 0.0:
+		hp = worm_data.current_hp
+	else:
+		hp = worm_data.get_computed_hp_max()
+		worm_data.current_hp = hp
 	max_speed = worm_data.speed
 	scale = Vector2.ONE * worm_data.size
 	if worm_data.template and worm_data.template.sprite_frames:
@@ -73,6 +88,7 @@ func _process(delta: float) -> void:
 	if is_being_dragged:
 		return
 	_update_effects(delta)
+	_update_regen(delta)
 	var speed = current_velocity.length()
 	if speed > 5.0:
 		bop_timer += delta * bop_speed * (speed / max_speed)
@@ -144,6 +160,32 @@ func _update_effects(delta: float):
 			active_effects.remove_at(i)
 		i -= 1
 
+func _update_regen(delta: float):
+	if regen_boost_timer > 0.0:
+		regen_boost_timer -= delta
+		if regen_boost_timer <= 0.0:
+			regen_boost_timer = 0.0
+			regen_multiplier = 1.0
+	if in_combat or in_combat_zone:
+		regen_timer = 0.0
+		can_regen = false
+		return
+	if hp >= worm_data.get_computed_hp_max():
+		can_regen = false
+		return
+	if not can_regen:
+		regen_timer += delta
+		if regen_timer >= REGEN_DELAY:
+			can_regen = true
+		return
+	var regen_amount = worm_data.get_computed_hp_max() * REGEN_RATE * regen_multiplier * delta
+	set_hp(min(hp + regen_amount, worm_data.get_computed_hp_max()))
+
+func activate_regen_boost(multiplier: float, duration: float):
+	regen_multiplier = multiplier
+	regen_boost_timer = duration
+	can_regen = true
+
 func add_effect(effect_type: String, value: float, duration: float):
 	for effect in active_effects:
 		if effect.type == effect_type:
@@ -172,6 +214,7 @@ func get_effect_value(effect_type: String) -> float:
 
 var last_attacker: Worm = null
 var coin_scene: PackedScene = preload("res://commons/coins/coin.tscn")
+var death_animation_scene: PackedScene = preload("res://commons/death_animation.tscn")
 
 func add_money():
 	if in_combat_zone:
@@ -194,6 +237,13 @@ func new_random_velocity() -> void:
 	var new_dir = Vector2.from_angle(deg_to_rad(randf_range(0, 360)))
 	target_velocity = new_dir * new_speed
 
+func set_hp(value: float) -> void:
+	hp = value
+	worm_data.current_hp = value
+	on_hp_changed.emit(value)
+	if hp <= 0.0 and not in_combat:
+		die()
+
 func _notify_take_damage(attacker: Worm, amount: float) -> void:
 	for skill in worm_data.skills:
 		skill.on_take_damage(self, attacker, amount)
@@ -215,14 +265,20 @@ func take_damage(amount: float, attacker: Worm = null) -> void:
 			amount -= shield_value
 			remove_effect("shield")
 	hp -= amount
+	worm_data.current_hp = hp
 	on_take_damage.emit(hp)
 	_notify_take_damage(attacker, amount)
 	if hp <= 0.0:
 		die()
 
 func die() -> void:
+	if is_dead:
+		return
+	is_dead = true
 	for skill in worm_data.skills:
 		skill.on_kill(last_attacker, self)
+	if last_attacker and is_instance_valid(last_attacker):
+		died.emit(last_attacker, self)
 	if _move_id >= 0:
 		AudioManager.free_sfx_looped(_move_id)
 		_move_id = -1
@@ -235,6 +291,9 @@ func die() -> void:
 	velocity = Vector2.ZERO
 	if area == "combat":
 		Inventory.remove_worm_data(worm_data)
+	var death_anim = death_animation_scene.instantiate()
+	death_anim.global_position = global_position + Vector2(0, -40)
+	get_parent().add_child(death_anim)
 	queue_free()
 
 func enter_combat(enemy: Worm) -> void:

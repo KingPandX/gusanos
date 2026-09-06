@@ -22,8 +22,6 @@ func exit():
 	worm.actual_enemy = null
 	for skill in worm.worm_data.skills:
 		skill.on_combat_end(worm)
-	if not worm.in_combat_zone:
-		worm.hp = worm.worm_data.get_computed_hp_max()
 
 func physics_update(delta: float):
 	if worm.in_combat_zone:

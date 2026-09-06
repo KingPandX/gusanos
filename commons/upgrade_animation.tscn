@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b4roedapk4nk1"]
+
+[ext_resource type="Texture2D" uid="uid://bxlmwwf5acah5" path="res://assets/Estrella.png" id="1_lb48p"]
+[ext_resource type="Script" uid="uid://cs2qqn8006d0a" path="res://commons/upgrade_animation.gd" id="1_mcpn4"]
+
+[sub_resource type="Curve" id="Curve_o12sk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.06756757, 1), 0.0, 0.0, 0, 0, Vector2(0.5135135, 1), -0.0739074, -0.0739074, 0, 0, Vector2(1, 0), -5.8202233, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_7yxm1"]
+curve = SubResource("Curve_o12sk")
+
+[sub_resource type="Curve" id="Curve_mcpn4"]
+_data = [Vector2(0, 0.50561804), 0.0, 5.701444, 0, 0, Vector2(0.16216218, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5cl4v"]
+curve = SubResource("Curve_mcpn4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yw8l4"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+angle_min = -77.399994
+angle_max = 54.200012
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 392.47
+initial_velocity_max = 860.20996
+angular_velocity_min = -371.61002
+angular_velocity_max = 123.86998
+gravity = Vector3(0, 980, 0)
+scale_min = 0.45
+scale_max = 0.59999996
+scale_curve = SubResource("CurveTexture_5cl4v")
+alpha_curve = SubResource("CurveTexture_7yxm1")
+
+[node name="Upgrade_animation" type="Node2D" unique_id=1092633741]
+script = ExtResource("1_mcpn4")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=238706484]
+emitting = false
+amount = 15
+texture = ExtResource("1_lb48p")
+lifetime = 0.93
+one_shot = true
+explosiveness = 0.73
+process_material = SubResource("ParticleProcessMaterial_yw8l4")

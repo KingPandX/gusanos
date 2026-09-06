@@ -1,0 +1,122 @@
+[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://kai2w0o7w3q7"]
+
+[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_w65wx"]
+[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_pcg5u"]
+[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_gu545"]
+[ext_resource type="Script" uid="uid://dsif35vmh5508" path="res://commons/skills/money_on_hit.gd" id="4_pcg5u"]
+[ext_resource type="Script" uid="uid://d3usylenyaym" path="res://commons/skills/reflect_damage.gd" id="5_f1wmd"]
+[ext_resource type="SpriteFrames" uid="uid://dferluchoc2us" path="res://assets/worms_frames/useless_worm.tres" id="5_gu545"]
+[ext_resource type="Script" uid="uid://bpu8djq4or8f2" path="res://commons/skills/money_on_kill.gd" id="6_mkill"]
+[ext_resource type="Script" uid="uid://dhbsxtsdlcpta" path="res://commons/skills/mutual_kill.gd" id="7_mkill"]
+[ext_resource type="Script" path="res://commons/skills/primeros_auxilios.gd" id="8_pa"]
+
+[sub_resource type="Resource" id="Resource_common"]
+script = ExtResource("1_w65wx")
+hp = Vector2(1, 2)
+damage = Vector2(0, 0)
+cooldown_attack = Vector2(2, 3)
+cooldown_money = Vector2(8.0, 15.0)
+speed = Vector2(30, 50)
+size = Vector2(0.5, 0.7)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_w65wx")
+hp = Vector2(1, 2)
+damage = Vector2(40, 60)
+cooldown_attack = Vector2(0.5, 0.8)
+cooldown_money = Vector2(2.0, 5.0)
+speed = Vector2(80, 100)
+size = Vector2(1, 1.2)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_w65wx")
+hp = Vector2(1, 2)
+damage = Vector2(80, 120)
+cooldown_attack = Vector2(0.3, 0.5)
+cooldown_money = Vector2(1.0, 3.0)
+speed = Vector2(100, 130)
+size = Vector2(1.2, 1.5)
+
+[sub_resource type="Resource" id="Resource_rare"]
+script = ExtResource("1_w65wx")
+hp = Vector2(1, 2)
+damage = Vector2(5, 10)
+cooldown_attack = Vector2(1.5, 2.5)
+cooldown_money = Vector2(4.0, 8.0)
+speed = Vector2(60, 80)
+size = Vector2(0.8, 1)
+
+[sub_resource type="Resource" id="Resource_s1"]
+script = ExtResource("4_pcg5u")
+money_amount = 200
+trigger_chance = 1.0
+skill_name = "Muerte Grandiosa"
+description = "Otorga 200 monedas al jugador al recibir daño. Su fracaso es tan épico que hasta el juego le regala dinero por intentarlo."
+
+[sub_resource type="Resource" id="Resource_e1"]
+script = ExtResource("3_gu545")
+skill = SubResource("Resource_s1")
+spawn_chance = 0.4
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s2"]
+script = ExtResource("7_mkill")
+skill_name = "Aprendí a Pensar"
+description = "Te abrazas con tanta fuerza a tu rival que la fricción causa una explosión ridícula. Ambos terminan hechos papilla, pero oye, el abrazo fue sincero."
+
+[sub_resource type="Resource" id="Resource_e2"]
+script = ExtResource("3_gu545")
+skill = SubResource("Resource_s2")
+spawn_chance = 0.2
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s3"]
+script = ExtResource("6_mkill")
+money_amount = 5
+trigger_chance = 0.3
+skill_name = "Suerte de Principe"
+description = "Con suerte de principito, a veces le regalan monedas al matar. No es habilidad, es carisma puro disfrazado de estrategia."
+
+[sub_resource type="Resource" id="Resource_e3"]
+script = ExtResource("3_gu545")
+skill = SubResource("Resource_s3")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s4"]
+script = ExtResource("5_f1wmd")
+reflect_percent = 0.3
+trigger_chance = 0.15
+skill_name = "Espejo Roto"
+description = "Un espejo agrietado que a veces refleja migajas de daño. La mayoría de las veces solo refleja la tristeza de ser un gusano inútil."
+
+[sub_resource type="Resource" id="Resource_e4"]
+script = ExtResource("3_gu545")
+skill = SubResource("Resource_s4")
+spawn_chance = 0.6
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s5"]
+script = ExtResource("8_pa")
+hp_threshold = 0.3
+regen_boost = 3.0
+boost_duration = 5.0
+cooldown = 120.0
+skill_name = "Primeros Auxilios"
+description = "Cuando su vida cae por debajo del 30%, activa una regeneración triple por 5 segundos. Cooldown de 2 minutos."
+
+[sub_resource type="Resource" id="Resource_e5"]
+script = ExtResource("3_gu545")
+skill = SubResource("Resource_s5")
+spawn_chance = 0.4
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[resource]
+script = ExtResource("2_pcg5u")
+worm_name = "El Inútil"
+sprite_frames = ExtResource("5_gu545")
+common_stats = SubResource("Resource_common")
+rare_stats = SubResource("Resource_rare")
+epic_stats = SubResource("Resource_epic")
+legendary_stats = SubResource("Resource_legendary")
+skills = Array[ExtResource("3_gu545")]([SubResource("Resource_e1"), SubResource("Resource_e2"), SubResource("Resource_e3"), SubResource("Resource_e4"), SubResource("Resource_e5")])

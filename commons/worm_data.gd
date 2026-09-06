@@ -5,6 +5,7 @@ class_name Worm_Data
 @export var rarity : Rarity.Level
 
 @export var hp_max : float
+@export var current_hp: float = -1.0
 @export var damage : float
 @export var cooldown_attack : float
 @export var cooldown_money : float
