@@ -9,6 +9,7 @@ static var extra_slots: int = 0
 
 static var all_items: Array[ItemData] = []
 static var available_items: Array[ItemData] = []
+static var item_stock: Dictionary = {}
 static var renew_cost: int = 50
 static var renew_count: int = 0
 static var auto_renew_time: float = 300.0
@@ -35,10 +36,12 @@ static func rotate_items(count: int = 4) -> Array[ItemData]:
 	if all_items.is_empty():
 		_load_all_items()
 	available_items.clear()
+	item_stock.clear()
 	var pool = all_items.duplicate()
 	pool.shuffle()
 	for i in range(min(count, pool.size())):
 		available_items.append(pool[i])
+		item_stock[pool[i].item_name] = randi_range(1, 3)
 	return available_items
 
 static func get_available_items() -> Array[ItemData]:

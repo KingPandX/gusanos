@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://deatub06gp7gu"]
+
+[ext_resource type="Script" uid="uid://chchhkvgli1ck" path="res://commons/ui/pause_menu.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.1, 0.12, 0.16, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.35, 0.45, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PauseMenu" type="Control" unique_id=1577618433]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="BG" type="ColorRect" parent="." unique_id=2092681121]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.19215687, 0.6156863)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1753341669]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1637227277]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="Panel/VBox" unique_id=1628464601]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="Panel/VBox" unique_id=913199732]
+layout_mode = 2
+
+[node name="SaveBtn" type="Button" parent="Panel/VBox" unique_id=1368034227]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Guardar Partida"
+
+[node name="LoadBtn" type="Button" parent="Panel/VBox" unique_id=14715241]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Cargar Partida"
+
+[node name="DeleteBtn" type="Button" parent="Panel/VBox" unique_id=663456924]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Borrar Partida"
+
+[node name="Sep2" type="HSeparator" parent="Panel/VBox" unique_id=1427822428]
+layout_mode = 2
+
+[node name="ResumeBtn" type="Button" parent="Panel/VBox" unique_id=1830157680]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Reanudar"

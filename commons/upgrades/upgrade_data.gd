@@ -10,7 +10,7 @@ class_name UpgradeData
 @export var max_level: int = 5
 @export var prerequisite: UpgradeData
 
-var current_level: int = 0
+@export var current_level: int = 0
 
 func get_current_cost() -> int:
 	return round(cost * pow(cost_multiplier, current_level))

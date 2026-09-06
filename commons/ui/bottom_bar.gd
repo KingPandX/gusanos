@@ -9,6 +9,7 @@ const SHOP_MENU_SCENE = preload("res://commons/ui/shop_menu.tscn")
 const WORM_SELECTOR_SCENE = preload("res://commons/ui/worm_selector/worm_selector.tscn")
 const WORM_DETAILS_SCENE = preload("res://commons/ui/worm_details_panel.tscn")
 const SLOT_MACHINE_SCENE = preload("res://commons/ui/slot_machine/slot_machine.tscn")
+const PAUSE_MENU_SCENE = preload("res://commons/ui/pause_menu.tscn")
 
 @onready var bg: ColorRect = $BG
 @onready var main_vbox: VBoxContainer = $MainVBox
@@ -38,6 +39,7 @@ var worm_selector_instance: WormSelector = null
 var worm_details_instance: WormDetailsPanel = null
 var slot_machine_instance: Control = null
 var pending_item: ItemData = null
+var pause_menu_instance: Control = null
 
 func _ready() -> void:
 	add_to_group("bottom_bar")
@@ -49,6 +51,7 @@ func _ready() -> void:
 	worms_btn.pressed.connect(_on_worms_pressed)
 	inventory_close_btn.pressed.connect(_on_inventory_close)
 	give_money_btn.pressed.connect(func(): GlobalManager.add_money(500))
+	_create_pause_button()
 	GlobalManager.money_changed.connect(_on_money_changed)
 	Inventory.inventory_changed.connect(_on_inventory_changed)
 	ItemInventory.inventory_changed.connect(_on_item_inventory_changed)
@@ -259,3 +262,18 @@ func _on_slot_machine_pressed() -> void:
 
 func _on_slot_machine_closed() -> void:
 	pass
+
+func _create_pause_button() -> void:
+	var sep = VSeparator.new()
+	bar_container.add_child(sep)
+	var pause_btn = Button.new()
+	pause_btn.text = "Pausa"
+	pause_btn.custom_minimum_size = Vector2(70, 0)
+	pause_btn.pressed.connect(_on_pause_pressed)
+	bar_container.add_child(pause_btn)
+
+func _on_pause_pressed() -> void:
+	if pause_menu_instance == null or not is_instance_valid(pause_menu_instance):
+		pause_menu_instance = PAUSE_MENU_SCENE.instantiate()
+		get_parent().add_child(pause_menu_instance)
+	pause_menu_instance.open()

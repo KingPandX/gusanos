@@ -14,7 +14,6 @@ signal shop_closed
 @onready var money_label: Label = $Panel/VBox/Footer/MoneyLabel
 
 var show_upgrades: bool = false
-var item_stock: Dictionary = {}
 var initialized: bool = false
 
 func _ready() -> void:
@@ -36,8 +35,8 @@ func _process(_delta: float) -> void:
 func open() -> void:
 	visible = true
 	if not initialized:
-		Shop.rotate_items()
-		_init_stock()
+		if Shop.available_items.is_empty():
+			Shop.rotate_items()
 		initialized = true
 	_refresh_content()
 	_update_money_label()
@@ -45,11 +44,6 @@ func open() -> void:
 func close() -> void:
 	visible = false
 	shop_closed.emit()
-
-func _init_stock() -> void:
-	item_stock.clear()
-	for item in Shop.get_available_items():
-		item_stock[item.item_name] = randi_range(1, 3)
 
 func _on_bg_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -78,7 +72,6 @@ func _on_money_changed(_new_value: int) -> void:
 	_update_money_label()
 
 func _on_shop_renewed() -> void:
-	_init_stock()
 	_refresh_content()
 	_update_money_label()
 
@@ -123,7 +116,7 @@ func _build_items_list() -> void:
 		content_list.add_child(card)
 
 func _build_item_card(item: ItemData) -> PanelContainer:
-	var stock = item_stock.get(item.item_name, 0)
+	var stock = Shop.item_stock.get(item.item_name, 0)
 
 	var card = PanelContainer.new()
 	card.custom_minimum_size = Vector2(0, 70)
@@ -257,14 +250,14 @@ func _build_upgrade_card(upgrade: UpgradeData) -> PanelContainer:
 	return card
 
 func _on_buy_item(item: ItemData) -> void:
-	var stock = item_stock.get(item.item_name, 0)
+	var stock = Shop.item_stock.get(item.item_name, 0)
 	if stock <= 0:
 		return
 	var final_cost = _get_discounted_cost(item.cost)
 	if GlobalManager.can_afford(final_cost):
 		GlobalManager.transaction(final_cost)
 		ItemInventory.add_item(item)
-		item_stock[item.item_name] = stock - 1
+		Shop.item_stock[item.item_name] = stock - 1
 		_update_money_label()
 		_refresh_content()
 

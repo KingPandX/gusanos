@@ -13,8 +13,8 @@ class_name Worm_Data
 @export var speed : float = 60
 
 @export var skills: Array[SkillData] = []
-var combat_stacks: int = 0
-var stat_multiplier: float = 1.0
+@export var combat_stacks: int = 0
+@export var stat_multiplier: float = 1.0
 
 func get_computed_damage() -> float:
 	return damage * stat_multiplier

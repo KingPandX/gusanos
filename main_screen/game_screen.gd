@@ -8,6 +8,8 @@ const ETERNO__PERO_NO_PARA_SIEMPRE = preload("uid://bj5wdvs13ijiq")
 func _ready() -> void:
 	AudioManager.change_music(ETERNO__PERO_NO_PARA_SIEMPRE)
 	DragManager.worm_dropped.connect(_on_worm_dropped)
+	if SaveManager.has_save():
+		SaveManager.load_game()
 
 func _process(delta: float) -> void:
 	Shop.update(delta)
