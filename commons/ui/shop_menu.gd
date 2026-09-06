@@ -16,6 +16,9 @@ signal shop_closed
 var show_upgrades: bool = false
 var initialized: bool = false
 
+const SHOP_TOUR = preload("res://commons/tutorial/tours/shop_tour.tres")
+const COMPRAR_1 = preload("uid://6v3u2xthkldd")
+
 func _ready() -> void:
 	bg.gui_input.connect(_on_bg_input)
 	close_btn.pressed.connect(_on_close_pressed)
@@ -40,6 +43,11 @@ func open() -> void:
 		initialized = true
 	_refresh_content()
 	_update_money_label()
+	_start_shop_tour_if_needed()
+
+func _start_shop_tour_if_needed() -> void:
+	if not TutorialManager.is_tour_completed(SHOP_TOUR.tour_name):
+		TutorialManager.start_tour(SHOP_TOUR)
 
 func close() -> void:
 	visible = false
@@ -68,6 +76,7 @@ func _on_close_pressed() -> void:
 
 func _on_renew_pressed() -> void:
 	if GlobalManager.can_afford(Shop.get_renew_cost()):
+		AudioManager.play_sfx(COMPRAR_1, randf_range(0.8,1.2))
 		GlobalManager.transaction(Shop.get_renew_cost())
 		Shop.renew_shop()
 		_update_money_label()
@@ -269,6 +278,7 @@ func _on_buy_item(item: ItemData) -> void:
 		return
 	var final_cost = _get_discounted_cost(item.cost)
 	if GlobalManager.can_afford(final_cost):
+		AudioManager.play_sfx(COMPRAR_1, randf_range(0.8,1.2))
 		GlobalManager.transaction(final_cost)
 		ItemInventory.add_item(item)
 		Shop.item_stock[item.item_name] = stock - 1

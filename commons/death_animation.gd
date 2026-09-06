@@ -4,6 +4,8 @@ extends Node2D
 @onready var smoke: GPUParticles2D = $Smoke
 @onready var stars: GPUParticles2D = $Stars
 
+const TUMBA = preload("uid://ui3dryee83dk")
+
 func _ready() -> void:
 	sprite.scale = Vector2(0, 0)
 	smoke.emitting = true
@@ -17,6 +19,7 @@ func _ready() -> void:
 	await tween.finished
 
 	sprite.play("default")
+	AudioManager.play_sfx(TUMBA,randf_range(0.8,1.2))
 	await sprite.animation_finished
 
 	var fade_tween := create_tween()

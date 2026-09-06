@@ -28,6 +28,7 @@ var available_items: Array[ItemData] = []
 var worm_selector_instance: WormSelector = null
 
 const CASINO_MUSIC = preload("uid://dsgul804mbr4u")
+const SLOTS_TOUR = preload("res://commons/tutorial/tours/slots_tour.tres")
 
 static var consecutive_nothing: int = 0
 
@@ -70,6 +71,8 @@ func _ready() -> void:
 
 func _load_available_items() -> void:
 	available_items.clear()
+	available_items.append_array(Shop.all_items)
+	# Fallback: cargar dinámicamente en caso de rutas personalizadas
 	var dirs = ["res://assets/items/"]
 	for path in dirs:
 		var dir = DirAccess.open(path)
@@ -80,7 +83,7 @@ func _load_available_items() -> void:
 		while file_name != "":
 			if file_name.ends_with(".tres"):
 				var resource = load(path + file_name)
-				if resource is ItemData:
+				if resource is ItemData and not available_items.has(resource):
 					available_items.append(resource)
 			file_name = dir.get_next()
 
@@ -88,6 +91,11 @@ func open() -> void:
 	AudioManager.change_music(CASINO_MUSIC)
 	visible = true
 	_update_ui()
+	_start_slots_tour_if_needed()
+
+func _start_slots_tour_if_needed() -> void:
+	if not TutorialManager.is_tour_completed(SLOTS_TOUR.tour_name):
+		TutorialManager.start_tour(SLOTS_TOUR)
 
 func close() -> void:
 	visible = false

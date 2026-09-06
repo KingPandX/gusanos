@@ -63,6 +63,8 @@ var drag_preview: Control = null
 # Efectos activos
 var active_effects: Array[Dictionary] = []
 
+const MUERTE_GUSANOS = preload("uid://cq0ece7ejn4au")
+
 func _ready() -> void:
 	input_pickable = true
 	add_to_group("worms")
@@ -274,6 +276,7 @@ func take_damage(amount: float, attacker: Worm = null) -> void:
 func die() -> void:
 	if is_dead:
 		return
+	AudioManager.play_sfx(MUERTE_GUSANOS,randf_range(0.8,1.2))
 	is_dead = true
 	for skill in worm_data.skills:
 		skill.on_kill(last_attacker, self)

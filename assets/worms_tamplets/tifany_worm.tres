@@ -10,44 +10,46 @@
 
 [sub_resource type="Resource" id="Resource_common"]
 script = ExtResource("1_nxk4p")
-hp = Vector2(90, 130)
+hp = Vector2(250, 350)
 damage = Vector2(0, 0)
-cooldown_attack = Vector2(1.2, 1.8)
-speed = Vector2(65, 85)
-size = Vector2(1.2, 1.4)
-
-[sub_resource type="Resource" id="Resource_epic"]
-script = ExtResource("1_nxk4p")
-hp = Vector2(220, 320)
-damage = Vector2(0, 0)
-cooldown_attack = Vector2(0.8, 1.2)
-cooldown_money = Vector2(2, 5)
-speed = Vector2(95, 120)
-size = Vector2(1.7, 2)
-
-[sub_resource type="Resource" id="Resource_legendary"]
-script = ExtResource("1_nxk4p")
-hp = Vector2(300, 450)
-damage = Vector2(0, 0)
-cooldown_attack = Vector2(0.6, 1)
-cooldown_money = Vector2(1, 3)
-speed = Vector2(115, 145)
-size = Vector2(2, 3.5)
+cooldown_attack = Vector2(5.0, 5.0)
+cooldown_money = Vector2(8.0, 15.0)
+speed = Vector2(35, 45)
+size = Vector2(1.4, 1.6)
 
 [sub_resource type="Resource" id="Resource_rare"]
 script = ExtResource("1_nxk4p")
-hp = Vector2(160, 230)
+hp = Vector2(400, 550)
 damage = Vector2(0, 0)
-cooldown_money = Vector2(4, 8)
-speed = Vector2(80, 100)
-size = Vector2(1.4, 1.7)
+cooldown_attack = Vector2(5.0, 5.0)
+cooldown_money = Vector2(4.0, 8.0)
+speed = Vector2(35, 45)
+size = Vector2(1.6, 1.9)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_nxk4p")
+hp = Vector2(600, 800)
+damage = Vector2(0, 0)
+cooldown_attack = Vector2(5.0, 5.0)
+cooldown_money = Vector2(2.0, 5.0)
+speed = Vector2(40, 50)
+size = Vector2(1.9, 2.3)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_nxk4p")
+hp = Vector2(900, 1200)
+damage = Vector2(0, 0)
+cooldown_attack = Vector2(5.0, 5.0)
+cooldown_money = Vector2(1.0, 3.0)
+speed = Vector2(45, 55)
+size = Vector2(2.3, 2.8)
 
 [sub_resource type="Resource" id="Resource_s1"]
 script = ExtResource("4_ys713")
 reflect_percent = 1.0
-trigger_chance = 0.9
+trigger_chance = 1.0
 skill_name = "¿Por Qué Te Pegas Solo?"
-description = "¡Aish, no te pegues! ¿Por qué te pegas? ¡Deja de pegarte!». Tifany no ataca. Solo aprieta los pectorales y te devuelve el 100% del daño que intentas hacerle, mientras se burla de lo tonto que te ves destruyéndote a ti mismo."
+description = "«¡Aish, no te pegues! ¿Por qué te pegas? ¡Deja de pegarte!». Tiffany no ataca. Solo aprieta los pectorales y te devuelve el 100% del daño que intentas hacerle, mientras se burla de lo tonto que te ves destruyéndote a ti mismo."
 
 [sub_resource type="Resource" id="Resource_e1"]
 script = ExtResource("3_32kuk")
@@ -55,27 +57,58 @@ skill = SubResource("Resource_s1")
 spawn_chance = 1.0
 metadata/_custom_type_script = "uid://gbpjypqsxc3"
 
+[sub_resource type="Resource" id="Resource_s2"]
+script = ExtResource("4_ys713")
+reflect_percent = 1.5
+trigger_chance = 0.5
+skill_name = "Pectorales de Granito"
+description = "A veces refleja más de lo que le pegan, porque su autoestima es inversamente proporcional a su masa muscular. 50% de chance de devolver 1.5x el daño."
+
+[sub_resource type="Resource" id="Resource_e2"]
+script = ExtResource("3_32kuk")
+skill = SubResource("Resource_s2")
+spawn_chance = 0.3
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s3"]
+script = ExtResource("4_ys713")
+reflect_percent = 1.0
+trigger_chance = 0.75
+skill_name = "No Sentir Nada"
+description = "Su piel es tan dura que ni siquiera le duele. 75% de chance de rebotar el daño íntegro. El que pega, se jode; ella solo se ríe."
+
+[sub_resource type="Resource" id="Resource_e3"]
+script = ExtResource("3_32kuk")
+skill = SubResource("Resource_s3")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
 [sub_resource type="Resource" id="Resource_s4"]
 script = ExtResource("6_ice")
-damage_reduction = 0.25
-cooldown_slow = 0.35
+damage_reduction = 0.3
+cooldown_slow = 0.4
 skill_name = "Gélida Elegancia"
-description = "Su elegancia es tan fría que congela el aire a su alrededor. Los enemigos se mueven más lento y el daño se diluye como hielo al sol."
+description = "Su mirada fría congela al rival. Reduce 30% el daño que recibe y el enemigo se mueve como en cámara lenta (40% más lento al atacar)."
 
 [sub_resource type="Resource" id="Resource_e4"]
 script = ExtResource("3_32kuk")
 skill = SubResource("Resource_s4")
+spawn_chance = 0.4
 metadata/_custom_type_script = "uid://gbpjypqsxc3"
 
 [sub_resource type="Resource" id="Resource_s5"]
 script = ExtResource("7_pa")
-skill_name = "Primeros Auxilios"
-description = "Cuando su vida cae por debajo del 30%, activa una regeneración triple por 5 segundos. Cooldown de 2 minutos."
+hp_threshold = 0.4
+regen_boost = 4.0
+boost_duration = 6.0
+cooldown = 90.0
+skill_name = "Autocuidado Brutal"
+description = "Cuando cae al 40% de vida, se toma un respiro y regenera 4x por 6 segundos. La gimnasia tiene sus beneficios."
 
 [sub_resource type="Resource" id="Resource_e5"]
 script = ExtResource("3_32kuk")
 skill = SubResource("Resource_s5")
-spawn_chance = 0.4
+spawn_chance = 0.5
 metadata/_custom_type_script = "uid://gbpjypqsxc3"
 
 [resource]
@@ -86,4 +119,4 @@ common_stats = SubResource("Resource_common")
 rare_stats = SubResource("Resource_rare")
 epic_stats = SubResource("Resource_epic")
 legendary_stats = SubResource("Resource_legendary")
-skills = Array[ExtResource("3_32kuk")]([SubResource("Resource_e1"), SubResource("Resource_e4"), SubResource("Resource_e5")])
+skills = Array[ExtResource("3_32kuk")]([SubResource("Resource_e1"), SubResource("Resource_e2"), SubResource("Resource_e3"), SubResource("Resource_e4"), SubResource("Resource_e5")])

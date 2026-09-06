@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="TourData" format=3 uid="uid://dwv0liiqydc5d"]
+
+[ext_resource type="Script" uid="uid://c0kuor6rxlvsd" path="res://commons/tutorial/tour_data.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cijguomvla23i" path="res://commons/tutorial/tour_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_1"]
+script = ExtResource("2_step")
+signal_string = "welcome"
+message = "Te enseñaré cómo funcionan las cosas por aquí antes de empezar."
+popup_position = 2
+button_2_text = "No gracias"
+button_2_action = 2
+
+[sub_resource type="Resource" id="step_2"]
+script = ExtResource("2_step")
+step_type = 1
+signal_string = "collect_drops"
+message = "Esos bultos de fango ocultan sorpresas. Haz clic sobre ellos para descubrir qué hay dentro."
+highlight_padding = Vector2(16, 16)
+popup_position = 2
+button_1_text = ""
+action_type = 1
+action_message_waiting = "Toca el bulto de tierra..."
+action_count = 2
+dynamic_target_group = "worm_drops"
+
+[sub_resource type="Resource" id="step_3"]
+script = ExtResource("2_step")
+step_type = 1
+signal_string = "drag_to_combat"
+message = "Arrástra a los gusanos hacia la zona de combate para enviarlos a pelear."
+highlight_padding = Vector2(20, 20)
+follow_target = true
+popup_position = 0
+button_1_text = ""
+action_type = 2
+action_signal_name = "drag_to_combat"
+action_message_waiting = "Arrastra tu gusano a la zona de combate..."
+action_count = 2
+dynamic_target_group = "worms"
+
+[resource]
+script = ExtResource("1_script")
+tour_name = "main_game"
+steps = [SubResource("step_1"), SubResource("step_2"), SubResource("step_3")]

@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://t6fs06he5fjq"]
 
-[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Texture2D" uid="uid://cqlnj5jmsque4" path="res://assets/Items-Sheet.png" id="2_5l5o3"]
+[ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
@@ -13,12 +13,14 @@ target = 1
 value = 50.0
 duration = 20.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4omp"]
+atlas = ExtResource("2_5l5o3")
+region = Rect2(450, 0, 90, 90)
+
 [resource]
 script = ExtResource("1_item")
-item_name = "Pergamino de Escudo"
-description = "+50 HP escudo temporal (20s)"
+item_name = "Spray Repelente"
+description = "[+50 HP escudo durante 20s] Un par de disparos en la cara y listo. Crea una capa protectora invisible que huele sospechosamente a desinfectante de pino."
+icon = SubResource("AtlasTexture_i4omp")
 effect = SubResource("effect")
-target = 1
-icon = ExtResource("3_icon")
 cost = 150
-quantity = 1

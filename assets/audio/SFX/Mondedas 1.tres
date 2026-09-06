@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://ybc6uwqxd75t"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_jk6uu"]
+[ext_resource type="AudioStream" uid="uid://dl455gqiddvo2" path="res://assets/audio/SFX/Monedas 1.wav" id="2_rdeqa"]
+
+[resource]
+script = ExtResource("1_jk6uu")
+stream = ExtResource("2_rdeqa")
+max_instances = 5
+cooldown = 0.09
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

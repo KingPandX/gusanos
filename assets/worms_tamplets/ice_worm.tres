@@ -1,0 +1,102 @@
+[gd_resource type="Resource" script_class="WormTemplate" format=3 uid="uid://dd2j7m7fqyq05"]
+
+[ext_resource type="Script" uid="uid://d4hjxj4ayg6n6" path="res://commons/stat_range.gd" id="1_a7wuf"]
+[ext_resource type="Script" uid="uid://bgqq8nyq1u0f8" path="res://commons/worm_template.gd" id="2_vnsav"]
+[ext_resource type="Script" uid="uid://gbpjypqsxc3" path="res://commons/skills/skill_entry.gd" id="3_gfkjk"]
+[ext_resource type="Script" uid="uid://drviu18vbr47w" path="res://commons/skills/ice_skill.gd" id="4_ice"]
+[ext_resource type="Script" uid="uid://da7j7kun841id" path="res://commons/skills/combat_ramp.gd" id="5_cramp"]
+[ext_resource type="Script" uid="uid://bpu8djq4or8f2" path="res://commons/skills/money_on_kill.gd" id="6_mkill"]
+[ext_resource type="Script" uid="uid://b1hcgfsh83g15" path="res://commons/skills/primeros_auxilios.gd" id="7_pa"]
+[ext_resource type="SpriteFrames" uid="uid://qw147pj3bcj7" path="res://assets/worms_frames/ice_worm.tres" id="9_a7wuf"]
+
+[sub_resource type="Resource" id="Resource_common"]
+script = ExtResource("1_a7wuf")
+hp = Vector2(65, 95)
+damage = Vector2(12, 20)
+cooldown_attack = Vector2(0.9, 1.3)
+speed = Vector2(75, 95)
+size = Vector2(0.7, 0.9)
+
+[sub_resource type="Resource" id="Resource_epic"]
+script = ExtResource("1_a7wuf")
+hp = Vector2(120, 170)
+damage = Vector2(48, 70)
+cooldown_attack = Vector2(0.5, 0.8)
+cooldown_money = Vector2(2, 5)
+speed = Vector2(105, 135)
+size = Vector2(1.1, 1.4)
+
+[sub_resource type="Resource" id="Resource_legendary"]
+script = ExtResource("1_a7wuf")
+hp = Vector2(150, 220)
+damage = Vector2(75, 105)
+cooldown_attack = Vector2(0.35, 0.6)
+cooldown_money = Vector2(1, 3)
+speed = Vector2(120, 155)
+size = Vector2(1.3, 1.6)
+
+[sub_resource type="Resource" id="Resource_rare"]
+script = ExtResource("1_a7wuf")
+hp = Vector2(90, 130)
+damage = Vector2(28, 45)
+cooldown_attack = Vector2(0.7, 1)
+cooldown_money = Vector2(4, 8)
+speed = Vector2(90, 115)
+size = Vector2(0.9, 1.1)
+
+[sub_resource type="Resource" id="Resource_s1"]
+script = ExtResource("4_ice")
+damage_reduction = 0.15
+cooldown_slow = 0.35
+skill_name = "Escarcha Eterna"
+description = "Cada uno de sus golpes es un abrazo de invierno. Reduce 15% el daño que recibe y congela el brazo del enemigo, que tarda 35% más en volver a pegar. El hielo no perdona."
+
+[sub_resource type="Resource" id="Resource_e1"]
+script = ExtResource("3_gfkjk")
+skill = SubResource("Resource_s1")
+spawn_chance = 0.8
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s2"]
+script = ExtResource("5_cramp")
+skill_name = "Frío Vengativo"
+description = "Cuanto más dura la pelea, más se congela su furia en venganza. +10% de daño por segundo de combate, hasta +50%. El hielo se acumula... y luego revienta."
+
+[sub_resource type="Resource" id="Resource_e2"]
+script = ExtResource("3_gfkjk")
+skill = SubResource("Resource_s2")
+spawn_chance = 0.5
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s3"]
+script = ExtResource("6_mkill")
+money_amount = 15
+skill_name = "Botín Polar"
+description = "Al enterrar a sus rivales bajo el hielo, les registra los bolsillos. Cada enemigo derrotado le deja 15 monedas. La muerte siempre paga."
+
+[sub_resource type="Resource" id="Resource_e3"]
+script = ExtResource("3_gfkjk")
+skill = SubResource("Resource_s3")
+spawn_chance = 0.4
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[sub_resource type="Resource" id="Resource_s4"]
+script = ExtResource("7_pa")
+skill_name = "Primeros Auxilios"
+description = "Cuando su vida cae por debajo del 30%, activa una regeneración triple por 5 segundos. Cooldown de 2 minutos."
+
+[sub_resource type="Resource" id="Resource_e4"]
+script = ExtResource("3_gfkjk")
+skill = SubResource("Resource_s4")
+spawn_chance = 0.4
+metadata/_custom_type_script = "uid://gbpjypqsxc3"
+
+[resource]
+script = ExtResource("2_vnsav")
+worm_name = "El Ventisca"
+sprite_frames = ExtResource("9_a7wuf")
+common_stats = SubResource("Resource_common")
+rare_stats = SubResource("Resource_rare")
+epic_stats = SubResource("Resource_epic")
+legendary_stats = SubResource("Resource_legendary")
+skills = Array[ExtResource("3_gfkjk")]([SubResource("Resource_e1"), SubResource("Resource_e2"), SubResource("Resource_e3"), SubResource("Resource_e4")])

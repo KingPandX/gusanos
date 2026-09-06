@@ -20,7 +20,7 @@ var drop_timer: Timer
 func _ready() -> void:
 	add_to_group("social_area")
 	_setup_drop_timer()
-	spawn_worm_drop()
+	call_deferred("play_music")
 
 func play_music() -> void:
 	AudioManager.change_music(MUSIC)

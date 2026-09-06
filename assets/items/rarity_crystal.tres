@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://gw4a5l0f7qgp"]
 
-[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Texture2D" uid="uid://cqlnj5jmsque4" path="res://assets/Items-Sheet.png" id="2_7ci3x"]
+[ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
@@ -11,12 +11,14 @@ description = "Sube la rareza un nivel"
 effect_type = 1
 target = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u07i"]
+atlas = ExtResource("2_7ci3x")
+region = Rect2(720, 0, 90, 90)
+
 [resource]
 script = ExtResource("1_item")
 item_name = "Cristal de Rareza"
-description = "Sube rareza +1 nivel"
+description = "[Aumenta la rareza en +1 nivel] Un par de geodas moradas que te juzgan en silencio. Tienen tanto estilo que hacen que todo a tu alrededor suba de categoría."
+icon = SubResource("AtlasTexture_1u07i")
 effect = SubResource("effect")
-target = 1
-icon = ExtResource("3_icon")
 cost = 300
-quantity = 1

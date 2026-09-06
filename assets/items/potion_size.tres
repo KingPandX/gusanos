@@ -1,24 +1,24 @@
-[gd_resource type="Resource" load_steps=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b1lncmfr81pl1"]
 
-[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" uid="uid://cqlnj5jmsque4" path="res://assets/Items-Sheet.png" id="2_gpyyg"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
 effect_name = "Tamaño"
 description = "Aumenta el tamaño permanentemente"
-effect_type = 0
 target = 1
 stat = "size"
 value = 0.25
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2i1h"]
+atlas = ExtResource("2_gpyyg")
+region = Rect2(90, 0, 90, 90)
+
 [resource]
 script = ExtResource("1_item")
 item_name = "Poción de Gigantismo"
-description = "+25% tamaño permanente. Gusano más grande = más monedas"
+description = "[+25% tamaño permanente] Te crece todo, hasta la frente. Prepárate para pegarte en el marco de absolutamente todas las puertas."
+icon = SubResource("AtlasTexture_j2i1h")
 effect = SubResource("effect")
-target = 1
-icon = ExtResource("3_icon")
-cost = 100
-quantity = 1

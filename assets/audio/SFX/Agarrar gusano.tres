@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://dx5oy72nmg8ed"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_mw6e7"]
+[ext_resource type="AudioStream" uid="uid://bl4g6heqkveb7" path="res://assets/audio/SFX/Agarrar gusano.wav" id="2_fpoqf"]
+
+[resource]
+script = ExtResource("1_mw6e7")
+stream = ExtResource("2_fpoqf")
+max_instances = 1
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

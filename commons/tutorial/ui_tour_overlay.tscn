@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/tutorial/ui_tour_overlay.gd" id="1_script"]
+
+[node name="UITourOverlay" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_script")
+
+[node name="Top" type="ColorRect" parent="."]
+mouse_filter = 0
+color = Color(0, 0, 0, 0.65)
+
+[node name="Bottom" type="ColorRect" parent="."]
+mouse_filter = 0
+color = Color(0, 0, 0, 0.65)
+
+[node name="Left" type="ColorRect" parent="."]
+mouse_filter = 0
+color = Color(0, 0, 0, 0.65)
+
+[node name="Right" type="ColorRect" parent="."]
+mouse_filter = 0
+color = Color(0, 0, 0, 0.65)

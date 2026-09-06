@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="TourData" format=3 uid="uid://5qfk1t023kqf"]
+
+[ext_resource type="Script" uid="uid://c0kuor6rxlvsd" path="res://commons/tutorial/tour_data.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cijguomvla23i" path="res://commons/tutorial/tour_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_1"]
+script = ExtResource("2_step")
+message = "Esta es la tienda. Aqui puedes comprar items y mejoras para tus gusanos."
+target_node_path = NodePath("UILayer/ShopMenu/Panel")
+avoid_overlap = false
+popup_position = 4
+button_2_text = "Creo que se comprar, gracias."
+button_2_action = 2
+
+[sub_resource type="Resource" id="step_2"]
+script = ExtResource("2_step")
+message = "La tienda tiene dos pestanas: Items y Mejoras. Los items se usan en combate, las mejoras son permanentes."
+target_node_path = NodePath("UILayer/ShopMenu/Panel/VBox/Tabs")
+popup_position = 2
+
+[sub_resource type="Resource" id="step_3"]
+script = ExtResource("2_step")
+message = "Puedes renovar los items disponibles con el boton de renovar. Usalo sabiamente!"
+target_node_path = NodePath("UILayer/ShopMenu/Panel/VBox/TopBar/RenewBtn")
+button_1_text = "Entendido"
+
+[resource]
+script = ExtResource("1_script")
+tour_name = "shop"
+steps = [SubResource("step_1"), SubResource("step_2"), SubResource("step_3")]

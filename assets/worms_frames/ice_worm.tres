@@ -1,0 +1,58 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://qw147pj3bcj7"]
+
+[ext_resource type="Texture2D" uid="uid://wxuenqul5pcl" path="res://assets/Hielo-Sheet.png" id="1_3ej23"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xj4xr"]
+atlas = ExtResource("1_3ej23")
+region = Rect2(270, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdm2q"]
+atlas = ExtResource("1_3ej23")
+region = Rect2(360, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7v4c"]
+atlas = ExtResource("1_3ej23")
+region = Rect2(450, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxoks"]
+atlas = ExtResource("1_3ej23")
+region = Rect2(0, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hthm0"]
+atlas = ExtResource("1_3ej23")
+region = Rect2(90, 0, 90, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8852b"]
+atlas = ExtResource("1_3ej23")
+region = Rect2(180, 0, 90, 90)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xj4xr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdm2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7v4c")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxoks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hthm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8852b")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]

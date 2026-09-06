@@ -4,10 +4,21 @@ extends Control
 @onready var social_area: Control = $SocialArea
 @onready var ui_layer: CanvasLayer = $UILayer
 
+const MAIN_GAME_TOUR = preload("uid://dwv0liiqydc5d")
+
 func _ready() -> void:
 	DragManager.worm_dropped.connect(_on_worm_dropped)
 	if SaveManager.has_save():
 		SaveManager.load_game()
+	else:
+		SaveManager.new_game()
+	_start_main_tour_if_needed()
+
+func _start_main_tour_if_needed() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not TutorialManager.is_tour_completed(MAIN_GAME_TOUR.tour_name):
+		TutorialManager.start_tour(MAIN_GAME_TOUR)
 
 func _process(delta: float) -> void:
 	Shop.update(delta)

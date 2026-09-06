@@ -10,11 +10,41 @@ var max_slots : int = 3
 var unlocked_slots : int = 3
 var templates : Array[WormTemplate] = []
 
+const TEMPLATE_PATHS: Array[String] = [
+	"res://assets/worms_tamplets/glasses_worm.tres",
+	"res://assets/worms_tamplets/golden_worm.tres",
+	"res://assets/worms_tamplets/ice_worm.tres",
+	"res://assets/worms_tamplets/marine_worm.tres",
+	"res://assets/worms_tamplets/obsidian_worm.tres",
+	"res://assets/worms_tamplets/tifany_worm.tres",
+	"res://assets/worms_tamplets/tooth_worm.tres",
+	"res://assets/worms_tamplets/useles_worm.tres",
+]
+
+const TEMPLATES = [
+	preload("res://assets/worms_tamplets/glasses_worm.tres"),
+	preload("res://assets/worms_tamplets/golden_worm.tres"),
+	preload("res://assets/worms_tamplets/ice_worm.tres"),
+	preload("res://assets/worms_tamplets/marine_worm.tres"),
+	preload("res://assets/worms_tamplets/obsidian_worm.tres"),
+	preload("res://assets/worms_tamplets/tifany_worm.tres"),
+	preload("res://assets/worms_tamplets/tooth_worm.tres"),
+	preload("res://assets/worms_tamplets/useles_worm.tres"),
+]
+
 func _ready() -> void:
 	_load_templates()
 
 func _load_templates() -> void:
-	var dirs = ["res://assets/worms_tamplets/", "res://resources/templates/"]
+	templates.clear()
+	for resource in TEMPLATES:
+		if resource is WormTemplate:
+			templates.append(resource)
+	# Fallback: cargar dinámicamente en caso de rutas personalizadas
+	_load_templates_from_dirs(["res://assets/worms_tamplets/", "res://resources/templates/"])
+	print("Templates loaded: %d" % templates.size())
+
+func _load_templates_from_dirs(dirs: Array) -> void:
 	for path in dirs:
 		var dir = DirAccess.open(path)
 		if dir == null:
@@ -24,10 +54,9 @@ func _load_templates() -> void:
 		while file_name != "":
 			if file_name.ends_with(".tres"):
 				var resource = load(path + file_name)
-				if resource is WormTemplate:
+				if resource is WormTemplate and not templates.has(resource):
 					templates.append(resource)
 			file_name = dir.get_next()
-	print("Templates loaded: %d" % templates.size())
 
 func add_worm(worm: Worm_Data, area: String = "social") -> bool:
 	if worms.size() >= unlocked_slots:

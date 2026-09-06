@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://6v3u2xthkldd"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_0chy6"]
+[ext_resource type="AudioStream" uid="uid://bd81rn8fgsv3t" path="res://assets/audio/SFX/Comprar 1.wav" id="2_nhkhi"]
+
+[resource]
+script = ExtResource("1_0chy6")
+stream = ExtResource("2_nhkhi")
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://ui3dryee83dk"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_hatin"]
+[ext_resource type="AudioStream" uid="uid://r0or8h3lhp33" path="res://assets/audio/SFX/Tumba.wav" id="2_hn4e7"]
+
+[resource]
+script = ExtResource("1_hatin")
+stream = ExtResource("2_hn4e7")
+max_instances = 5
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

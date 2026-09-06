@@ -62,19 +62,22 @@ func _add_shop_items() -> void:
 	items_list.add_child(shop_label)
 
 	var dir = DirAccess.open("res://assets/items/")
+	var items = Shop.all_items
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
 			if file_name.ends_with(".tres"):
 				var item = load("res://assets/items/" + file_name)
-				if item is ItemData:
-					var btn = Button.new()
-					btn.text = "Comprar: %s - $%d" % [item.item_name, item.cost]
-					btn.custom_minimum_size = Vector2(0, 40)
-					btn.pressed.connect(_on_buy_item_pressed.bind(item))
-					items_list.add_child(btn)
+				if item is ItemData and not items.has(item):
+					items.append(item)
 			file_name = dir.get_next()
+	for item in items:
+		var btn = Button.new()
+		btn.text = "Comprar: %s - $%d" % [item.item_name, item.cost]
+		btn.custom_minimum_size = Vector2(0, 40)
+		btn.pressed.connect(_on_buy_item_pressed.bind(item))
+		items_list.add_child(btn)
 
 func _on_item_button_pressed(item_name: String) -> void:
 	selected_item_name = item_name

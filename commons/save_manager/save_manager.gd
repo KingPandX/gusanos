@@ -170,6 +170,16 @@ func _reset_game() -> void:
 			if node is Worm:
 				node.queue_free()
 
+func new_game() -> void:
+	if not has_save():
+		_reset_game()
+		var tree = Engine.get_main_loop() as SceneTree
+		if tree:
+			var social_area = tree.get_first_node_in_group("social_area")
+			if social_area:
+				social_area.spawn_worm_drop()
+				social_area.spawn_worm_drop()
+
 func get_trigger(key: String, default = null):
 	return global_triggers.get(key, default)
 

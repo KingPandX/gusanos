@@ -19,6 +19,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="PauseMenu" type="Control" unique_id=1577618433]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,31 +83,29 @@ text = "Borrar Partida"
 [node name="Sep2" type="HSeparator" parent="Panel/VBox" unique_id=1427822428]
 layout_mode = 2
 
-[node name="MusicLabel" type="Label" parent="Panel/VBox"]
+[node name="MusicLabel" type="Label" parent="Panel/VBox" unique_id=762664946]
 layout_mode = 2
 text = "Musica"
 
-[node name="MusicSlider" type="HSlider" parent="Panel/VBox"]
+[node name="MusicSlider" type="HSlider" parent="Panel/VBox" unique_id=447804875]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-min_value = 0.0
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SFXLabel" type="Label" parent="Panel/VBox"]
+[node name="SFXLabel" type="Label" parent="Panel/VBox" unique_id=643580552]
 layout_mode = 2
 text = "Efectos de Sonido"
 
-[node name="SFXSlider" type="HSlider" parent="Panel/VBox"]
+[node name="SFXSlider" type="HSlider" parent="Panel/VBox" unique_id=17628454]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-min_value = 0.0
 max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="Sep3" type="HSeparator" parent="Panel/VBox"]
+[node name="Sep3" type="HSeparator" parent="Panel/VBox" unique_id=807862118]
 layout_mode = 2
 
 [node name="ResumeBtn" type="Button" parent="Panel/VBox" unique_id=1830157680]

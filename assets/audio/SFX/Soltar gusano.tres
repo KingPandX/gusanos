@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SFXData" format=3 uid="uid://c7kndgve43vwf"]
+
+[ext_resource type="Script" uid="uid://bhxfir0c7fqem" path="res://commons/audio/sfx_data.gd" id="1_qfk5n"]
+[ext_resource type="AudioStream" uid="uid://dnmqiyx42qhlu" path="res://assets/audio/SFX/Soltar gusano.wav" id="2_fhk5u"]
+
+[resource]
+script = ExtResource("1_qfk5n")
+stream = ExtResource("2_fhk5u")
+max_instances = 1
+metadata/_custom_type_script = "uid://bhxfir0c7fqem"

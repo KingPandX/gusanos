@@ -11,6 +11,9 @@ var dragged_worm_data: Worm_Data = null
 var drag_source: String = "social"
 var drag_preview: Control = null
 
+const AGARRAR_GUSANO = preload("uid://dx5oy72nmg8ed")
+const SOLTAR_GUSANO = preload("uid://c7kndgve43vwf")
+
 func register_zone(zone_name: String, zone: Control) -> void:
 	registered_zones[zone_name] = zone
 
@@ -28,6 +31,7 @@ func start_drag(worm_data: Worm_Data, source: String) -> void:
 	if is_dragging:
 		return
 	is_dragging = true
+	AudioManager.play_sfx(AGARRAR_GUSANO, randf_range(0.8,1.2))
 	dragged_worm_data = worm_data
 	drag_source = source
 	drag_started.emit(worm_data, source)
@@ -36,6 +40,7 @@ func end_drag() -> void:
 	if not is_dragging:
 		return
 	is_dragging = false
+	AudioManager.play_sfx(SOLTAR_GUSANO, randf_range(0.8,1.2))
 	dragged_worm_data = null
 	drag_source = "social"
 	drag_ended.emit()

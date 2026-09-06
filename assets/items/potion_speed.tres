@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
 [ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" uid="uid://buthj8l4iou4n" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://cqlnj5jmsque4" path="res://assets/Items-Sheet.png" id="2_x0wue"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
@@ -12,9 +12,13 @@ target = 1
 stat = "speed"
 value = 0.3
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5optj"]
+atlas = ExtResource("2_x0wue")
+region = Rect2(180, 0, 90, 90)
+
 [resource]
 script = ExtResource("1_item")
 item_name = "Poción de Velocidad"
-description = "+30% velocidad permanente"
-icon = ExtResource("3_icon")
+description = "[+30% velocidad permanente] Contiene un 99% de cafeína pura. Vas tan rápido que tus piernas avanzan pero tus ideas se quedan atrás."
+icon = SubResource("AtlasTexture_5optj")
 effect = SubResource("effect")

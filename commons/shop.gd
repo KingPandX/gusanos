@@ -16,21 +16,55 @@ static var auto_renew_time: float = 300.0
 static var auto_renew_timer: float = 300.0
 static var items_loaded: bool = false
 
+const ITEM_PATHS: Array[String] = [
+	"res://assets/items/heal_potion.tres",
+	"res://assets/items/hunter_amulet.tres",
+	"res://assets/items/philosopher_stone.tres",
+	"res://assets/items/potion_damage.tres",
+	"res://assets/items/potion_money_cd.tres",
+	"res://assets/items/potion_size.tres",
+	"res://assets/items/potion_speed.tres",
+	"res://assets/items/rarity_crystal.tres",
+	"res://assets/items/shield_scroll.tres",
+	"res://assets/items/skill_scroll.tres",
+]
+
+const ITEMS = [
+	preload("res://assets/items/heal_potion.tres"),
+	preload("res://assets/items/hunter_amulet.tres"),
+	preload("res://assets/items/philosopher_stone.tres"),
+	preload("res://assets/items/potion_damage.tres"),
+	preload("res://assets/items/potion_money_cd.tres"),
+	preload("res://assets/items/potion_size.tres"),
+	preload("res://assets/items/potion_speed.tres"),
+	preload("res://assets/items/rarity_crystal.tres"),
+	preload("res://assets/items/shield_scroll.tres"),
+	preload("res://assets/items/skill_scroll.tres"),
+]
+
 static func _load_all_items() -> void:
 	if items_loaded:
 		return
 	all_items.clear()
-	var dir = DirAccess.open("res://assets/items/")
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if file_name.ends_with(".tres"):
-				var resource = load("res://assets/items/" + file_name)
-				if resource is ItemData:
-					all_items.append(resource)
-			file_name = dir.get_next()
+	for resource in ITEMS:
+		if resource is ItemData:
+			all_items.append(resource)
+	# Fallback: cargar dinámicamente en caso de rutas personalizadas
+	_load_items_from_dir("res://assets/items/")
 	items_loaded = true
+
+static func _load_items_from_dir(path: String) -> void:
+	var dir = DirAccess.open(path)
+	if not dir:
+		return
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".tres"):
+			var resource = load(path + file_name)
+			if resource is ItemData and not all_items.has(resource):
+				all_items.append(resource)
+		file_name = dir.get_next()
 
 static func rotate_items(count: int = 4) -> Array[ItemData]:
 	if all_items.is_empty():

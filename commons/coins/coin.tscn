@@ -50,6 +50,7 @@ animations = [{
 radius = 45.0
 
 [node name="Coin" type="Area2D" unique_id=596058062]
+visible = false
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1")

@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=3]
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bmccw2wpxclxi"]
 
-[ext_resource type="Script" path="res://commons/items/item_data.gd" id="1_item"]
-[ext_resource type="Script" path="res://commons/effects/effect_data.gd" id="2_effect"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://dqpi3m6f45t22" path="res://commons/items/item_data.gd" id="1_item"]
+[ext_resource type="Script" uid="uid://d18f66v7il0x6" path="res://commons/effects/effect_data.gd" id="2_effect"]
+[ext_resource type="Texture2D" uid="uid://cqlnj5jmsque4" path="res://assets/Items-Sheet.png" id="2_k7gml"]
 
 [sub_resource type="Resource" id="effect"]
 script = ExtResource("2_effect")
@@ -12,12 +12,14 @@ effect_type = 13
 target = 1
 value = 1.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_st5vb"]
+atlas = ExtResource("2_k7gml")
+region = Rect2(630, 0, 90, 90)
+
 [resource]
 script = ExtResource("1_item")
-item_name = "Pergamino de Habilidad"
-description = "Otorga una habilidad aleatoria que el gusano no tenga aún de su pool del template"
+item_name = "Píldora de Habilidad"
+description = "[Otorga una habilidad aleatoria del pool] La clásica pastilla misteriosa de la abuela. Te la tragas sin agua y rezas para que te dé un súper poder y no un dolor de estómago."
+icon = SubResource("AtlasTexture_st5vb")
 effect = SubResource("effect")
-target = 1
-icon = ExtResource("3_icon")
 cost = 250
-quantity = 1

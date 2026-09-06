@@ -16,6 +16,7 @@ var bar_height: float = 50.0
 const EXPANDED_SIZE = Vector2(720, 627)
 
 func _ready() -> void:
+	TutorialManager.step_completed.connect(_on_step_completed)
 	zone_name = "combat"
 	super()
 	scale = Vector2.ONE * mini_scale
@@ -29,6 +30,10 @@ func _ready() -> void:
 	var bottom_bar = get_tree().get_first_node_in_group("bottom_bar")
 	if bottom_bar and bottom_bar.has_signal("bar_height_changed"):
 		bottom_bar.bar_height_changed.connect(_on_bar_height_changed)
+
+func _on_step_completed(signal_str : String):
+	if signal_str == "drag_to_combat":
+		expand()
 
 func _on_bar_height_changed(new_height: float) -> void:
 	bar_height = new_height

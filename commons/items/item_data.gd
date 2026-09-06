@@ -7,7 +7,7 @@ enum Target {
 }
 
 @export var item_name: String
-@export var description: String
+@export_multiline() var description: String
 @export var icon: Texture2D
 @export var effect: EffectData
 @export var target: Target = Target.WORM

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="TourData" format=3 uid="uid://cu8lvh5jv22tb"]
+
+[ext_resource type="Script" uid="uid://c0kuor6rxlvsd" path="res://commons/tutorial/tour_data.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cijguomvla23i" path="res://commons/tutorial/tour_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="step_1"]
+script = ExtResource("2_step")
+message = "Esta es la tragamonedas. Aqui puedes gastar dinero para obtener items, mejoras e incluso nuevos gusanos."
+target_node_path = NodePath("UILayer/SlotMachine/Panel")
+avoid_overlap = false
+popup_position = 4
+button_2_text = "¡CALLATE GAMBLING!"
+button_2_action = 2
+
+[sub_resource type="Resource" id="step_2"]
+script = ExtResource("2_step")
+message = "Primero selecciona un gusano. La rareza del gusano afecta las probabilidades de ganar."
+target_node_path = NodePath("UILayer/SlotMachine/Panel/VBox/GusanoInfo/SelectBtn")
+popup_position = 4
+
+[sub_resource type="Resource" id="step_3"]
+script = ExtResource("2_step")
+message = "Luego presiona Tirar para girar. Buena suerte!"
+target_node_path = NodePath("UILayer/SlotMachine/Panel/VBox/TirarBtn")
+popup_position = 4
+button_1_text = "Entendido"
+
+[resource]
+script = ExtResource("1_script")
+tour_name = "slots"
+steps = [SubResource("step_1"), SubResource("step_2"), SubResource("step_3")]
