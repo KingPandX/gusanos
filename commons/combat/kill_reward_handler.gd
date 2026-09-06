@@ -1,7 +1,7 @@
 class_name KillRewardHandler
 extends Node
 
-const STAT_UPGRADE_CHANCE := 0.2
+const STAT_UPGRADE_CHANCE := 0.4
 const RARITY_UPGRADE_CHANCE := 0.2
 
 const STAT_BOOST_MIN := 0.05
@@ -16,6 +16,8 @@ var upgrade_animation_scene: PackedScene = preload("res://commons/upgrade_animat
 
 func on_worm_died(killer: Worm, victim: Worm) -> void:
 	if not is_instance_valid(killer) or killer.hp <= 0:
+		return
+	if killer.worm_data.rarity < victim.worm_data.rarity:
 		return
 
 	var stat_chance = minf(STAT_UPGRADE_CHANCE + stat_upgrade_bonus, 1.0)
