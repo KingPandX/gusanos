@@ -6,9 +6,10 @@ class_name MutualKill
 func on_take_damage(worm: Worm, attacker: Worm, _amount: float) -> void:
 	if randf() > trigger_chance:
 		return
-	if attacker != null and is_instance_valid(attacker):
-		attacker.set_hp(0)
-	worm.set_hp(0)
+	if attacker != null and is_instance_valid(attacker) and not attacker.is_dead:
+		attacker.die()
+	if not worm.is_dead:
+		worm.die()
 
 func get_display_chance() -> String:
 	return " (%d%%)" % int(trigger_chance * 100)
