@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dk4t3s4bsjmeh" path="res://commons/ui/worm_selector/worm_selector.gd" id="1_script"]
 
 [node name="WormSelector" type="Control" unique_id=1833332390]
-z_index = 10
-layout_mode = 3
+z_index = 20
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

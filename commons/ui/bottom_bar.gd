@@ -8,6 +8,7 @@ signal bar_height_changed(new_height: float)
 const SHOP_MENU_SCENE = preload("res://commons/ui/shop_menu.tscn")
 const WORM_SELECTOR_SCENE = preload("res://commons/ui/worm_selector/worm_selector.tscn")
 const WORM_DETAILS_SCENE = preload("res://commons/ui/worm_details_panel.tscn")
+const SLOT_MACHINE_SCENE = preload("res://commons/ui/slot_machine/slot_machine.tscn")
 
 @onready var bg: ColorRect = $BG
 @onready var main_vbox: VBoxContainer = $MainVBox
@@ -35,6 +36,7 @@ var displayed_money: int = 0
 var shop_menu_instance: Control = null
 var worm_selector_instance: WormSelector = null
 var worm_details_instance: WormDetailsPanel = null
+var slot_machine_instance: Control = null
 var pending_item: ItemData = null
 
 func _ready() -> void:
@@ -119,9 +121,25 @@ func _show_worm_selector() -> void:
 		get_parent().add_child(worm_selector_instance)
 	worm_selector_instance.open()
 
-func _on_worm_selected(worm: Worm) -> void:
+func _on_worm_selected(worm_data: Worm_Data) -> void:
 	if pending_item:
-		ItemInventory.use_item_on_worm(pending_item.item_name, worm)
+		var worm_node = _find_worm_node(worm_data)
+		if worm_node:
+			ItemInventory.use_item_on_worm(pending_item.item_name, worm_node)
+		else:
+			var effect = pending_item.effect
+			if effect and effect.target == EffectData.Target.WORM:
+				match effect.effect_type:
+					EffectData.Type.STAT_BOOST:
+						WormEffects.permanent_boost_data(worm_data, effect.stat, effect.value, true)
+					EffectData.Type.RARITY_UPGRADE:
+						WormEffects.upgrade_rarity_data(worm_data)
+					EffectData.Type.HEAL:
+						worm_data.current_hp = minf(worm_data.current_hp + effect.value, worm_data.get_computed_hp_max())
+					_:
+						pass
+			ItemInventory.remove_item(pending_item.item_name)
+			Inventory.inventory_changed.emit()
 	pending_item = null
 
 func _on_selector_closed() -> void:
@@ -233,4 +251,11 @@ func _on_shop_menu_closed() -> void:
 	pass
 
 func _on_slot_machine_pressed() -> void:
-	print("Tragamonedas - por implementar")
+	if slot_machine_instance == null or not is_instance_valid(slot_machine_instance):
+		slot_machine_instance = SLOT_MACHINE_SCENE.instantiate()
+		slot_machine_instance.slot_machine_closed.connect(_on_slot_machine_closed)
+		get_parent().add_child(slot_machine_instance)
+	slot_machine_instance.open()
+
+func _on_slot_machine_closed() -> void:
+	pass
