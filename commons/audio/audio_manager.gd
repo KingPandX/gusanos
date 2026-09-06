@@ -18,6 +18,7 @@ var _next_loop_id: int = 0
 var _music_positions: Dictionary = {}
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_init_music_players()
 	_init_sfx_pool()
 	_ensure_buses()
