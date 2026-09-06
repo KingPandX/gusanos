@@ -18,11 +18,21 @@ var click_requirements: Dictionary = {
 
 func _ready() -> void:
 	input_pickable = true
+	add_to_group("worm_drops")
 	clicks_needed = click_requirements.get(rarity, 2)
 	clicks_remaining = clicks_needed
+	_play_appear()
 
 func setup(p_rarity: Rarity.Level) -> void:
 	rarity = p_rarity
+
+func _play_appear() -> void:
+	sprite.scale = Vector2(0.2, 0.05)
+	sprite.pivot_offset = sprite.texture.get_size() * 0.5
+	var tween = create_tween()
+	tween.tween_property(sprite, "scale", Vector2(1.15, 0.7), 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(sprite, "scale", Vector2(0.95, 1.1), 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(sprite, "scale", Vector2.ONE, 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
