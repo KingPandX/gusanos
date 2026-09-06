@@ -13,12 +13,15 @@ const MIN_SPAWN_INTERVAL: float = 3.0
 const REDUCTION_PER_LEVEL: float = 2.0
 const MAX_DROPS_OFFSET: int = 2
 
+const MUSIC = preload("uid://bj5wdvs13ijiq")
+
 var drop_timer: Timer
 
 func _ready() -> void:
 	add_to_group("social_area")
 	_setup_drop_timer()
 	spawn_worm_drop()
+	AudioManager.change_music(MUSIC)
 
 func _setup_drop_timer() -> void:
 	drop_timer = Timer.new()
