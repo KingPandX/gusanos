@@ -15,6 +15,7 @@ var _sfx_streams: Dictionary = {}
 
 var _looped_players: Dictionary = {}
 var _next_loop_id: int = 0
+var _music_positions: Dictionary = {}
 
 func _ready() -> void:
 	_init_music_players()
@@ -54,13 +55,16 @@ func _ensure_buses() -> void:
 func play_music(track: MusicData, fade_in: float = -1.0) -> void:
 	if _current_music == track and _music_player.playing:
 		return
+	_save_persistent_position()
 	var duration := track.default_fade_in if fade_in < 0.0 else fade_in
 	_stop_active_tween()
 	_current_music = track
 	_music_player.stream = track.stream
-	if track.loop:
+	if track.loop or track.persistent:
 		_music_player.finished.connect(_on_music_finished, CONNECT_ONE_SHOT)
 	_music_player.play()
+	if track.persistent and _music_positions.has(track):
+		_music_player.seek(_music_positions[track])
 	if duration > 0.0:
 		_music_tween = create_tween()
 		_music_tween.tween_property(_music_player, "volume_db", 0.0, duration).from(-80.0)
@@ -68,17 +72,21 @@ func play_music(track: MusicData, fade_in: float = -1.0) -> void:
 		_music_player.volume_db = 0.0
 
 func play_music_abrupt(track: MusicData) -> void:
+	_save_persistent_position()
 	_stop_active_tween()
 	_current_music = track
 	_music_player.stream = track.stream
 	_music_player.volume_db = 0.0
-	if track.loop:
+	if track.loop or track.persistent:
 		_music_player.finished.connect(_on_music_finished, CONNECT_ONE_SHOT)
 	_music_player.play()
+	if track.persistent and _music_positions.has(track):
+		_music_player.seek(_music_positions[track])
 
 func stop_music(fade_out: float = -1.0) -> void:
 	if not _music_player.playing:
 		return
+	_save_persistent_position()
 	var duration := _current_music.default_fade_out if fade_out < 0.0 and _current_music else fade_out
 	_stop_active_tween()
 	if duration > 0.0:
@@ -89,6 +97,7 @@ func stop_music(fade_out: float = -1.0) -> void:
 		stop_music_abrupt()
 
 func stop_music_abrupt() -> void:
+	_save_persistent_position()
 	_stop_active_tween()
 	_music_player.stop()
 	_music_player_xfade.stop()
@@ -97,6 +106,7 @@ func stop_music_abrupt() -> void:
 func change_music(new_track: MusicData, crossfade: float = -1.0) -> void:
 	if _current_music == new_track and _music_player.playing:
 		return
+	_save_persistent_position()
 	var duration := crossfade if crossfade >= 0.0 else 1.0
 	if not _music_player.playing:
 		play_music(new_track, duration)
@@ -104,9 +114,11 @@ func change_music(new_track: MusicData, crossfade: float = -1.0) -> void:
 	_stop_active_tween()
 	_music_player_xfade.stream = new_track.stream
 	_music_player_xfade.volume_db = -80.0
-	if new_track.loop:
-		_music_player_xfade.finished.connect(_on_xfade_finished, CONNECT_ONE_SHOT)
+	if new_track.loop or new_track.persistent:
+		_music_player_xfade.finished.connect(_on_xfade_finished.bind(new_track), CONNECT_ONE_SHOT)
 	_music_player_xfade.play()
+	if new_track.persistent and _music_positions.has(new_track):
+		_music_player_xfade.seek(_music_positions[new_track])
 	_music_tween = create_tween().set_parallel(true)
 	_music_tween.tween_property(_music_player, "volume_db", -80.0, duration)
 	_music_tween.tween_property(_music_player_xfade, "volume_db", 0.0, duration).from(-80.0)
@@ -225,13 +237,24 @@ func _stop_active_tween() -> void:
 		_music_tween.kill()
 	_music_tween = null
 
-func _on_music_finished() -> void:
-	if _current_music and _current_music.loop:
-		_music_player.play()
+func _save_persistent_position() -> void:
+	if _current_music and _current_music.persistent and _music_player.playing:
+		_music_positions[_current_music] = _music_player.get_playback_position()
 
-func _on_xfade_finished() -> void:
-	if _current_music and _current_music.loop:
-		_music_player_xfade.play()
+func _on_music_finished() -> void:
+	if _current_music:
+		if _current_music.loop:
+			_music_player.play()
+		if _current_music.persistent:
+			_music_positions.erase(_current_music)
+
+func _on_xfade_finished(track: MusicData = null) -> void:
+	var finished_track := track if track else _current_music
+	if finished_track:
+		if finished_track.loop:
+			_music_player_xfade.play()
+		if finished_track.persistent:
+			_music_positions.erase(finished_track)
 
 func _on_crossfade_done(new_track: MusicData) -> void:
 	_music_player.stop()

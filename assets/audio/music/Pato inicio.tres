@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicData" format=3 uid="uid://dsgul804mbr4u"]
+
+[ext_resource type="Script" uid="uid://d1ksuty7pf6tt" path="res://commons/audio/music_data.gd" id="1_qj1ho"]
+[ext_resource type="AudioStream" uid="uid://c6nq748lealhf" path="res://assets/audio/music/pato inicio.ogg" id="2_1dmq0"]
+
+[resource]
+script = ExtResource("1_qj1ho")
+stream = ExtResource("2_1dmq0")
+metadata/_custom_type_script = "uid://d1ksuty7pf6tt"
