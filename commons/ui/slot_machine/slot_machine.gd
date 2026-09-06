@@ -22,6 +22,9 @@ enum DropType { NOTHING, MONEY, ITEM, WORM }
 @onready var money_label: Label = $Panel/VBox/Footer/MoneyLabel
 @onready var pity_label: Label = $Panel/VBox/Footer/PityLabel
 
+const PATO_INICIO = preload("uid://dsgul804mbr4u")
+const ETERNO__PERO_NO_PARA_SIEMPRE = preload("uid://bj5wdvs13ijiq")
+
 var selected_worm: Worm_Data = null
 var is_spinning: bool = false
 var available_items: Array[ItemData] = []
@@ -83,11 +86,13 @@ func _load_available_items() -> void:
 			file_name = dir.get_next()
 
 func open() -> void:
+	AudioManager.change_music(PATO_INICIO)
 	visible = true
 	_update_ui()
 
 func close() -> void:
 	visible = false
+	AudioManager.change_music(ETERNO__PERO_NO_PARA_SIEMPRE, 0.5)
 	if worm_selector_instance and is_instance_valid(worm_selector_instance):
 		worm_selector_instance.hide()
 	slot_machine_closed.emit()
