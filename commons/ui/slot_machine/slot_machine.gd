@@ -27,6 +27,8 @@ var is_spinning: bool = false
 var available_items: Array[ItemData] = []
 var worm_selector_instance: WormSelector = null
 
+const CASINO_MUSIC = preload("uid://dsgul804mbr4u")
+
 static var consecutive_nothing: int = 0
 
 const DROP_WEIGHTS := {
@@ -83,6 +85,7 @@ func _load_available_items() -> void:
 			file_name = dir.get_next()
 
 func open() -> void:
+	AudioManager.change_music(CASINO_MUSIC)
 	visible = true
 	_update_ui()
 
@@ -91,6 +94,20 @@ func close() -> void:
 	if worm_selector_instance and is_instance_valid(worm_selector_instance):
 		worm_selector_instance.hide()
 	slot_machine_closed.emit()
+	_return_to_active_zone_music()
+
+func _return_to_active_zone_music() -> void:
+	var tree = get_tree()
+	if tree == null:
+		return
+	for zone in tree.get_nodes_in_group("combat_zones"):
+		if zone is CombatZone and zone.combat_active:
+			zone.play_combat_music()
+			return
+	for node in tree.get_nodes_in_group("social_area"):
+		if node.has_method("play_music"):
+			node.play_music()
+			break
 
 func _on_bg_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
