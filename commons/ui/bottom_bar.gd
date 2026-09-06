@@ -266,11 +266,39 @@ func _on_slot_machine_closed() -> void:
 func _create_pause_button() -> void:
 	var sep = VSeparator.new()
 	bar_container.add_child(sep)
+	var test_btn = Button.new()
+	test_btn.text = "Test Muerte Mutua"
+	test_btn.custom_minimum_size = Vector2(130, 0)
+	test_btn.pressed.connect(_test_mutual_kill)
+	bar_container.add_child(test_btn)
 	var pause_btn = Button.new()
 	pause_btn.text = "Pausa"
 	pause_btn.custom_minimum_size = Vector2(70, 0)
 	pause_btn.pressed.connect(_on_pause_pressed)
 	bar_container.add_child(pause_btn)
+
+func _test_mutual_kill() -> void:
+	var mutual_skill = load("res://assets/skills/mutual_kill_skill.tres")
+	if mutual_skill == null:
+		mutual_skill = MutualKill.new()
+		mutual_skill.skill_name = "Muerte Mutua"
+		mutual_skill.trigger_chance = 1.0
+
+	var worm1 = WormFactory.generate_random_worm(Inventory.templates)
+	worm1.skills.clear()
+	worm1.skills.append(mutual_skill)
+
+	var worm2 = WormFactory.generate_random_worm(Inventory.templates)
+	worm2.skills.clear()
+	worm2.skills.append(mutual_skill)
+
+	Inventory.add_worm(worm1, "combat")
+	Inventory.add_worm(worm2, "combat")
+
+	var spawner = get_tree().get_first_node_in_group("combat_spawner")
+	if spawner:
+		spawner.spawn_specific_worm(worm1, Vector2(20, 30))
+		spawner.spawn_specific_worm(worm2, Vector2(80, 30))
 
 func _on_pause_pressed() -> void:
 	if pause_menu_instance == null or not is_instance_valid(pause_menu_instance):
