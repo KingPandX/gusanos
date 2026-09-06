@@ -292,13 +292,13 @@ func _test_mutual_kill() -> void:
 	worm2.skills.clear()
 	worm2.skills.append(mutual_skill)
 
-	Inventory.add_worm(worm1, "combat")
-	Inventory.add_worm(worm2, "combat")
+	Inventory.add_worm(worm1, "social")
+	Inventory.add_worm(worm2, "social")
 
-	var spawner = get_tree().get_first_node_in_group("combat_spawner")
-	if spawner:
-		spawner.spawn_specific_worm(worm1, Vector2(20, 30))
-		spawner.spawn_specific_worm(worm2, Vector2(80, 30))
+	var social_area = get_tree().get_first_node_in_group("social_area")
+	if social_area:
+		social_area.spawn_social_worm(worm1, Vector2(200, 200))
+		social_area.spawn_social_worm(worm2, Vector2(300, 200))
 
 func _on_pause_pressed() -> void:
 	if pause_menu_instance == null or not is_instance_valid(pause_menu_instance):
