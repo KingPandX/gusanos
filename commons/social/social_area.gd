@@ -21,7 +21,18 @@ func _ready() -> void:
 	add_to_group("social_area")
 	_setup_drop_timer()
 	spawn_worm_drop()
+
+func play_music() -> void:
 	AudioManager.change_music(MUSIC)
+
+func is_combat_active() -> bool:
+	var tree = get_tree()
+	if tree == null:
+		return false
+	for zone in tree.get_nodes_in_group("combat_zones"):
+		if zone is CombatZone and zone.combat_active:
+			return true
+	return false
 
 func _setup_drop_timer() -> void:
 	drop_timer = Timer.new()

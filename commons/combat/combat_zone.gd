@@ -15,6 +15,8 @@ var worms_in_zone: Array[Worm] = []
 var combat_active: bool = false
 var kill_reward_handler: KillRewardHandler
 
+const COMBAT_MUSIC = preload("uid://dsgul804mbr4u")
+
 func _ready() -> void:
 	add_to_group("combat_zones")
 	body_entered.connect(_on_body_entered)
@@ -72,6 +74,7 @@ func activate_combat() -> void:
 	if combat_active:
 		return
 	combat_active = true
+	AudioManager.change_music(COMBAT_MUSIC)
 	combat_activated.emit()
 
 func deactivate_combat() -> void:
@@ -79,7 +82,20 @@ func deactivate_combat() -> void:
 		return
 	combat_active = false
 	_stop_all_combats()
+	_return_to_social_music()
 	combat_deactivated.emit()
+
+func _return_to_social_music() -> void:
+	var tree = get_tree()
+	if tree == null:
+		return
+	for node in tree.get_nodes_in_group("social_area"):
+		if node.has_method("play_music"):
+			node.play_music()
+			break
+
+func play_combat_music() -> void:
+	AudioManager.change_music(COMBAT_MUSIC)
 
 func _assign_targets_to_all() -> void:
 	for worm in worms_in_zone:

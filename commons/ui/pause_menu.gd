@@ -103,3 +103,17 @@ func _on_resume_pressed() -> void:
 	get_tree().paused = false
 	visible = false
 	pause_menu_closed.emit()
+	_return_to_active_zone_music()
+
+func _return_to_active_zone_music() -> void:
+	var tree = get_tree()
+	if tree == null:
+		return
+	for zone in tree.get_nodes_in_group("combat_zones"):
+		if zone is CombatZone and zone.combat_active:
+			zone.play_combat_music()
+			return
+	for node in tree.get_nodes_in_group("social_area"):
+		if node.has_method("play_music"):
+			node.play_music()
+			break
