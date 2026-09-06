@@ -26,17 +26,22 @@ static func _apply_to_player(effect: EffectData):
 			Shop.apply_discount(effect.value, effect.duration)
 		EffectData.Type.SHOP_EXTRA_ITEMS:
 			Shop.add_extra_slots(int(effect.value))
+		EffectData.Type.KILL_UPGRADE_BOOST:
+			KillRewardHandler.stat_upgrade_bonus += effect.value
+			KillRewardHandler.rarity_upgrade_bonus += effect.value * 0.5
 
 static func _apply_to_worm(effect: EffectData, worm: Worm):
 	match effect.effect_type:
 		EffectData.Type.STAT_BOOST:
-			WormEffects.permanent_boost(worm, effect.stat, effect.value)
+			WormEffects.permanent_boost(worm, effect.stat, effect.value, true)
 		EffectData.Type.RARITY_UPGRADE:
 			WormEffects.upgrade_rarity(worm)
 		EffectData.Type.SHIELD:
 			WormEffects.add_shield(worm, effect.value, effect.duration)
 		EffectData.Type.HEAL:
 			WormEffects.heal(worm, effect.value)
+		EffectData.Type.RANDOM_SKILL:
+			WormEffects.add_random_skill(worm)
 		EffectData.Type.RESURRECT:
 			pass
 
